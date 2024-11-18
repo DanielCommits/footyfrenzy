@@ -1,41 +1,56 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React from 'react';
+import FootballNews from './components/FootballNews';
 
 const App = () => {
-    const [headlines, setHeadlines] = useState([]);
+  return (
+    <div>
+      <header style={styles.header}>
+        <h1>FootyFrenzy</h1>
+        <nav>
+          <a href="#news" style={styles.link}>News</a>
+          <a href="#live-scores" style={styles.link}>Live Scores</a>
+          <a href="#contact" style={styles.link}>Contact</a>
+        </nav>
+      </header>
 
-    useEffect(() => {
-        const fetchHeadlines = async () => {
-            try {
-                const response = await axios.get(
-                    "https://cors-anywhere.herokuapp.com/https://www.goal.com/en/news"
-                );
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(response.data, "text/html");
+      <main style={styles.main}>
+        <section id="news">
+          <FootballNews /> {/* Displays scraped football news */}
+        </section>
+      </main>
 
-                const fetchedHeadlines = [...doc.querySelectorAll("h3.headline")].map((el) =>
-                    el.innerText.trim()
-                );
+      <footer style={styles.footer}>
+        <p>© 2024 FootyFrenzy. All rights reserved.</p>
+      </footer>
+    </div>
+  );
+};
 
-                setHeadlines(fetchedHeadlines);
-            } catch (error) {
-                console.error("Error fetching headlines:", error);
-            }
-        };
-
-        fetchHeadlines();
-    }, []);
-
-    return (
-        <div>
-            <h1>Football News Headlines</h1>
-            <ul>
-                {headlines.map((headline, index) => (
-                    <li key={index}>{headline}</li>
-                ))}
-            </ul>
-        </div>
-    );
+// Example inline styles (or replace with CSS)
+const styles = {
+  header: {
+    backgroundColor: '#333',
+    color: '#fff',
+    padding: '10px 20px',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  link: {
+    color: '#fff',
+    marginLeft: '15px',
+    textDecoration: 'none',
+  },
+  main: {
+    padding: '20px',
+  },
+  footer: {
+    textAlign: 'center',
+    padding: '10px 20px',
+    backgroundColor: '#333',
+    color: '#fff',
+    marginTop: '20px',
+  },
 };
 
 export default App;
