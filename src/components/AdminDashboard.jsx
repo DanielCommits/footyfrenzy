@@ -31,7 +31,6 @@ const AdminDashboard = () => {
     });
 
     if (response.ok) {
-      // Fetch the updated list of articles after adding a new one
       const updatedNews = await response.json();
       setNews((prevNews) => [...prevNews, updatedNews]);
       alert('Article added successfully!');
@@ -47,7 +46,6 @@ const AdminDashboard = () => {
     });
 
     if (response.ok) {
-      // Remove the deleted article from the state
       setNews(news.filter((article) => article.id !== id));
       alert('Article deleted successfully!');
     } else {

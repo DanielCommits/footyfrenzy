@@ -7,9 +7,13 @@ const Home = () => {
   useEffect(() => {
     // Fetch articles from the backend
     const fetchNews = async () => {
-      const response = await fetch("http://localhost:5000/news");
-      const data = await response.json();
-      setNews(data);
+      try {
+        const response = await fetch("http://localhost:5000/news");
+        const data = await response.json();
+        setNews(data);
+      } catch (error) {
+        console.error('Error fetching news:', error);
+      }
     };
     fetchNews();
   }, []);

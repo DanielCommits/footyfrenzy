@@ -8,10 +8,14 @@ const ArticleDetail = () => {
   useEffect(() => {
     // Fetch the article details by ID
     const fetchArticle = async () => {
-      const response = await fetch(`http://localhost:5000/news`);
-      const data = await response.json();
-      const foundArticle = data.find((article) => article.id === parseInt(id));
-      setArticle(foundArticle);
+      try {
+        const response = await fetch(`http://localhost:5000/news`);
+        const data = await response.json();
+        const foundArticle = data.find((article) => article.id === parseInt(id));
+        setArticle(foundArticle);
+      } catch (error) {
+        console.error('Error fetching article:', error);
+      }
     };
     fetchArticle();
   }, [id]);
