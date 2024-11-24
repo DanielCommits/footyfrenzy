@@ -21,19 +21,24 @@ const Home = () => {
   return (
     <div>
       <h1>News Feed</h1>
-      <div className="news-list">
-        {news.map((article) => (
-          <div className="news-item" key={article.id}>
-            <Link to={`/article/${article.id}`}>
-              <img src={article.imageUrl} alt={article.title} />
-              <h2>{article.title}</h2>
-              <p>{article.description}</p>
-            </Link>
-          </div>
-        ))}
-      </div>
+      {news.length === 0 ? (
+        <p>No news articles available.</p>
+      ) : (
+        <div className="news-list">
+          {news.map((article) => (
+            <div className="news-item" key={article.id}>
+              <Link to={`/article/${article.id}`}>
+                <img src={article.imageUrl} alt={article.title} />
+                <h2>{article.title}</h2>
+                <p>{article.description}</p>
+              </Link>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
+  
 };
 
 export default Home;
