@@ -6,10 +6,15 @@ const AdminDashboard = () => {
   const [imageUrl, setImageUrl] = useState('');
   const [news, setNews] = useState([]);
 
+  // Dynamic API URL
+  const API_URL = process.env.NODE_ENV === 'production'
+    ? 'https://footyfrenzy.vercel.app/api/news' // Vercel URL
+    : 'http://localhost:5000/news'; // Local URL for development
+
   // Fetch the articles when the component mounts
   useEffect(() => {
     const fetchNews = async () => {
-      const response = await fetch('http://localhost:5000/news');
+      const response = await fetch(API_URL);
       const data = await response.json();
       setNews(data);
     };
@@ -22,7 +27,7 @@ const AdminDashboard = () => {
     const newArticle = { title, description, imageUrl };
 
     // Send the article data to the backend
-    const response = await fetch('http://localhost:5000/news', {
+    const response = await fetch(API_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -41,7 +46,7 @@ const AdminDashboard = () => {
 
   // Delete an article by ID
   const handleDelete = async (id) => {
-    const response = await fetch(`http://localhost:5000/news/${id}`, {
+    const response = await fetch(`${API_URL}/${id}`, {
       method: 'DELETE',
     });
 

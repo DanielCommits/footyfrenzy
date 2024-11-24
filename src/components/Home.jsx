@@ -5,10 +5,15 @@ const Home = () => {
   const [news, setNews] = useState([]);
 
   useEffect(() => {
+    // Dynamic API URL
+    const API_URL = process.env.NODE_ENV === 'production'
+      ? 'https://footyfrenzy.vercel.app/api/news' // Vercel URL
+      : 'http://localhost:5000/news'; // Local URL for development
+
     // Fetch articles from the backend
     const fetchNews = async () => {
       try {
-        const response = await fetch("http://localhost:5000/news");
+        const response = await fetch(API_URL);
         const data = await response.json();
         setNews(data);
       } catch (error) {
@@ -38,7 +43,6 @@ const Home = () => {
       )}
     </div>
   );
-  
 };
 
 export default Home;

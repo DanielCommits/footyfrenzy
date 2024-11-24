@@ -6,10 +6,15 @@ const ArticleDetail = () => {
   const [article, setArticle] = useState(null);
 
   useEffect(() => {
+    // Dynamic API URL
+    const API_URL = process.env.NODE_ENV === 'production'
+      ? `https://footyfrenzy.vercel.app/api/news` // Vercel URL
+      : `http://localhost:5000/news`; // Local URL for development
+
     // Fetch the article details by ID
     const fetchArticle = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/news`);
+        const response = await fetch(API_URL);
         const data = await response.json();
         const foundArticle = data.find((article) => article.id === parseInt(id));
         setArticle(foundArticle);
