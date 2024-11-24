@@ -38,10 +38,11 @@ app.put('/news/:id', (req, res) => {
 
 // Delete News
 app.delete('/news/:id', (req, res) => {
-  const { id } = req.params;
-  news = news.filter((article) => article.id !== parseInt(id));
-  res.json({ success: true });
-});
+    const { id } = req.params;
+    news = news.filter((article) => article.id !== parseInt(id));
+    res.json({ success: true });
+  });
+  
 
 // Start the Server
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));

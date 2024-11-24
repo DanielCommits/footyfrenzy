@@ -1,9 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const AdminDashboard = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [imageUrl, setImageUrl] = useState('');
+  const [news, setNews] = useState([]);
+
+  // Fetch the articles when the component mounts
+  useEffect(() => {
+    const fetchNews = async () => {
+      const response = await fetch('http://localhost:5000/news');
+      const data = await response.json();
+      setNews(data);
+    };
+    fetchNews();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,10 +31,27 @@ const AdminDashboard = () => {
     });
 
     if (response.ok) {
-      // Handle successful submission
+      // Fetch the updated list of articles after adding a new one
+      const updatedNews = await response.json();
+      setNews((prevNews) => [...prevNews, updatedNews]);
       alert('Article added successfully!');
     } else {
       alert('Failed to add article');
+    }
+  };
+
+  // Delete an article by ID
+  const handleDelete = async (id) => {
+    const response = await fetch(`http://localhost:5000/news/${id}`, {
+      method: 'DELETE',
+    });
+
+    if (response.ok) {
+      // Remove the deleted article from the state
+      setNews(news.filter((article) => article.id !== id));
+      alert('Article deleted successfully!');
+    } else {
+      alert('Failed to delete article');
     }
   };
 
@@ -59,6 +87,18 @@ const AdminDashboard = () => {
         </div>
         <button type="submit">Add Article</button>
       </form>
+
+      <h3>Existing Articles</h3>
+      <ul>
+        {news.map((article) => (
+          <li key={article.id}>
+            <h4>{article.title}</h4>
+            <img src={article.imageUrl} alt={article.title} style={{ width: '100px' }} />
+            <p>{article.description}</p>
+            <button onClick={() => handleDelete(article.id)}>Delete</button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
