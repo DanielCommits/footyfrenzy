@@ -7,7 +7,7 @@ const Home = () => {
   useEffect(() => {
     // Dynamic API URL
     const API_URL = process.env.NODE_ENV === 'production'
-      ? 'https://footyfrenzy.vercel.app/api/news' // Vercel URL
+      ? 'https://footyfrenzy.vercel.app/news' // Vercel URL
       : 'http://localhost:5000/news'; // Local URL for development
 
     // Fetch articles from the backend
