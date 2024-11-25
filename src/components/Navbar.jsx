@@ -1,8 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./Navbar.css";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const sidebarRef = useRef(null);
+
+  // Close sidebar if clicked outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
 
   return (
     <nav className="navbar">
@@ -29,7 +45,7 @@ const Navbar = () => {
         <div></div>
       </div>
       {isMenuOpen && (
-        <div className="sidebar">
+        <div className="sidebar" ref={sidebarRef}>
           <ul>
             <li>LIVE SCORES</li>
             <li>NEWS</li>

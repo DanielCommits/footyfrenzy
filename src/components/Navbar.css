@@ -56,7 +56,7 @@
     }
   }
 
-  /* Sidebar */
+/* Sidebar */
 .sidebar {
   position: fixed;
   top: 0;
@@ -67,8 +67,12 @@
   color: white;
   padding: 1rem;
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
-  transform: translateX(0);
+  transform: translateX(100%);
   transition: transform 0.3s ease-in-out;
+}
+
+.sidebar.open {
+  transform: translateX(0);
 }
 
 .sidebar ul {
@@ -81,9 +85,18 @@
   cursor: pointer;
 }
 
-/* Hide sidebar initially */
-.sidebar.hidden {
-  transform: translateX(100%);
+/* Menu icon and layout */
+.navbar-menu-icon {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  cursor: pointer;
+}
+
+.navbar-menu-icon div {
+  width: 1.5rem;
+  height: 0.2rem;
+  background-color: white;
 }
 
   
