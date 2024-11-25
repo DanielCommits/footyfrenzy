@@ -85,18 +85,3 @@
   cursor: pointer;
 }
 
-/* Menu icon and layout */
-.navbar-menu-icon {
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-  cursor: pointer;
-}
-
-.navbar-menu-icon div {
-  width: 1.5rem;
-  height: 0.2rem;
-  background-color: white;
-}
-
-  
