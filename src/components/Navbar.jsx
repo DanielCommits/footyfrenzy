@@ -45,7 +45,7 @@ const Navbar = () => {
         <div></div>
       </div>
       {isMenuOpen && (
-        <div className="sidebar">
+        <div className="sidebar" ref={sidebarRef}>
           <ul>
             <li>LIVE SCORES</li>
             <li>NEWS</li>
