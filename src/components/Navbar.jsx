@@ -7,7 +7,7 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-logo">FootyFrenzy</div>
-      <ul className={`navbar-links ${isMenuOpen ? "open" : ""}`}>
+      <ul className="navbar-links">
         <li>LIVE SCORES</li>
         <li>NEWS</li>
         <li>TRANSFERS</li>
@@ -28,9 +28,21 @@ const Navbar = () => {
         <div></div>
         <div></div>
       </div>
+      {isMenuOpen && (
+        <div className="sidebar">
+          <ul>
+            <li>LIVE SCORES</li>
+            <li>NEWS</li>
+            <li>TRANSFERS</li>
+            <li>PREMIER LEAGUE</li>
+            <li>LA LIGA</li>
+            <li>CULTURE</li>
+            <li>BETTING</li>
+          </ul>
+        </div>
+      )}
     </nav>
   );
 };
 
 export default Navbar;
-

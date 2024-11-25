@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
-///mport AdminDashboard from "./components/AdminDashboard";
+///import AdminDashboard from "./components/AdminDashboard";
 import Admin from './components/Admin';
 import ArticleDetail from "./components/ArticleDetail";  
 import Navbar from "./components/Navbar";  
