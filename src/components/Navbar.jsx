@@ -45,18 +45,19 @@ const Navbar = () => {
         <div></div>
       </div>
       {isMenuOpen && (
-        <div className="sidebar" ref={sidebarRef}>
-          <ul>
-            <li>LIVE SCORES</li>
-            <li>NEWS</li>
-            <li>TRANSFERS</li>
-            <li>PREMIER LEAGUE</li>
-            <li>LA LIGA</li>
-            <li>CULTURE</li>
-            <li>BETTING</li>
-          </ul>
-        </div>
-      )}
+  <div className={`sidebar ${isMenuOpen ? "open" : ""}`} ref={sidebarRef}>
+    <ul>
+      <li>LIVE SCORES</li>
+      <li>NEWS</li>
+      <li>TRANSFERS</li>
+      <li>PREMIER LEAGUE</li>
+      <li>LA LIGA</li>
+      <li>CULTURE</li>
+      <li>BETTING</li>
+    </ul>
+  </div>
+)}
+
     </nav>
   );
 };
