@@ -48,15 +48,14 @@ const AdminDashboard = () => {
   // Delete an article by ID
   const handleDelete = async (id) => {
     const response = await fetch(`${API_URL}/${id}`, { method: "DELETE" });
-  
+
     if (response.ok) {
-      setNews(news.filter((article) => article._id !== id));
+      setNews((prevNews) => prevNews.filter((article) => article._id !== id)); // Use `_id` if that's what your backend returns
       alert("Article deleted successfully!");
     } else {
       alert("Failed to delete article");
     }
   };
-  
 
   return (
     <div>
