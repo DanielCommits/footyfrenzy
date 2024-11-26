@@ -1,29 +1,17 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import "./Navbar.css";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const sidebarRef = useRef(null);
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
-        setIsMenuOpen(false);
-      }
-    };
-
-    document.addEventListener("click", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, []);
-
+    console.log("Menu state:", isMenuOpen);
+  }, [isMenuOpen]);
 
   return (
     <nav className="navbar">
       <div className="navbar-logo">FootyFrenzy</div>
-      <ul className="navbar-links">
+      <ul className={`navbar-links ${isMenuOpen ? "open" : ""}`}>
         <li>LIVE SCORES</li>
         <li>NEWS</li>
         <li>TRANSFERS</li>
@@ -38,26 +26,14 @@ const Navbar = () => {
       </div>
       <div
         className="navbar-menu-icon"
-        onClick={() => setIsMenuOpen(!isMenuOpen)}
+        onClick={() => {
+          setIsMenuOpen(!isMenuOpen);
+        }}
       >
         <div></div>
         <div></div>
         <div></div>
       </div>
-      {isMenuOpen && (
-  <div className={`sidebar ${isMenuOpen ? "open" : ""}`} ref={sidebarRef}>
-    <ul>
-      <li>LIVE SCORES</li>
-      <li>NEWS</li>
-      <li>TRANSFERS</li>
-      <li>PREMIER LEAGUE</li>
-      <li>LA LIGA</li>
-      <li>CULTURE</li>
-      <li>BETTING</li>
-    </ul>
-  </div>
-)}
-
     </nav>
   );
 };
