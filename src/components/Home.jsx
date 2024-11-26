@@ -8,7 +8,7 @@ const Home = () => {
     // Dynamic API URL
     const API_URL =
       process.env.NODE_ENV === "production"
-        ? "https://footyfrenzy.vercel.app/api/news"
+        ? "https://footyfrenzy.vercel.app/news"
         : "http://localhost:5000/news";
 
     // Fetch articles from the backend
