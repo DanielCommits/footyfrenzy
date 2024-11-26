@@ -39,7 +39,7 @@ const Navbar = () => {
           <i className="login-icon"></i>
         </div>
         <button className="theme-toggle" onClick={toggleDarkMode}>
-          {isDarkMode ? <FaSun /> :<FaMoon />} {/* Show moon for dark mode, sun for light mode */}.
+          {isDarkMode ? <FaSun /> : <FaMoon />} {/* Show moon for dark mode, sun for light mode */}
         </button>
         <div
           className="navbar-menu-icon"
