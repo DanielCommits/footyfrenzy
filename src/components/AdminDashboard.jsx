@@ -45,14 +45,28 @@ const AdminDashboard = () => {
     }
   };
 
-  // Delete an article by ID
   const handleDelete = async (id) => {
-    const response = await fetch(`${API_URL}/${id}`, { method: "DELETE" });
+    // Optimistically update the state by removing the article
+    const updatedNews = news.filter((article) => article.id !== id);
+    setNews(updatedNews);
 
-    if (response.ok) {
-      setNews((prevNews) => prevNews.filter((article) => article._id !== id)); // Use `_id` if that's what your backend returns
-      alert("Article deleted successfully!");
-    } else {
+    try {
+      // Make the API call to delete the article
+      const response = await fetch(`${API_URL}/${id}`, { method: "DELETE" });
+
+      if (!response.ok) {
+        // If deletion fails, restore the article back to the list
+        const deletedArticle = news.find((article) => article.id === id);
+        setNews((prevNews) => [...prevNews, deletedArticle]);
+        alert("Failed to delete article");
+      } else {
+        alert("Article deleted successfully!");
+      }
+    } catch (error) {
+      console.error("Error deleting article:", error);
+      // Restore article if there was an error
+      const deletedArticle = news.find((article) => article.id === id);
+      setNews((prevNews) => [...prevNews, deletedArticle]);
       alert("Failed to delete article");
     }
   };
