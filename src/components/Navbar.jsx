@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Navbar.css";
-import { FaSun, FaMoon } from 'react-icons/fa';
+import { FaSun, FaMoon } from "react-icons/fa";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -39,7 +39,8 @@ const Navbar = () => {
           <i className="login-icon"></i>
         </div>
         <button className="theme-toggle" onClick={toggleDarkMode}>
-          {isDarkMode ?  <FaMoon size={24} /> : <FaSun size={24} />} {/* Show moon for dark mode, sun for light mode */}
+          {isDarkMode ? <FaMoon size={24} /> : <FaSun size={24} />}{" "}
+          {/* Show moon for dark mode, sun for light mode */}
         </button>
         <div
           className="navbar-menu-icon"
