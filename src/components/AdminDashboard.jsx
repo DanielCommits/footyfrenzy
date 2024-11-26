@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 const AdminDashboard = () => {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [imageUrl, setImageUrl] = useState('');
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
   const [news, setNews] = useState([]);
 
   // Dynamic API URL
-  const API_URL = process.env.NODE_ENV === 'production'
-    ? 'https://footyfrenzy.vercel.app/api/news' // Vercel URL
-    : 'http://localhost:5000/news'; // Local URL for development
+  const API_URL =
+    process.env.NODE_ENV === "production"
+      ? "https://footyfrenzy.vercel.app/api/news"
+      : "http://localhost:5000/news";
 
   // Fetch the articles when the component mounts
   useEffect(() => {
@@ -28,9 +29,9 @@ const AdminDashboard = () => {
 
     // Send the article data to the backend
     const response = await fetch(API_URL, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(newArticle),
     });
@@ -38,23 +39,23 @@ const AdminDashboard = () => {
     if (response.ok) {
       const updatedNews = await response.json();
       setNews((prevNews) => [...prevNews, updatedNews]);
-      alert('Article added successfully!');
+      alert("Article added successfully!");
     } else {
-      alert('Failed to add article');
+      alert("Failed to add article");
     }
   };
 
   // Delete an article by ID
   const handleDelete = async (id) => {
     const response = await fetch(`${API_URL}/${id}`, {
-      method: 'DELETE',
+      method: "DELETE",
     });
 
     if (response.ok) {
       setNews(news.filter((article) => article.id !== id));
-      alert('Article deleted successfully!');
+      alert("Article deleted successfully!");
     } else {
-      alert('Failed to delete article');
+      alert("Failed to delete article");
     }
   };
 
@@ -96,7 +97,11 @@ const AdminDashboard = () => {
         {news.map((article) => (
           <li key={article.id}>
             <h4>{article.title}</h4>
-            <img src={article.imageUrl} alt={article.title} style={{ width: '100px' }} />
+            <img
+              src={article.imageUrl}
+              alt={article.title}
+              style={{ width: "100px" }}
+            />
             <p>{article.description}</p>
             <button onClick={() => handleDelete(article.id)}>Delete</button>
           </li>

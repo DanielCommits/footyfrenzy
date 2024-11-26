@@ -6,9 +6,10 @@ const Home = () => {
 
   useEffect(() => {
     // Dynamic API URL
-    const API_URL = process.env.NODE_ENV === 'production'
-      ? 'https://footyfrenzy.vercel.app/api/news' // Vercel URL
-      : 'http://localhost:5000/news'; // Local URL for development
+    const API_URL =
+      process.env.NODE_ENV === "production"
+        ? "https://footyfrenzy.vercel.app/api/news"
+        : "http://localhost:5000/news";
 
     // Fetch articles from the backend
     const fetchNews = async () => {
@@ -17,7 +18,7 @@ const Home = () => {
         const data = await response.json();
         setNews(data);
       } catch (error) {
-        console.error('Error fetching news:', error);
+        console.error("Error fetching news:", error);
       }
     };
     fetchNews();
