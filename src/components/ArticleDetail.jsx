@@ -1,34 +1,29 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { db } from "../firebase"; // Firebase Firestore setup
 
-const ArticleDetail = () => {
-  const { id } = useParams();
+const ArticleDetail = ({ match }) => {
   const [article, setArticle] = useState(null);
 
   useEffect(() => {
-    const API_URL =
-      process.env.NODE_ENV === "production"
-        ? `https://footyfrenzy.vercel.app/news/${id}`
-        : `http://localhost:5000/news/${id}`;
-
     const fetchArticle = async () => {
-      try {
-        const response = await fetch(API_URL);
-        const data = await response.json();
-        setArticle(data);
-      } catch (error) {
-        console.error("Error fetching article:", error);
+      const articleRef = db.collection("articles").doc(match.params.id);
+      const doc = await articleRef.get();
+      if (doc.exists) {
+        setArticle(doc.data());
+      } else {
+        console.log("No such article!");
       }
     };
-    fetchArticle();
-  }, [id]);
 
-  if (!article) return <div>Loading...</div>;
+    fetchArticle();
+  }, [match.params.id]);
+
+  if (!article) return <p>Loading...</p>;
 
   return (
     <div>
-      <h1>{article.title}</h1>
-      <img src={article.imageUrl} alt={article.title} />
+      <h2>{article.title}</h2>
+      <img src={article.imageUrl} alt={article.title} style={{ width: "100%" }} />
       <p>{article.description}</p>
     </div>
   );

@@ -1,25 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../firebaseConfig";
 
 const Home = () => {
   const [news, setNews] = useState([]);
 
   useEffect(() => {
-    // Dynamic API URL
-    const API_URL =
-      process.env.NODE_ENV === "production"
-        ? "https://footyfrenzy.vercel.app/news"
-        : "http://localhost:5000/news";
-
-    // Fetch articles from the backend
     const fetchNews = async () => {
-      try {
-        const response = await fetch(API_URL);
-        const data = await response.json();
-        setNews(data);
-      } catch (error) {
-        console.error("Error fetching news:", error);
-      }
+      const querySnapshot = await getDocs(collection(db, "news"));
+      const articles = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      setNews(articles);
     };
     fetchNews();
   }, []);
