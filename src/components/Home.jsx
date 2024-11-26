@@ -5,8 +5,10 @@ const Home = () => {
   const [news, setNews] = useState([]);
 
   useEffect(() => {
-    // Use the environment variable for the API URL
-    const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/news';
+    // Dynamic API URL
+    const API_URL = process.env.NODE_ENV === 'production'
+      ? 'https://footyfrenzy.vercel.app/api/news' // Vercel URL
+      : 'http://localhost:5000/news'; // Local URL for development
 
     // Fetch articles from the backend
     const fetchNews = async () => {
@@ -31,11 +33,7 @@ const Home = () => {
           {news.map((article) => (
             <div className="news-item" key={article.id}>
               <Link to={`/article/${article.id}`}>
-                {article.imageUrl ? (
-                  <img src={article.imageUrl} alt={article.title} />
-                ) : (
-                  <img src="default-image.jpg" alt="Default" /> // Fallback image
-                )}
+                <img src={article.imageUrl} alt={article.title} />
                 <h2>{article.title}</h2>
                 <p>{article.description}</p>
               </Link>
