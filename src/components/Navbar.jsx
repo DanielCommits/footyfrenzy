@@ -3,10 +3,22 @@ import "./Navbar.css";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(true); // Dark mode state
+
+  // Toggle dark mode and apply/remove the class on body
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+    if (isDarkMode) {
+      document.body.classList.add("dark-mode"); // Apply dark mode styles
+    } else {
+      document.body.classList.remove("dark-mode"); // Remove dark mode styles
+    }
+  };
 
   useEffect(() => {
-    console.log("Menu state:", isMenuOpen);
-  }, [isMenuOpen]);
+    // Log the current theme state (dark/light)
+    console.log("Dark Mode:", isDarkMode ? "On" : "Off");
+  }, [isDarkMode]);
 
   return (
     <nav className="navbar">
@@ -20,19 +32,24 @@ const Navbar = () => {
         <li>CULTURE</li>
         <li>BETTING</li>
       </ul>
-      <div className="navbar-login">
-        <span>Log in</span>
-        <i className="login-icon"></i>
-      </div>
-      <div
-        className="navbar-menu-icon"
-        onClick={() => {
-          setIsMenuOpen(!isMenuOpen);
-        }}
-      >
-        <div></div>
-        <div></div>
-        <div></div>
+      <div className="navbar-right">
+        <div className="navbar-login">
+          <span>Log in</span>
+          <i className="login-icon"></i>
+        </div>
+        <button className="theme-toggle" onClick={toggleDarkMode}>
+          {isDarkMode ? "🌙" : "🌞"} {/* Show moon for dark mode, sun for light mode */}
+        </button>
+        <div
+          className="navbar-menu-icon"
+          onClick={() => {
+            setIsMenuOpen(!isMenuOpen);
+          }}
+        >
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
       </div>
     </nav>
   );
