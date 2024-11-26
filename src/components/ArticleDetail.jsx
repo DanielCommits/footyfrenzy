@@ -2,25 +2,20 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 const ArticleDetail = () => {
-  const { id } = useParams(); // Get the article ID from the URL
+  const { id } = useParams();
   const [article, setArticle] = useState(null);
 
   useEffect(() => {
-    // Dynamic API URL
     const API_URL =
       process.env.NODE_ENV === "production"
-        ? "https://footyfrenzy.vercel.app/news"
-        : "http://localhost:5000/news";
+        ? `https://footyfrenzy.vercel.app/news/${id}`
+        : `http://localhost:5000/news/${id}`;
 
-    // Fetch the article details by ID
     const fetchArticle = async () => {
       try {
         const response = await fetch(API_URL);
         const data = await response.json();
-        const foundArticle = data.find(
-          (article) => article.id === parseInt(id)
-        );
-        setArticle(foundArticle);
+        setArticle(data);
       } catch (error) {
         console.error("Error fetching article:", error);
       }

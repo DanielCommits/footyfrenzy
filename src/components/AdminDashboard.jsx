@@ -47,17 +47,16 @@ const AdminDashboard = () => {
 
   // Delete an article by ID
   const handleDelete = async (id) => {
-    const response = await fetch(`${API_URL}/${id}`, {
-      method: "DELETE",
-    });
-
+    const response = await fetch(`${API_URL}/${id}`, { method: "DELETE" });
+  
     if (response.ok) {
-      setNews(news.filter((article) => article.id !== id));
+      setNews(news.filter((article) => article._id !== id));
       alert("Article deleted successfully!");
     } else {
       alert("Failed to delete article");
     }
   };
+  
 
   return (
     <div>
