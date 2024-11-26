@@ -6,7 +6,7 @@ const Home = () => {
 
   useEffect(() => {
     // Use the environment variable for the API URL
-    const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/news'; // fallback to localhost if not set
+    const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/news';
 
     // Fetch articles from the backend
     const fetchNews = async () => {

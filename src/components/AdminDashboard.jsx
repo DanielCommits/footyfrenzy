@@ -1,50 +1,109 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
 
-const ArticleDetail = () => {
-  const { id } = useParams(); // Get the article ID from the URL
-  const [article, setArticle] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+const AdminDashboard = () => {
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
+  const [news, setNews] = useState([]);
 
+  // Dynamic API URL
+  const API_URL = process.env.NODE_ENV === 'production'
+    ? 'https://footyfrenzy.vercel.app/api/news' // Vercel URL
+    : 'http://localhost:5000/news'; // Local URL for development
+
+  // Fetch the articles when the component mounts
   useEffect(() => {
-    // Dynamically set the API URL based on environment
-    const API_URL = process.env.REACT_APP_API_URL
-      ? `${process.env.REACT_APP_API_URL}/${id}` // Vercel URL
-      : `http://localhost:5000/news/${id}`; // Local URL for development
-
-    // Fetch the article details by ID
-    const fetchArticle = async () => {
-      try {
-        const response = await fetch(API_URL);
-        if (!response.ok) {
-          throw new Error("Article not found");
-        }
-        const data = await response.json();
-        setArticle(data); // Store the fetched article
-      } catch (error) {
-        setError(error.message); // Set error message
-      } finally {
-        setLoading(false); // Set loading to false after fetching
-      }
+    const fetchNews = async () => {
+      const response = await fetch(API_URL);
+      const data = await response.json();
+      setNews(data);
     };
+    fetchNews();
+  }, []);
 
-    fetchArticle();
-  }, [id]);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  // Show loading state
-  if (loading) return <div>Loading...</div>;
+    const newArticle = { title, description, imageUrl };
 
-  // Show error message
-  if (error) return <div>Error: {error}</div>;
+    // Send the article data to the backend
+    const response = await fetch(API_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newArticle),
+    });
+
+    if (response.ok) {
+      const updatedNews = await response.json();
+      setNews((prevNews) => [...prevNews, updatedNews]);
+      alert('Article added successfully!');
+    } else {
+      alert('Failed to add article');
+    }
+  };
+
+  // Delete an article by ID
+  const handleDelete = async (id) => {
+    const response = await fetch(`${API_URL}/${id}`, {
+      method: 'DELETE',
+    });
+
+    if (response.ok) {
+      setNews(news.filter((article) => article.id !== id));
+      alert('Article deleted successfully!');
+    } else {
+      alert('Failed to delete article');
+    }
+  };
 
   return (
     <div>
-      <h1>{article.title}</h1>
-      {article.imageUrl && <img src={article.imageUrl} alt={article.title} />}
-      <p>{article.description}</p>
+      <h2>Admin Dashboard</h2>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>Title:</label>
+          <input
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <label>Description:</label>
+          <textarea
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <label>Image URL:</label>
+          <input
+            type="text"
+            value={imageUrl}
+            onChange={(e) => setImageUrl(e.target.value)}
+            required
+          />
+        </div>
+        <button type="submit">Add Article</button>
+      </form>
+
+      <h3>Existing Articles</h3>
+      <ul>
+        {news.map((article) => (
+          <li key={article.id}>
+            <h4>{article.title}</h4>
+            <img src={article.imageUrl} alt={article.title} style={{ width: '100px' }} />
+            <p>{article.description}</p>
+            <button onClick={() => handleDelete(article.id)}>Delete</button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
 
-export default ArticleDetail;
+export default AdminDashboard;

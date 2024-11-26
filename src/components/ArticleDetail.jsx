@@ -7,18 +7,19 @@ const ArticleDetail = () => {
 
   useEffect(() => {
     // Dynamic API URL
-    const API_URL = process.env.REACT_APP_API_URL
-      ? `${process.env.REACT_APP_API_URL}/${id}` // Fetch the article by ID
-      : `http://localhost:5000/news/${id}`; // Local URL for development
+    const API_URL = process.env.NODE_ENV === 'production'
+      ? `https://footyfrenzy.vercel.app/api/news` // Vercel URL
+      : `http://localhost:5000/news`; // Local URL for development
 
     // Fetch the article details by ID
     const fetchArticle = async () => {
       try {
         const response = await fetch(API_URL);
         const data = await response.json();
-        setArticle(data); // Assuming the API returns the single article
+        const foundArticle = data.find((article) => article.id === parseInt(id));
+        setArticle(foundArticle);
       } catch (error) {
-        console.error("Error fetching article:", error);
+        console.error('Error fetching article:', error);
       }
     };
     fetchArticle();
@@ -29,7 +30,7 @@ const ArticleDetail = () => {
   return (
     <div>
       <h1>{article.title}</h1>
-      {article.imageUrl && <img src={article.imageUrl} alt={article.title} />}
+      <img src={article.imageUrl} alt={article.title} />
       <p>{article.description}</p>
     </div>
   );
