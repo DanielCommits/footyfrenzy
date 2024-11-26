@@ -13,19 +13,19 @@
       }
     }
   ],
-  "routes": [
+  "rewrites": [
     {
-      "src": "/api/(.*)",
-      "dest": "/server/server.cjs"
+      "source": "/api/(.*)",
+      "destination": "/server/server.cjs"
     },
     {
-      "src": "/(.*)",
-      "dest": "/dist/$1"
+      "source": "/(.*)",
+      "destination": "/dist/$1"
     }
   ],
   "headers": [
     {
-      "source": "/(.*)",  
+      "source": "/(.*)",
       "headers": [
         {
           "key": "Content-Security-Policy",
