@@ -2,21 +2,30 @@
 let news = [];
 
 module.exports = (req, res) => {
-  if (req.method === 'GET') {
+  const { method } = req;
+  const { id } = req.query;
+
+  if (method === 'GET') {
     res.json(news); // Fetch all news
-  } else if (req.method === 'POST') {
+  } else if (method === 'POST') {
     const newArticle = { id: Date.now(), ...req.body };
     news.push(newArticle);
     res.json(newArticle);
-  } else if (req.method === 'PUT') {
-    const { id } = req.query;
-    news = news.map((article) =>
-      article.id === parseInt(id) ? { ...article, ...req.body } : article
-    );
+  } else if (method === 'PUT') {
+    // Update article by ID
+    const articleIndex = news.findIndex((article) => article.id === parseInt(id));
+    if (articleIndex === -1) {
+      return res.status(404).json({ error: 'Article not found' });
+    }
+    news[articleIndex] = { ...news[articleIndex], ...req.body };
     res.json({ success: true });
-  } else if (req.method === 'DELETE') {
-    const { id } = req.query;
-    news = news.filter((article) => article.id !== parseInt(id));
+  } else if (method === 'DELETE') {
+    // Delete article by ID
+    const articleIndex = news.findIndex((article) => article.id === parseInt(id));
+    if (articleIndex === -1) {
+      return res.status(404).json({ error: 'Article not found' });
+    }
+    news.splice(articleIndex, 1);
     res.json({ success: true });
   } else {
     res.status(405).json({ error: 'Method Not Allowed' });

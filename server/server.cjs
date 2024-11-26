@@ -30,16 +30,26 @@ app.post('/news', (req, res) => {
 // Update News (PUT /news/:id)
 app.put('/news/:id', (req, res) => {
   const { id } = req.params;
-  news = news.map((article) =>
-    article.id === parseInt(id) ? { ...article, ...req.body } : article
-  );
+  const articleIndex = news.findIndex((article) => article.id === parseInt(id));
+
+  if (articleIndex === -1) {
+    return res.status(404).json({ error: 'Article not found' });
+  }
+
+  news[articleIndex] = { ...news[articleIndex], ...req.body };
   res.json({ success: true });
 });
 
 // Delete News (DELETE /news/:id)
 app.delete('/news/:id', (req, res) => {
   const { id } = req.params;
-  news = news.filter((article) => article.id !== parseInt(id));
+  const articleIndex = news.findIndex((article) => article.id === parseInt(id));
+
+  if (articleIndex === -1) {
+    return res.status(404).json({ error: 'Article not found' });
+  }
+
+  news.splice(articleIndex, 1);
   res.json({ success: true });
 });
 
