@@ -8,6 +8,7 @@ const AdminDashboard = () => {
   const [imageUrl, setImageUrl] = useState("");  // To store the image URL input value
   const [news, setNews] = useState([]);  // To store the fetched news articles
 
+  // Fetch articles from Firestore
   useEffect(() => {
     const fetchNews = async () => {
       const storedNews = localStorage.getItem("news");
@@ -39,9 +40,10 @@ const AdminDashboard = () => {
     e.preventDefault();
     const newArticle = { title, description, imageUrl };
     try {
-      await addDoc(collection(db, "news"), newArticle); // Add the new article to Firestore
-      // Fetch updated news after adding
-      fetchNews();
+      // Add the new article to Firestore
+      const docRef = await addDoc(collection(db, "news"), newArticle);
+      // Update the local state by adding the new article
+      setNews([...news, { id: docRef.id, ...newArticle }]);
       // Optionally, you can reset the form values
       setTitle("");
       setDescription("");
@@ -54,8 +56,10 @@ const AdminDashboard = () => {
   // Handle delete article
   const handleDelete = async (id) => {
     try {
-      await deleteDoc(doc(db, "news", id)); // Delete the article from Firestore
-      fetchNews(); // Fetch updated news after deletion
+      // Delete the article from Firestore
+      await deleteDoc(doc(db, "news", id));
+      // Update the local state by filtering out the deleted article
+      setNews(news.filter((article) => article.id !== id));
     } catch (error) {
       console.error("Error deleting article:", error);
     }
