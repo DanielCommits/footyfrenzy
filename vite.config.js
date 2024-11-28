@@ -7,4 +7,9 @@ export default defineConfig({
     outDir: "dist", // Make sure the build output is directed to `dist`
   },
   plugins: [react()],
+  server: {
+    proxy: {
+      '/api': 'http://localhost:3000', // Proxy API requests to Vercel
+    },
+  },
 });
