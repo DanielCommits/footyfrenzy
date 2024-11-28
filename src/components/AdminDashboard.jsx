@@ -8,7 +8,6 @@ const AdminDashboard = () => {
   const [imageUrl, setImageUrl] = useState("");  // To store the image URL input value
   const [news, setNews] = useState([]);  // To store the fetched news articles
 
-  // Fetch articles from Firestore
   useEffect(() => {
     const fetchNews = async () => {
       const storedNews = localStorage.getItem("news");
@@ -40,10 +39,9 @@ const AdminDashboard = () => {
     e.preventDefault();
     const newArticle = { title, description, imageUrl };
     try {
-      // Add the new article to Firestore
-      const docRef = await addDoc(collection(db, "news"), newArticle);
-      // Update the local state by adding the new article
-      setNews([...news, { id: docRef.id, ...newArticle }]);
+      await addDoc(collection(db, "news"), newArticle); // Add the new article to Firestore
+      // Fetch updated news after adding
+      fetchNews();
       // Optionally, you can reset the form values
       setTitle("");
       setDescription("");
@@ -56,12 +54,26 @@ const AdminDashboard = () => {
   // Handle delete article
   const handleDelete = async (id) => {
     try {
-      // Delete the article from Firestore
-      await deleteDoc(doc(db, "news", id));
-      // Update the local state by filtering out the deleted article
-      setNews(news.filter((article) => article.id !== id));
+      await deleteDoc(doc(db, "news", id)); // Delete the article from Firestore
+      // After deleting, re-fetch and update localStorage
+      fetchNews();
     } catch (error) {
       console.error("Error deleting article:", error);
+    }
+  };
+
+  const fetchNews = async () => {
+    try {
+      const querySnapshot = await getDocs(collection(db, "news"));
+      const articles = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setNews(articles);
+      // Update localStorage with the latest news
+      localStorage.setItem("news", JSON.stringify(articles));
+    } catch (error) {
+      console.error("Error fetching news:", error);
     }
   };
 
