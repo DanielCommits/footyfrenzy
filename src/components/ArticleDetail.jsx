@@ -6,6 +6,7 @@ import { db } from "../firebaseConfig";
 const ArticleDetail = () => {
   const { id } = useParams(); // Get the dynamic ID from the route
   const [article, setArticle] = useState(null);
+  const [error, setError] = useState(null);  // State for handling errors
 
   useEffect(() => {
     const fetchArticle = async () => {
@@ -16,14 +17,19 @@ const ArticleDetail = () => {
       } else {
         // Otherwise, fetch it from Firestore
         const articleRef = doc(db, "news", id);
-        const docSnap = await getDoc(articleRef);
-        if (docSnap.exists()) {
-          const articleData = docSnap.data();
-          setArticle(articleData);
-          // Store the fetched article in localStorage for future use
-          localStorage.setItem(`article_${id}`, JSON.stringify(articleData));
-        } else {
-          console.log("No such article!");
+        try {
+          const docSnap = await getDoc(articleRef);
+          if (docSnap.exists()) {
+            const articleData = docSnap.data();
+            setArticle(articleData);
+            // Store the fetched article in localStorage for future use
+            localStorage.setItem(`article_${id}`, JSON.stringify(articleData));
+          } else {
+            setError("No such article found!");  // Set error if article is not found
+          }
+        } catch (err) {
+          setError("Failed to fetch article. Please try again later.");  // Catch any other errors
+          console.error("Error fetching article:", err);
         }
       }
     };
@@ -31,6 +37,7 @@ const ArticleDetail = () => {
     fetchArticle();
   }, [id]);
 
+  if (error) return <p>{error}</p>;  // Display error if exists
   if (!article) return <p>Loading...</p>;
 
   return (
