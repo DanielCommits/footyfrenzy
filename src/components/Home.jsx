@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebaseConfig";  // Import Firebase configuration
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [news, setNews] = useState([]);
@@ -33,17 +34,22 @@ const Home = () => {
 
   return (
     <div>
-      <h2>Latest News...</h2>
-      <ul>
-        {news.map((article) => (
-          <li key={article.id}>
-            <h3>{article.title}</h3>
-            <img src={article.imageUrl} alt={article.title} style={{ width: "100px" }} />
-            <p>{article.description}</p>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <h2>Latest News...</h2>
+    <ul>
+      {news.map((article) => (
+        <li key={article.id}>
+          <h3>{article.title}</h3>
+          <img
+            src={article.imageUrl}
+            alt={article.title}
+            style={{ width: "100px" }}
+          />
+          <p>{article.description}</p>
+          <Link to={`/article/${article.id}`}>Read More</Link>
+        </li>
+      ))}
+    </ul>
+  </div>
   );
 };
 
