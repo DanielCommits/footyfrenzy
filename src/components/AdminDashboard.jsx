@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../firebaseConfig";  // Import Firebase configuration
+import { collection, getDocs, addDoc, deleteDoc, doc } from "firebase/firestore";
+import { db } from "../firebaseConfig"; // Import Firebase configuration
 
 const AdminDashboard = () => {
-  const [news, setNews] = useState([]);
+  const [title, setTitle] = useState("");  // To store the title input value
+  const [description, setDescription] = useState("");  // To store the description input value
+  const [imageUrl, setImageUrl] = useState("");  // To store the image URL input value
+  const [news, setNews] = useState([]);  // To store the fetched news articles
 
   useEffect(() => {
     const fetchNews = async () => {
@@ -31,16 +34,78 @@ const AdminDashboard = () => {
     fetchNews();
   }, []);
 
+  // Handle form submission to add a new article
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const newArticle = { title, description, imageUrl };
+    try {
+      await addDoc(collection(db, "news"), newArticle); // Add the new article to Firestore
+      // Fetch updated news after adding
+      fetchNews();
+      // Optionally, you can reset the form values
+      setTitle("");
+      setDescription("");
+      setImageUrl("");
+    } catch (error) {
+      console.error("Error adding article:", error);
+    }
+  };
+
+  // Handle delete article
+  const handleDelete = async (id) => {
+    try {
+      await deleteDoc(doc(db, "news", id)); // Delete the article from Firestore
+      fetchNews(); // Fetch updated news after deletion
+    } catch (error) {
+      console.error("Error deleting article:", error);
+    }
+  };
+
   return (
     <div>
       <h2>Admin Dashboard</h2>
-      {/* Display news and other admin functionalities */}
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>Title:</label>
+          <input
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <label>Description:</label>
+          <textarea
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <label>Image URL:</label>
+          <input
+            type="text"
+            value={imageUrl}
+            onChange={(e) => setImageUrl(e.target.value)}
+            required
+          />
+        </div>
+        <button type="submit">Add Article</button>
+      </form>
+
+      <h3>Existing Articles</h3>
       <ul>
         {news.map((article) => (
           <li key={article.id}>
-            <h3>{article.title}</h3>
+            <h4>{article.title}</h4>
+            <img
+              src={article.imageUrl}
+              alt={article.title}
+              style={{ width: "100px" }}
+            />
             <p>{article.description}</p>
-            <button>Delete</button> {/* You can add delete functionality */}
+            <button onClick={() => handleDelete(article.id)}>Delete</button>
           </li>
         ))}
       </ul>
