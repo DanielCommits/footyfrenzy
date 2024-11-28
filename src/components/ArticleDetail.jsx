@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
-import { db } from "../firebaseConfig ";
-
+import { db } from "../firebaseConfig";
 
 const ArticleDetail = () => {
   const { id } = useParams(); // Get the dynamic ID from the route
