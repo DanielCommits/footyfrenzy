@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { db } from "../firebaseConfig"; // Firebase Firestore setup
+
 
 const ArticleDetail = ({ match }) => {
   const [article, setArticle] = useState(null);
