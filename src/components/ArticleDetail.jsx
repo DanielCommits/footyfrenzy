@@ -26,7 +26,11 @@ const ArticleDetail = () => {
   return (
     <div>
       <h2>{article.title}</h2>
-      <img src={article.imageUrl} alt={article.title} style={{ width: "100%" }} />
+      <img
+        src={article.imageUrl}
+        alt={article.title}
+        style={{ width: "100%" }}
+      />
       <p>{article.description}</p>
     </div>
   );

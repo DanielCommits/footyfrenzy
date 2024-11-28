@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
-
-import { collection, addDoc, getDocs, deleteDoc, doc } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  getDocs,
+  deleteDoc,
+  doc,
+} from "firebase/firestore";
 import { db } from "../firebaseConfig";
 
 const AdminDashboard = () => {
@@ -11,7 +16,10 @@ const AdminDashboard = () => {
 
   const fetchNews = async () => {
     const querySnapshot = await getDocs(collection(db, "news"));
-    const articles = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+    const articles = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
     setNews(articles);
   };
 

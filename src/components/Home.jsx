@@ -9,7 +9,10 @@ const Home = () => {
   useEffect(() => {
     const fetchNews = async () => {
       const querySnapshot = await getDocs(collection(db, "news"));
-      const articles = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      const articles = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
       setNews(articles);
     };
     fetchNews();
