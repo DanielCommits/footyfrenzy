@@ -1,22 +1,25 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../firebaseConfig";
 
-
-const ArticleDetail = ({ match }) => {
+const ArticleDetail = () => {
+  const { id } = useParams(); // Get the dynamic ID from the route
   const [article, setArticle] = useState(null);
 
   useEffect(() => {
     const fetchArticle = async () => {
-      const articleRef = db.collection("articles").doc(match.params.id);
-      const doc = await articleRef.get();
-      if (doc.exists) {
-        setArticle(doc.data());
+      const articleRef = doc(db, "news", id);
+      const docSnap = await getDoc(articleRef);
+      if (docSnap.exists()) {
+        setArticle(docSnap.data());
       } else {
         console.log("No such article!");
       }
     };
 
     fetchArticle();
-  }, [match.params.id]);
+  }, [id]);
 
   if (!article) return <p>Loading...</p>;
 
