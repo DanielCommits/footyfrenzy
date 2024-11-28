@@ -33,7 +33,7 @@ const Home = () => {
 
   return (
     <div>
-      <h2>Latest News</h2>
+      <h2>Latest News...</h2>
       <ul>
         {news.map((article) => (
           <li key={article.id}>
