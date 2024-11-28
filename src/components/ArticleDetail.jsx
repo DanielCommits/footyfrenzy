@@ -9,12 +9,22 @@ const ArticleDetail = () => {
 
   useEffect(() => {
     const fetchArticle = async () => {
-      const articleRef = doc(db, "news", id);
-      const docSnap = await getDoc(articleRef);
-      if (docSnap.exists()) {
-        setArticle(docSnap.data());
+      const storedArticle = localStorage.getItem(`article_${id}`);
+      if (storedArticle) {
+        // If the article is in localStorage, use it
+        setArticle(JSON.parse(storedArticle));
       } else {
-        console.log("No such article!");
+        // Otherwise, fetch it from Firestore
+        const articleRef = doc(db, "news", id);
+        const docSnap = await getDoc(articleRef);
+        if (docSnap.exists()) {
+          const articleData = docSnap.data();
+          setArticle(articleData);
+          // Store the fetched article in localStorage for future use
+          localStorage.setItem(`article_${id}`, JSON.stringify(articleData));
+        } else {
+          console.log("No such article!");
+        }
       }
     };
 
