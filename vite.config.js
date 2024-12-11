@@ -8,8 +8,6 @@ export default defineConfig({
   },
   plugins: [react()],
   server: {
-    proxy: {
-      '/api': 'http://localhost:3000', // Proxy API requests to Vercel
-    },
+    host: '0.0.0.0', 
   },
 });
