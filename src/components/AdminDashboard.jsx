@@ -1,48 +1,37 @@
 import React, { useState, useEffect } from "react";
-import { collection, getDocs, addDoc, deleteDoc, doc } from "firebase/firestore";
+import { collection, addDoc, deleteDoc, doc, onSnapshot } from "firebase/firestore";
 import { db } from "../firebaseConfig"; // Import Firebase configuration
 
 const AdminDashboard = () => {
-  const [title, setTitle] = useState("");  // To store the title input value
-  const [description, setDescription] = useState("");  // To store the description input value
-  const [imageUrl, setImageUrl] = useState("");  // To store the image URL input value
-  const [news, setNews] = useState([]);  // To store the fetched news articles
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
+  const [news, setNews] = useState([]);
 
+  // Fetch news with real-time updates
   useEffect(() => {
-    const fetchNews = async () => {
-      try {
-        const querySnapshot = await getDocs(collection(db, "news"));
-        const articles = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-  
-        // Sort by createdAt in descending order (newest first)
-        const sortedArticles = articles.sort((a, b) => b.createdAt - a.createdAt);
-        setNews(sortedArticles);
-  
-        localStorage.setItem("news", JSON.stringify(sortedArticles));
-      } catch (error) {
-        console.error("Error fetching news:", error);
-      }
-    };
-  
-    fetchNews();
+    const unsubscribe = onSnapshot(collection(db, "news"), (querySnapshot) => {
+      const articles = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+
+      // Sort articles by createdAt in descending order
+      const sortedArticles = articles.sort((a, b) => b.createdAt - a.createdAt);
+      setNews(sortedArticles);
+
+      localStorage.setItem("news", JSON.stringify(sortedArticles));
+    });
+
+    return () => unsubscribe(); // Cleanup the listener when component is unmounted
   }, []);
-  
+
   // Handle form submission to add a new article
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const newArticle = { 
-      title, 
-      description, 
-      imageUrl, 
-      createdAt: new Date()  // Add a timestamp for the article
-    };
+    const newArticle = { title, description, imageUrl, createdAt: new Date() };
     try {
       await addDoc(collection(db, "news"), newArticle); // Add the new article to Firestore
-      // Fetch updated news after adding
-      fetchNews();
       setTitle("");
       setDescription("");
       setImageUrl("");
@@ -50,31 +39,13 @@ const AdminDashboard = () => {
       console.error("Error adding article:", error);
     }
   };
-  
 
   // Handle delete article
   const handleDelete = async (id) => {
     try {
       await deleteDoc(doc(db, "news", id)); // Delete the article from Firestore
-      // After deleting, re-fetch and update localStorage
-      fetchNews();
     } catch (error) {
       console.error("Error deleting article:", error);
-    }
-  };
-
-  const fetchNews = async () => {
-    try {
-      const querySnapshot = await getDocs(collection(db, "news"));
-      const articles = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      setNews(articles);
-      // Update localStorage with the latest news
-      localStorage.setItem("news", JSON.stringify(articles));
-    } catch (error) {
-      console.error("Error fetching news:", error);
     }
   };
 
