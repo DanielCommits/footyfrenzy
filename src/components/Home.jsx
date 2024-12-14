@@ -10,28 +10,29 @@ const Home = () => {
     const fetchNews = async () => {
       const storedNews = localStorage.getItem("news");
       if (storedNews) {
-        // If data exists in localStorage, load it
         setNews(JSON.parse(storedNews));
       } else {
-        // Otherwise, fetch from Firestore
         try {
           const querySnapshot = await getDocs(collection(db, "news"));
           const articles = querySnapshot.docs.map((doc) => ({
             id: doc.id,
             ...doc.data(),
           }));
-          setNews(articles);
-          // Store the fetched data in localStorage
-          localStorage.setItem("news", JSON.stringify(articles));
+  
+          // Sort articles by createdAt to display newest articles first
+          const sortedArticles = articles.sort((a, b) => b.createdAt - a.createdAt);
+          setNews(sortedArticles);
+  
+          localStorage.setItem("news", JSON.stringify(sortedArticles));
         } catch (error) {
           console.error("Error fetching news:", error);
         }
       }
     };
-
+  
     fetchNews();
   }, []);
-
+  
   return (
     <div>
     <h2>Latest News...</h2>

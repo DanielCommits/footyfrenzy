@@ -10,39 +10,39 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     const fetchNews = async () => {
-      const storedNews = localStorage.getItem("news");
-      if (storedNews) {
-        // If data exists in localStorage, load it
-        setNews(JSON.parse(storedNews));
-      } else {
-        // Otherwise, fetch from Firestore
-        try {
-          const querySnapshot = await getDocs(collection(db, "news"));
-          const articles = querySnapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-          }));
-          setNews(articles);
-          // Store the fetched data in localStorage
-          localStorage.setItem("news", JSON.stringify(articles));
-        } catch (error) {
-          console.error("Error fetching news:", error);
-        }
+      try {
+        const querySnapshot = await getDocs(collection(db, "news"));
+        const articles = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+  
+        // Sort by createdAt in descending order (newest first)
+        const sortedArticles = articles.sort((a, b) => b.createdAt - a.createdAt);
+        setNews(sortedArticles);
+  
+        localStorage.setItem("news", JSON.stringify(sortedArticles));
+      } catch (error) {
+        console.error("Error fetching news:", error);
       }
     };
-
+  
     fetchNews();
   }, []);
-
+  
   // Handle form submission to add a new article
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const newArticle = { title, description, imageUrl };
+    const newArticle = { 
+      title, 
+      description, 
+      imageUrl, 
+      createdAt: new Date()  // Add a timestamp for the article
+    };
     try {
       await addDoc(collection(db, "news"), newArticle); // Add the new article to Firestore
       // Fetch updated news after adding
       fetchNews();
-      // Optionally, you can reset the form values
       setTitle("");
       setDescription("");
       setImageUrl("");
@@ -50,6 +50,7 @@ const AdminDashboard = () => {
       console.error("Error adding article:", error);
     }
   };
+  
 
   // Handle delete article
   const handleDelete = async (id) => {
