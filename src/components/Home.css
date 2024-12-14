@@ -1,0 +1,25 @@
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  .card-body {
+    padding: 1rem;
+  }
+  
+  /* Extra style to make the top articles bigger */
+  .featured-card {
+    background-color: #333;
+    color: white;
+    border-radius: 15px;
+  }
+  
+  .featured-card .card-body {
+    padding: 1.5rem;
+  }
+  
