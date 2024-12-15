@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Navbar.css";
 import { FaSun, FaMoon } from 'react-icons/fa';
 import { FaUserCircle } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -24,7 +25,9 @@ const Navbar = () => {
 
   return (
     <nav className="navbar">
-      <div className="navbar-logo">FootyFrenzy</div>
+      <Link to="/" className="navbar-logo">
+        FootyFrenzy
+      </Link>
       <ul className={`navbar-links ${isMenuOpen ? "open" : ""}`}>
         <li>LIVE SCORES</li>
         <li>NEWS</li>

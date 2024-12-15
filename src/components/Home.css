@@ -34,7 +34,7 @@
 
 /* Body styling for horizontal cards */
 .card-horizontal .card-body {
-  padding: 0.5rem 0;
+  padding: 1rem;
   display: flex;
   flex-direction: column; /* Ensure text is stacked in column layout */
   justify-content: center;
@@ -67,8 +67,8 @@
   }
 
   .card-img-left {
-    height: 80px; /* Smaller image height on small screens */
-    width: 100px; /* Adjusted image width for small screens */
+    height: 120px; /* Smaller image height on small screens */
+    width: 250px; /* Adjusted image width for small screens */
   }
 
   .card-horizontal .card-body {
@@ -77,14 +77,18 @@
   }
 
   .card-horizontal .card-title {
-    font-size: 0.9rem;
+    font-size: 1.2rem;
   }
 
   .card-horizontal .card-text {
-    font-size: 0.75rem;
+    font-size: 1rem;
   }
 
   .btn {
     font-size: 0.75rem;
   }
+}
+a {
+  color: inherit;      /* Inherit color from parent element */
+  text-decoration: none;  /* Remove underline */
 }
