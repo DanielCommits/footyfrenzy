@@ -72,25 +72,29 @@ const Home = () => {
 
       {/* Regular Articles: Display the rest in a grid */}
       <div className="row">
-        {news.slice(3).map((article) => (
-          <div key={article.id} className="col-md-4 mb-4">
-            <div className="card h-100">
-              <img
-                src={article.imageUrl}
-                className="card-img-top"
-                alt={article.title}
-              />
-              <div className="card-body">
-                <h5 className="card-title">{article.title}</h5>
-                <p className="card-text">{article.description}</p>
-                <Link to={`/article/${article.id}`} className="btn btn-primary">
-                  Full story
-                </Link>
-              </div>
-            </div>
-          </div>
-        ))}
+  {news.slice(3).map((article) => (
+    <div key={article.id} className="col-md-4 col-12 mb-3">
+      <div className="card card-horizontal h-100">
+        <div className={`card-img-top ${window.innerWidth <= 768 ? 'card-img-left' : ''}`}>
+          <img
+            src={article.imageUrl}
+            alt={article.title}
+            className="card-img-top"
+          />
+        </div>
+        <div className="card-body">
+          <h5 className="card-title">{article.title}</h5>
+          <p className="card-text">{article.description}</p>
+          <Link to={`/article/${article.id}`} className="btn btn-primary">
+            Read More
+          </Link>
+        </div>
       </div>
+    </div>
+  ))}
+</div>
+
+
     </div>
   );
 };
