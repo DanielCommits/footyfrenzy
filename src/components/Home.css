@@ -67,8 +67,8 @@
   }
 
   .card-img-left {
-    height: 120px; /* Smaller image height on small screens */
-    width: 250px; /* Adjusted image width for small screens */
+    height: 80px; /* Smaller image height on small screens */
+    width: 100px; /* Adjusted image width for small screens */
   }
 
   .card-horizontal .card-body {
