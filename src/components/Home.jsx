@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "../firebaseConfig";
-import { Link } from "react-router-dom";  // Import Link
+import { Link } from "react-router-dom"; // Import Link
 import "./Home.css";
 
 const Home = () => {
@@ -21,13 +21,13 @@ const Home = () => {
       localStorage.setItem("news", JSON.stringify(sortedArticles));
     });
 
-    return () => unsubscribe();  // Cleanup the listener when component is unmounted
+    return () => unsubscribe(); // Cleanup the listener when component is unmounted
   }, []);
 
   return (
     <div className="container mt-5">
       <h2>Latest News</h2>
-      <br/>
+      <br />
 
       {/* Featured Articles: One large article and two stacked */}
       <div className="row mb-4">
@@ -45,27 +45,31 @@ const Home = () => {
                 <p className="card-text">{news[0]?.description}</p>
                 <button className="btn btn-primary">Read Full Story</button>
               </div>
-              
             </div>
           </Link>
-          
         </div>
 
         {/* Second and Third articles: Stacked */}
         <div className="col-md-4 d-flex flex-column gap-3">
           {news.slice(1, 3).map((article) => (
-            <Link to={`/article/${article.id}`} key={article.id} className="card-link">
-              <div className="card cardforsmall h-100">
-              <div className={`card-img-top ${window.innerWidth <= 768 ? 'card-img-left' : ''}`}>
-                <img
-                  src={article.imageUrl}
-                  className="card-img-top"
-                  alt={article.title}
-                />
-                <div className="card-body">
-                  <h5 className="card-title">{article.title}</h5>
-                  <p className="card-text">{article.description}</p>
-                </div>
+            <Link
+              to={`/article/${article.id}`}
+              key={article.id}
+              className="card-link"
+            >
+              <div className="card card-horizontal h-100">
+                <div
+                  className={`card-img-top ${window.innerWidth <= 768 ? "card-img-left" : ""}`}
+                >
+                  <img
+                    src={article.imageUrl}
+                    className="card-img-top"
+                    alt={article.title}
+                  />
+                  <div className="card-body">
+                    <h5 className="card-title">{article.title}</h5>
+                    <p className="card-text">{article.description}</p>
+                  </div>
                 </div>
               </div>
             </Link>
@@ -79,7 +83,9 @@ const Home = () => {
           <div key={article.id} className="col-md-4 col-12 mb-3">
             <Link to={`/article/${article.id}`} className="card-link">
               <div className="card card-horizontal h-100">
-                <div className={`card-img-top ${window.innerWidth <= 768 ? 'card-img-left' : ''}`}>
+                <div
+                  className={`card-img-top ${window.innerWidth <= 768 ? "card-img-left" : ""}`}
+                >
                   <img
                     src={article.imageUrl}
                     alt={article.title}

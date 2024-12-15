@@ -67,30 +67,9 @@
   }
 
   .card-img-left {
-    height: 100px; /* Smaller image height on small screens */
+    height: 80px; /* Smaller image height on small screens */
     width: 150px; /* Adjusted image width for small screens */
   }
-
-  .cardforsmall {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .cardforsmall .card-body {
-    flex-grow: 0; /* Prevent body from growing too much */
-    margin-left: 10px; /* Space between the text and image */
-  }
-
-  .cardforsmall .card-title {
-    font-size: 1rem;
-  }
-
-  .cardforsmall .card-text {
-    font-size: 13px;
-    font-style: oblique;
-  }
-
   .card-horizontal .card-body {
     flex-grow: 0; /* Prevent body from growing too much */
     margin-left: 10px; /* Space between the text and image */
