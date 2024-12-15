@@ -27,6 +27,7 @@ const Home = () => {
   return (
     <div className="container mt-5">
       <h2>Latest News</h2>
+      <br/>
 
       {/* Featured Articles: One large article and two stacked */}
 <div className="row mb-4">

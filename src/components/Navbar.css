@@ -28,7 +28,6 @@ body:not(.dark-mode) {
   margin: 0;
   position: relative;
   z-index: 10;
-  margin-bottom: 10px;
 }
 
 .navbar-logo {
