@@ -56,7 +56,7 @@
 /* Responsive adjustments for smaller screens */
 @media (max-width: 768px) {
   .card {
-    min-height: 220px; /* Adjust for smaller screens */
+    min-height: 150px; /* Adjust for smaller screens */
   }
 
   .card-horizontal {
@@ -68,7 +68,7 @@
 
   .card-img-left {
     height: 80px; /* Smaller image height on small screens */
-    width: 150px; /* Adjusted image width for small screens */
+    width: 100px; /* Adjusted image width for small screens */
   }
 
   .card-horizontal .card-body {
