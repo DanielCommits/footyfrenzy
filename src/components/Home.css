@@ -4,6 +4,11 @@
   overflow: hidden;
   transition: transform 0.3s;
   font-size: 0.9rem;
+  min-height: 220px; /* Fixed minimum height for consistency */
+  height: 320px; /* Fixed height to maintain card size */
+  width: 100%; /* Let the card occupy 100% of its column width */
+  display: flex;
+  flex-direction: column;
 }
 
 .card:hover {
@@ -17,7 +22,7 @@
 
 /* Image styling for horizontal cards */
 .card-img-left {
-  width: 120px; /* Fixed width for horizontal layout */
+  width: 100px; /* Fixed width for horizontal layout */
   height: 100%;
   object-fit: cover;
   border-radius: 4px;
@@ -32,6 +37,7 @@
   flex-direction: column; /* Ensure text is stacked in column layout */
   justify-content: center;
   flex-grow: 1; /* Allow text to grow and fill available space */
+  overflow: hidden; /* Prevent text overflow */
 }
 
 /* Smaller title and description for horizontal layout */
@@ -47,6 +53,10 @@
 
 /* Responsive adjustments for smaller screens */
 @media (max-width: 768px) {
+  .card {
+    min-height: 220px; /* Adjust for smaller screens */
+  }
+
   .card-horizontal {
     display: flex;
     flex-direction: row;
