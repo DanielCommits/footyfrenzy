@@ -29,7 +29,7 @@
   object-fit: cover;
   border-radius: 4px;
   margin-right: 1rem; /* Space between the image and the text */
-  flex-shrink: 0;  /* Ensure image doesn't shrink */
+  flex-shrink: 0; /* Ensure image doesn't shrink */
 }
 
 /* Body styling for horizontal cards */
@@ -88,13 +88,10 @@
 
   .cardforsmall .card-text {
     font-size: 13px;
-     font-style: oblique;
-}
+    font-style: oblique;
+  }
 
-
-
-
-.card-horizontal .card-body {
+  .card-horizontal .card-body {
     flex-grow: 0; /* Prevent body from growing too much */
     margin-left: 10px; /* Space between the text and image */
   }
@@ -105,16 +102,14 @@
 
   .card-horizontal .card-text {
     font-size: 13px;
-     font-style: oblique;
+    font-style: oblique;
   }
 
   .btn {
     font-size: 0.75rem;
   }
-  
 }
 a {
-  color: inherit;      /* Inherit color from parent element */
-  text-decoration: none;  /* Remove underline */
+  color: inherit; /* Inherit color from parent element */
+  text-decoration: none; /* Remove underline */
 }
-
