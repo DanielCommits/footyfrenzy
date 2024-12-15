@@ -10,7 +10,9 @@
   display: flex;
   flex-direction: column;
 }
-
+.btn {
+  background-color: rgb(164, 190, 13);
+}
 .card:hover {
   transform: scale(1.02);
 }
