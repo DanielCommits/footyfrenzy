@@ -55,7 +55,8 @@ const Home = () => {
         <div className="col-md-4 d-flex flex-column gap-3">
           {news.slice(1, 3).map((article) => (
             <Link to={`/article/${article.id}`} key={article.id} className="card-link">
-              <div className="card h-100">
+              <div className="card cardforsmall h-100">
+              <div className={`card-img-top ${window.innerWidth <= 768 ? 'card-img-left' : ''}`}>
                 <img
                   src={article.imageUrl}
                   className="card-img-top"
@@ -64,6 +65,7 @@ const Home = () => {
                 <div className="card-body">
                   <h5 className="card-title">{article.title}</h5>
                   <p className="card-text">{article.description}</p>
+                </div>
                 </div>
               </div>
             </Link>

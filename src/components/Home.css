@@ -56,7 +56,7 @@
 /* Responsive adjustments for smaller screens */
 @media (max-width: 768px) {
   .card {
-    min-height: 150px; /* Adjust for smaller screens */
+    min-height: 100px; /* Adjust for smaller screens */
   }
 
   .card-horizontal {
@@ -71,7 +71,30 @@
     width: 150px; /* Adjusted image width for small screens */
   }
 
-  .card-horizontal .card-body {
+  .cardforsmall {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .cardforsmall .card-body {
+    flex-grow: 0; /* Prevent body from growing too much */
+    margin-left: 10px; /* Space between the text and image */
+  }
+
+  .cardforsmall .card-title {
+    font-size: 1rem;
+  }
+
+  .cardforsmall .card-text {
+    font-size: 13px;
+     font-style: oblique;
+}
+
+
+
+
+.card-horizontal .card-body {
     flex-grow: 0; /* Prevent body from growing too much */
     margin-left: 10px; /* Space between the text and image */
   }
@@ -88,8 +111,10 @@
   .btn {
     font-size: 0.75rem;
   }
+  
 }
 a {
   color: inherit;      /* Inherit color from parent element */
   text-decoration: none;  /* Remove underline */
 }
+
