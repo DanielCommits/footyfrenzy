@@ -1,25 +1,47 @@
-.card-img-top {
-    height: 200px;
-    object-fit: cover;
-  }
-  
-  .card-title {
-    font-size: 1.2rem;
-    font-weight: bold;
-  }
-  
-  .card-body {
-    padding: 1rem;
-  }
-  
-  /* Extra style to make the top articles bigger */
-  .featured-card {
-    background-color: #333;
-    color: white;
-    border-radius: 15px;
-  }
-  
-  .featured-card .card-body {
-    padding: 1.5rem;
-  }
-  
+.card {
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s;
+  font-size: 0.9rem; /* Reduce font size for smaller cards */
+}
+
+.card:hover {
+  transform: scale(1.02);
+}
+
+.featured-card img {
+  height: 180px; /* Reduced height for featured images */
+  object-fit: cover;
+}
+
+.col-md-8 img {
+  height: 350px; /* Reduced height for the large card image */
+  object-fit: cover;
+}
+
+.col-md-4 .card img {
+  height: 160px; /* Reduced height for the smaller stacked cards */
+  object-fit: cover;
+}
+
+.d-flex.gap-3 {
+  gap: 0.8rem; /* Slightly tighter spacing between stacked cards */
+}
+
+/* Adjust padding for the card body to make it more compact */
+.card-body {
+  padding: 0.8rem;
+}
+
+h5.card-title {
+  font-size: 1rem; /* Slightly smaller title text */
+  margin-bottom: 0.5rem;
+}
+
+.card-text {
+  font-size: 0.8rem; /* Smaller description text */
+}
+
+.btn {
+  font-size: 0.8rem; /* Smaller button size */
+}

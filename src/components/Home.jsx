@@ -28,11 +28,30 @@ const Home = () => {
     <div className="container mt-5">
       <h2>Latest News</h2>
 
-      {/* Featured Articles: Display the top 3 articles bigger */}
-      <div className="row mb-4">
-  {news.slice(0, 3).map((article) => (
-    <div key={article.id} className="col-md-4 mb-3 featured-card">
-      <div className="card h-100">
+      {/* Featured Articles: One large article and two stacked */}
+<div className="row mb-4">
+  {/* First article: Large */}
+  <div className="col-md-8 mb-3">
+    <div className="card h-100">
+      <img
+        src={news[0]?.imageUrl}
+        className="card-img-top"
+        alt={news[0]?.title}
+      />
+      <div className="card-body">
+        <h5 className="card-title">{news[0]?.title}</h5>
+        <p className="card-text">{news[0]?.description}</p>
+        <Link to={`/article/${news[0]?.id}`} className="btn btn-primary">
+          Full story
+        </Link>
+      </div>
+    </div>
+  </div>
+
+  {/* Second and Third articles: Stacked */}
+  <div className="col-md-4 d-flex flex-column gap-3">
+    {news.slice(1, 3).map((article) => (
+      <div key={article.id} className="card h-100">
         <img
           src={article.imageUrl}
           className="card-img-top"
@@ -46,8 +65,8 @@ const Home = () => {
           </Link>
         </div>
       </div>
-    </div>
-  ))}
+    ))}
+  </div>
 </div>
 
 
