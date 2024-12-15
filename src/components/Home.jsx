@@ -57,7 +57,7 @@ const Home = () => {
               key={article.id}
               className="card-link"
             >
-              <div className="card card-horizontal h-100">
+              <div className="card h-100">
                 <div
                   className={`card-img-top ${window.innerWidth <= 768 ? "card-img-left" : ""}`}
                 >
