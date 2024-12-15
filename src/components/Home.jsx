@@ -30,72 +30,69 @@ const Home = () => {
       <br/>
 
       {/* Featured Articles: One large article and two stacked */}
-<div className="row mb-4">
-  {/* First article: Large */}
-  <div className="col-md-8 mb-3">
-    <div className="card h-100">
-      <img
-        src={news[0]?.imageUrl}
-        className="card-img-top"
-        alt={news[0]?.title}
-      />
-      <div className="card-body">
-        <h5 className="card-title">{news[0]?.title}</h5>
-        <p className="card-text">{news[0]?.description}</p>
-        <Link to={`/article/${news[0]?.id}`} className="btn btn-primary">
-          Full story
-        </Link>
-      </div>
-    </div>
-  </div>
-
-  {/* Second and Third articles: Stacked */}
-  <div className="col-md-4 d-flex flex-column gap-3">
-    {news.slice(1, 3).map((article) => (
-      <div key={article.id} className="card h-100">
-        <img
-          src={article.imageUrl}
-          className="card-img-top"
-          alt={article.title}
-        />
-        <div className="card-body">
-          <h5 className="card-title">{article.title}</h5>
-          <p className="card-text">{article.description}</p>
-          <Link to={`/article/${article.id}`} className="btn btn-primary">
-            Full story
+      <div className="row mb-4">
+        {/* First article: Large */}
+        <div className="col-md-8 mb-3">
+          <Link to={`/article/${news[0]?.id}`} className="card-link">
+            <div className="card h-100">
+              <img
+                src={news[0]?.imageUrl}
+                className="card-img-top"
+                alt={news[0]?.title}
+              />
+              <div className="card-body">
+                <h5 className="card-title">{news[0]?.title}</h5>
+                <p className="card-text">{news[0]?.description}</p>
+                <button className="btn btn-primary">Read Full Story</button>
+              </div>
+              
+            </div>
           </Link>
+          
+        </div>
+
+        {/* Second and Third articles: Stacked */}
+        <div className="col-md-4 d-flex flex-column gap-3">
+          {news.slice(1, 3).map((article) => (
+            <Link to={`/article/${article.id}`} key={article.id} className="card-link">
+              <div className="card h-100">
+                <img
+                  src={article.imageUrl}
+                  className="card-img-top"
+                  alt={article.title}
+                />
+                <div className="card-body">
+                  <h5 className="card-title">{article.title}</h5>
+                  <p className="card-text">{article.description}</p>
+                </div>
+              </div>
+            </Link>
+          ))}
         </div>
       </div>
-    ))}
-  </div>
-</div>
-
 
       {/* Regular Articles: Display the rest in a grid */}
       <div className="row">
-  {news.slice(3).map((article) => (
-    <div key={article.id} className="col-md-4 col-12 mb-3">
-      <div className="card card-horizontal h-100">
-        <div className={`card-img-top ${window.innerWidth <= 768 ? 'card-img-left' : ''}`}>
-          <img
-            src={article.imageUrl}
-            alt={article.title}
-            className="card-img-top"
-          />
-        </div>
-        <div className="card-body">
-          <h5 className="card-title">{article.title}</h5>
-          <p className="card-text">{article.description}</p>
-          <Link to={`/article/${article.id}`} className="btn btn-primary">
-            Read More
-          </Link>
-        </div>
+        {news.slice(3).map((article) => (
+          <div key={article.id} className="col-md-4 col-12 mb-3">
+            <Link to={`/article/${article.id}`} className="card-link">
+              <div className="card card-horizontal h-100">
+                <div className={`card-img-top ${window.innerWidth <= 768 ? 'card-img-left' : ''}`}>
+                  <img
+                    src={article.imageUrl}
+                    alt={article.title}
+                    className="card-img-top"
+                  />
+                </div>
+                <div className="card-body">
+                  <h5 className="card-title">{article.title}</h5>
+                  <p className="card-text">{article.description}</p>
+                </div>
+              </div>
+            </Link>
+          </div>
+        ))}
       </div>
-    </div>
-  ))}
-</div>
-
-
     </div>
   );
 };
