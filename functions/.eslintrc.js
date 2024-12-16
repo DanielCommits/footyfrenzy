@@ -1,11 +1,11 @@
 module.exports = {
   env: {
     es2021: true,
-    node: true, // Ensures that 'module' and 'require' are available
+    node: true,
   },
   parserOptions: {
     ecmaVersion: 2021,
-    sourceType: "module", // 'module' allows modern syntax such as `import/export`
+    sourceType: "module",
   },
   extends: [
     "eslint:recommended",
@@ -15,12 +15,12 @@ module.exports = {
     "no-restricted-globals": ["error", "name", "length"],
     "prefer-arrow-callback": "error",
     "quotes": ["error", "double", { "allowTemplateLiterals": true }],
+    "no-undef": ["error", { "typeof": true }]  // Specifically added rule to help with undefined variables like 'module' and 'require'
   },
   globals: {
-    // Explicitly define CommonJS-related globals:
-    "module": "readonly", // Prevents any mutation to 'module'
-    "require": "readonly", // Makes 'require' readonly
-    "exports": "readonly", // Makes 'exports' readonly
+    "module": "readonly", 
+    "require": "readonly", 
+    "exports": "readonly", 
   },
   overrides: [
     {
