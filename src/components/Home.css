@@ -137,3 +137,15 @@ a {
   text-decoration: solid;
   font-family: Impact;
 }
+* Default Light Mode */
+.card {
+  background-color: white;
+  color: black;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Dark Mode */
+body.dark-mode .card {
+  background-color: #282222;;
+  color: white;
+}
