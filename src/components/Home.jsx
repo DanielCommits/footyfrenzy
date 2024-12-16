@@ -26,7 +26,7 @@ const Home = () => {
 
   return (
     <div className="container mt-5">
-      <h2>Latest News</h2>
+      <h1 className="toptext">LATEST NEWS</h1>
       <br />
 
       {/* Featured Articles: One large article and two stacked */}
@@ -51,30 +51,29 @@ const Home = () => {
 
         {/* Second and Third articles: Stacked */}
         <div className="col-md-4 d-flex flex-column gap-3">
-          {news.slice(1, 3).map((article) => (
-            <Link
-              to={`/article/${article.id}`}
-              key={article.id}
-              className="card-link"
-            >
-              <div className="card h-100">
-                <div
-                  className={`card-img-top ${window.innerWidth <= 768 ? "card-img-left" : ""}`}
-                >
-                  <img
-                    src={article.imageUrl}
-                    className="card-img-top"
-                    alt={article.title}
-                  />
-                  <div className="card-body">
-                    <h5 className="card-title">{article.title}</h5>
-                    <p className="card-text">{article.description}</p>
-                  </div>
-                </div>
-              </div>
-            </Link>
-          ))}
+  {news.slice(1, 3).map((article) => (
+    <Link
+      to={`/article/${article.id}`}
+      key={article.id}
+      className="card-link"
+    >
+      <div className={`card h-100 ${window.innerWidth <= 768 ? "card-horizontal" : ""}`}>
+        <div className="card-img-container">
+          <img
+            src={article.imageUrl}
+            className={`card-img ${window.innerWidth <= 768 ? "card-img-left" : "card-img-top"}`}
+            alt={article.title}
+          />
         </div>
+        <div className="card-body">
+          <h5 className="card-title">{article.title}</h5>
+          <p className="card-text">{article.description}</p>
+        </div>
+      </div>
+    </Link>
+  ))}
+</div>
+
       </div>
 
       {/* Regular Articles: Display the rest in a grid */}

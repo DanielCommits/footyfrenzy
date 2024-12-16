@@ -1,18 +1,26 @@
+/* General container styling */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
 /* General card styling */
 .card {
   border-radius: 8px;
   overflow: hidden;
   transition: transform 0.3s;
-  font-size: 0.9rem;
+  font-size: 1rem;
   min-height: 220px; /* Fixed minimum height for consistency */
   height: 320px; /* Fixed height to maintain card size */
   width: 100%; /* Let the card occupy 100% of its column width */
   display: flex;
   flex-direction: column;
 }
+
 .btn {
   background-color: rgb(164, 190, 13);
 }
+
 .card:hover {
   transform: scale(1.02);
 }
@@ -53,7 +61,27 @@
   margin-bottom: 0.4rem;
 }
 
-/* Responsive adjustments for smaller screens */
+/* Featured articles layout: First article larger, others stacked */
+.featured-articles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px; /* Add spacing between cards */
+}
+
+.featured-articles .featured-large {
+  flex: 2; /* Make the first article larger */
+  display: flex;
+  flex-direction: column;
+}
+
+.featured-articles .featured-small {
+  flex: 1; /* Smaller cards are half-sized */
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Responsive adjustments */
 @media (max-width: 768px) {
   .card {
     min-height: 100px; /* Adjust for smaller screens */
@@ -70,6 +98,7 @@
     height: 80px; /* Smaller image height on small screens */
     width: 150px; /* Adjusted image width for small screens */
   }
+
   .card-horizontal .card-body {
     flex-grow: 0; /* Prevent body from growing too much */
     margin-left: 10px; /* Space between the text and image */
@@ -87,8 +116,24 @@
   .btn {
     font-size: 0.75rem;
   }
+
+  .featured-articles {
+    flex-direction: column; /* Stack all cards on smaller screens */
+  }
+
+  .featured-articles .featured-large,
+  .featured-articles .featured-small {
+    flex: 1; /* Ensure both types of cards are equal width */
+  }
 }
+
+/* Ensure links look clean and clickable */
 a {
   color: inherit; /* Inherit color from parent element */
   text-decoration: none; /* Remove underline */
+}
+
+.toptext {
+  text-decoration: solid;
+  font-family: Impact;
 }

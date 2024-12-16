@@ -7,6 +7,30 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true); // Dark mode state
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+      document.body.classList.add("dark-mode");
+    }
+
+    const toggleTheme = () => {
+      document.body.classList.toggle("dark-mode");
+      const currentTheme = document.body.classList.contains("dark-mode") ? "dark" : "light";
+      localStorage.setItem("theme", currentTheme);
+    };
+
+    const themeToggleButton = document.querySelector(".theme-toggle");
+    if (themeToggleButton) {
+      themeToggleButton.addEventListener("click", toggleTheme);
+    }
+
+    return () => {
+      if (themeToggleButton) {
+        themeToggleButton.removeEventListener("click", toggleTheme);
+      }
+    };
+  }, []);
+
 
   // Toggle dark mode and apply/remove the class on body
   const toggleDarkMode = () => {
