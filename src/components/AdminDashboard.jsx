@@ -7,11 +7,13 @@ import {
   onSnapshot,
 } from "firebase/firestore";
 import { db } from "../firebaseConfig"; // Import Firebase configuration
+import { storage } from "../firebaseConfig"; // Import Firebase Storage
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage"; // Functions for uploading to Firebase Storage
 
 const AdminDashboard = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
+  const [imageFile, setImageFile] = useState(null); // State to hold image file
   const [news, setNews] = useState([]);
 
   // Fetch news with real-time updates
@@ -35,14 +37,35 @@ const AdminDashboard = () => {
   // Handle form submission to add a new article
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const newArticle = { title, description, imageUrl, createdAt: new Date() };
-    try {
-      await addDoc(collection(db, "news"), newArticle); // Add the new article to Firestore
-      setTitle("");
-      setDescription("");
-      setImageUrl("");
-    } catch (error) {
-      console.error("Error adding article:", error);
+    
+    // If there's an image, upload it first
+    if (imageFile) {
+      const storageRef = ref(storage, `images/${imageFile.name}`);
+      const uploadTask = uploadBytesResumable(storageRef, imageFile);
+      
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          // Track progress (optional)
+        },
+        (error) => {
+          console.error("Error uploading image:", error);
+        },
+        async () => {
+          // Get the download URL after the image is uploaded
+          const imageUrl = await getDownloadURL(uploadTask.snapshot.ref);
+          const newArticle = { title, description, imageUrl, createdAt: new Date() };
+          
+          try {
+            await addDoc(collection(db, "news"), newArticle); // Add the new article to Firestore
+            setTitle("");
+            setDescription("");
+            setImageFile(null);
+          } catch (error) {
+            console.error("Error adding article:", error);
+          }
+        }
+      );
     }
   };
 
@@ -77,12 +100,11 @@ const AdminDashboard = () => {
           />
         </div>
         <div>
-          <label>Image URL:</label>
+          <label>Image Upload:</label>
           <input
-            type="text"
-            value={imageUrl}
-            onChange={(e) => setImageUrl(e.target.value)}
-            required
+            type="file"
+            accept="image/*"
+            onChange={(e) => setImageFile(e.target.files[0])}
           />
         </div>
         <button type="submit">Add Article</button>
