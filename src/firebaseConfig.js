@@ -1,4 +1,8 @@
 // Import the functions you need from the SDKs you need
+import { getAuth } from "firebase/auth"; // Import Firebase Authentication
+// Add this after initializing the app:
+export const auth = getAuth(app); // Export auth for use elsewhere
+
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";  // Import getFirestore
 import { getAnalytics } from "firebase/analytics";

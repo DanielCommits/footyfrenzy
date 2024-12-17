@@ -1,19 +1,10 @@
 import React, { useState, useEffect } from "react";
-import {
-  collection,
-  addDoc,
-  deleteDoc,
-  doc,
-  onSnapshot,
-} from "firebase/firestore";
+import { collection, addDoc, deleteDoc, doc, onSnapshot } from "firebase/firestore";
 import { db } from "../firebaseConfig"; // Import Firebase configuration
-import { storage } from "../firebaseConfig"; // Import Firebase Storage
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage"; // Functions for uploading to Firebase Storage
 
 const AdminDashboard = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [imageFile, setImageFile] = useState(null); // State to hold image file
   const [imageUrl, setImageUrl] = useState(""); // State for image URL
   const [news, setNews] = useState([]);
 
@@ -38,36 +29,7 @@ const AdminDashboard = () => {
   // Handle form submission to add a new article
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    let imageUrlToUpload = imageUrl;  // Default to provided URL
-    
-    // If there's an image file, upload it first
-    if (imageFile) {
-      const storageRef = ref(storage, `images/${imageFile.name}`);
-      const uploadTask = uploadBytesResumable(storageRef, imageFile);
-      
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-          // Track progress (optional)
-        },
-        (error) => {
-          console.error("Error uploading image:", error);
-        },
-        async () => {
-          // Get the download URL after the image is uploaded
-          imageUrlToUpload = await getDownloadURL(uploadTask.snapshot.ref);
-          await addArticle(imageUrlToUpload);
-        }
-      );
-    } else if (imageUrl) {
-      // No file to upload but there is an image URL, directly use it
-      await addArticle(imageUrlToUpload);
-    }
-  };
 
-  // Add the article to Firestore with the image URL
-  const addArticle = async (imageUrl) => {
     const newArticle = {
       title,
       description,
@@ -79,8 +41,7 @@ const AdminDashboard = () => {
       await addDoc(collection(db, "news"), newArticle); // Add the new article to Firestore
       setTitle("");
       setDescription("");
-      setImageFile(null);
-      setImageUrl(""); // Reset image URL after submitting
+      setImageUrl(""); // Reset the form fields after submitting
     } catch (error) {
       console.error("Error adding article:", error);
     }
@@ -117,20 +78,13 @@ const AdminDashboard = () => {
           />
         </div>
         <div>
-          <label>Upload Image:</label>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(e) => setImageFile(e.target.files[0])}
-          />
-        </div>
-        <div>
-          <label>Or Add Image URL:</label>
+          <label>Image URL:</label>
           <input
             type="text"
             placeholder="Enter image URL"
             value={imageUrl}
             onChange={(e) => setImageUrl(e.target.value)}
+            required
           />
         </div>
         <button type="submit">Add Article</button>
@@ -156,4 +110,3 @@ const AdminDashboard = () => {
 };
 
 export default AdminDashboard;
-
