@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebaseConfig";
+import "./ArticleDetail.css"; // assuming styles are in the CSS file
 
 const ArticleDetail = () => {
   const { id } = useParams(); 
@@ -34,26 +35,29 @@ const ArticleDetail = () => {
     fetchArticle();
   }, [id]);
 
-  if (error) return <p>{error}</p>;
-  if (!article) return <p>Loading...</p>;
+  if (error) return <p className="error-message">{error}</p>;
+  if (!article) return <p className="loading-message">Loading...</p>;
 
   return (
-    <div>
-      <h2>{article.title}</h2>
-      <img
-        src={article.imageUrl}
-        alt={article.title}
-        style={{ width: "100%" }}
-      />
-      <p>{article.description}</p>
+    <div className="article-container">
+      <div className="article-header">
+        <h2>{article.title}</h2>
+        <img
+          src={article.imageUrl || "defaultImage.jpg"}  
+          alt={article.title}
+          className="article-image"
+        />
+        <p>{article.description}</p>
+      </div>
 
-      {/* Display Source and Date */}
-      <p><strong>Source:</strong> {article.source}</p>
-      <p><strong>Published on:</strong> {new Date(article.date).toLocaleString()}</p>
+      <div className="article-info">
+        <p><strong>Source:</strong> {article.source}</p>
+        <p><strong>Published on:</strong> {new Date(article.date).toLocaleString()}</p>
+      </div>
 
-      <div>
-        <h4>Full Article:</h4>
-        <p>{article.content}</p> 
+      <div className="article-content">
+        <h4>FULL STORY:</h4>
+        <p>{article.content}</p>
       </div>
     </div>
   );
