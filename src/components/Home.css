@@ -101,7 +101,7 @@
 
   .card-horizontal .card-body {
     flex-grow: 0; /* Prevent body from growing too much */
-    margin-left: 10px; /* Space between the text and image */
+    margin-left: 2px; /* Space between the text and image */
   }
 
   .card-horizontal .card-title {
@@ -150,3 +150,4 @@ body.dark-mode .card {
   background-color: #282222;;
   color: white;
 }
+
