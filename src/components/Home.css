@@ -36,7 +36,7 @@
   height: 100%;
   object-fit: cover;
   border-radius: 4px;
-  margin-right: 1rem; /* Space between the image and the text */
+  margin-right: 0.5rem; /* Space between the image and the text */
   flex-shrink: 0; /* Ensure image doesn't shrink */
 }
 
@@ -105,12 +105,13 @@
   }
 
   .card-horizontal .card-title {
-    font-size: 1rem;
+    font-size: 0.6rem;
+    margin-bottom: 10px;
+    font-style: oblique;
   }
 
   .card-horizontal .card-text {
-    font-size: 13px;
-    font-style: oblique;
+    font-size: 12px;
   }
 
   .btn {
