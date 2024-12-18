@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { collection, addDoc, updateDoc, deleteDoc, doc, onSnapshot } from "firebase/firestore";
-import { db } from "../firebaseConfig"; // Import Firebase configuration
+import { db } from "../firebaseConfig"; 
 import './AdminDashboard.css'
 
 const AdminDashboard = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [imageUrl, setImageUrl] = useState(""); // State for image URL
+  const [content, setContent] = useState(""); // New state for article content
   const [news, setNews] = useState([]);
-  const [editId, setEditId] = useState(null); // State to hold the id of the article being edited
+  const [editId, setEditId] = useState(null); 
 
-  // Fetch news with real-time updates
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, "news"), (querySnapshot) => {
       const articles = querySnapshot.docs.map((doc) => ({
@@ -18,17 +18,14 @@ const AdminDashboard = () => {
         ...doc.data(),
       }));
 
-      // Sort articles by createdAt in descending order
       const sortedArticles = articles.sort((a, b) => b.createdAt - a.createdAt);
       setNews(sortedArticles);
-
       localStorage.setItem("news", JSON.stringify(sortedArticles));
     });
 
-    return () => unsubscribe(); // Cleanup the listener when component is unmounted
+    return () => unsubscribe();
   }, []);
 
-  // Handle form submission to add or edit an article
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -36,43 +33,41 @@ const AdminDashboard = () => {
       title,
       description,
       imageUrl,
+      content, // Add the full article content here
       createdAt: new Date(),
     };
 
     try {
       if (editId) {
-        // Update existing article
         await updateDoc(doc(db, "news", editId), articleData);
-        setEditId(null); // Clear the edit mode
+        setEditId(null); 
       } else {
-        // Add a new article
         await addDoc(collection(db, "news"), articleData);
       }
 
-      // Reset form fields after submitting
       setTitle("");
       setDescription("");
       setImageUrl("");
+      setContent(""); // Reset content field after submit
     } catch (error) {
       console.error("Error saving article:", error);
     }
   };
 
-  // Handle delete article
   const handleDelete = async (id) => {
     try {
-      await deleteDoc(doc(db, "news", id)); // Delete the article from Firestore
+      await deleteDoc(doc(db, "news", id)); 
     } catch (error) {
       console.error("Error deleting article:", error);
     }
   };
 
-  // Handle edit article
   const handleEdit = (article) => {
     setTitle(article.title);
     setDescription(article.description);
     setImageUrl(article.imageUrl);
-    setEditId(article.id); // Set editId to track the article being edited
+    setContent(article.content); // Pre-fill content field during edit
+    setEditId(article.id); 
   };
 
   return (
@@ -103,6 +98,15 @@ const AdminDashboard = () => {
             placeholder="Enter image URL"
             value={imageUrl}
             onChange={(e) => setImageUrl(e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <label>Article Content:</label>
+          <textarea
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            placeholder="Enter full article content"
             required
           />
         </div>

@@ -4,31 +4,28 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 
 const ArticleDetail = () => {
-  const { id } = useParams(); // Get the dynamic ID from the route
+  const { id } = useParams(); 
   const [article, setArticle] = useState(null);
-  const [error, setError] = useState(null); // State for handling errors
+  const [error, setError] = useState(null); 
 
   useEffect(() => {
     const fetchArticle = async () => {
       const storedArticle = localStorage.getItem(`article_${id}`);
       if (storedArticle) {
-        // If the article is in localStorage, use it
         setArticle(JSON.parse(storedArticle));
       } else {
-        // Otherwise, fetch it from Firestore
         const articleRef = doc(db, "news", id);
         try {
           const docSnap = await getDoc(articleRef);
           if (docSnap.exists()) {
             const articleData = docSnap.data();
             setArticle(articleData);
-            // Store the fetched article in localStorage for future use
             localStorage.setItem(`article_${id}`, JSON.stringify(articleData));
           } else {
-            setError("No such article found!"); // Set error if article is not found
+            setError("No such article found!");
           }
         } catch (err) {
-          setError("Failed to fetch article. Please try again later."); // Catch any other errors
+          setError("Failed to fetch article. Please try again later.");
           console.error("Error fetching article:", err);
         }
       }
@@ -37,7 +34,7 @@ const ArticleDetail = () => {
     fetchArticle();
   }, [id]);
 
-  if (error) return <p>{error}</p>; // Display error if exists
+  if (error) return <p>{error}</p>;
   if (!article) return <p>Loading...</p>;
 
   return (
@@ -49,6 +46,10 @@ const ArticleDetail = () => {
         style={{ width: "100%" }}
       />
       <p>{article.description}</p>
+      <div>
+        <h4>Full Article:</h4>
+        <p>{article.content}</p> {/* Display the full article content here */}
+      </div>
     </div>
   );
 };
