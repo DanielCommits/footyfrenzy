@@ -1,4 +1,11 @@
-textarea {
-    background-color: white; /* Force white background */
-    color: black; /* Force black text color */
+/* General form styling */
+input, textarea {
+    background-color: white; /* Background stays white */
+    color: black; /* Text stays black */
+    border: 1px solid #ccc; /* Optional: add a visible border */
+}
+
+/* For better consistency across input fields */
+input::placeholder, textarea::placeholder {
+    color: #888; /* Set placeholder color */
 }
