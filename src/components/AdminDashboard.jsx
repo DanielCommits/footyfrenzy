@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { collection, addDoc, updateDoc, deleteDoc, doc, onSnapshot } from "firebase/firestore";
 import { db } from "../firebaseConfig"; // Import Firebase configuration
-
+import './AdminDashboard.css';
 
 const AdminDashboard = () => {
   const [title, setTitle] = useState("");
