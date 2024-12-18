@@ -6,10 +6,12 @@ import './AdminDashboard.css'
 const AdminDashboard = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [imageUrl, setImageUrl] = useState(""); // State for image URL
-  const [content, setContent] = useState(""); // New state for article content
+  const [imageUrl, setImageUrl] = useState(""); 
+  const [content, setContent] = useState(""); 
+  const [source, setSource] = useState(""); // New state for article source
+  const [date, setDate] = useState(""); // New state for publication date
   const [news, setNews] = useState([]);
-  const [editId, setEditId] = useState(null); 
+  const [editId, setEditId] = useState(null);
 
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, "news"), (querySnapshot) => {
@@ -33,14 +35,16 @@ const AdminDashboard = () => {
       title,
       description,
       imageUrl,
-      content, // Add the full article content here
+      content,
+      source,
+      date, // Add the source and publication date here
       createdAt: new Date(),
     };
 
     try {
       if (editId) {
         await updateDoc(doc(db, "news", editId), articleData);
-        setEditId(null); 
+        setEditId(null);
       } else {
         await addDoc(collection(db, "news"), articleData);
       }
@@ -48,7 +52,9 @@ const AdminDashboard = () => {
       setTitle("");
       setDescription("");
       setImageUrl("");
-      setContent(""); // Reset content field after submit
+      setContent("");
+      setSource("");
+      setDate("");
     } catch (error) {
       console.error("Error saving article:", error);
     }
@@ -66,7 +72,9 @@ const AdminDashboard = () => {
     setTitle(article.title);
     setDescription(article.description);
     setImageUrl(article.imageUrl);
-    setContent(article.content); // Pre-fill content field during edit
+    setContent(article.content);
+    setSource(article.source); // Pre-fill the source during edit
+    setDate(article.date); // Pre-fill the date during edit
     setEditId(article.id); 
   };
 
@@ -107,6 +115,25 @@ const AdminDashboard = () => {
             value={content}
             onChange={(e) => setContent(e.target.value)}
             placeholder="Enter full article content"
+            required
+          />
+        </div>
+        <div>
+          <label>Source:</label>
+          <input
+            type="text"
+            value={source}
+            onChange={(e) => setSource(e.target.value)}
+            placeholder="Enter source (e.g., Goal, ESPN)"
+            required
+          />
+        </div>
+        <div>
+          <label>Publication Date:</label>
+          <input
+            type="datetime-local"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
             required
           />
         </div>

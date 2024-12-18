@@ -6,7 +6,7 @@ import { db } from "../firebaseConfig";
 const ArticleDetail = () => {
   const { id } = useParams(); 
   const [article, setArticle] = useState(null);
-  const [error, setError] = useState(null); 
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchArticle = async () => {
@@ -46,9 +46,14 @@ const ArticleDetail = () => {
         style={{ width: "100%" }}
       />
       <p>{article.description}</p>
+
+      {/* Display Source and Date */}
+      <p><strong>Source:</strong> {article.source}</p>
+      <p><strong>Published on:</strong> {new Date(article.date).toLocaleString()}</p>
+
       <div>
         <h4>Full Article:</h4>
-        <p>{article.content}</p> {/* Display the full article content here */}
+        <p>{article.content}</p> 
       </div>
     </div>
   );
