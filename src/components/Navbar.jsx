@@ -54,11 +54,9 @@ const Navbar = () => {
       </Link>
       <ul className={`navbar-links ${isMenuOpen ? "open" : ""}`}>
         <li>LIVE SCORES</li>
-        <li>NEWS</li>
         <li>TRANSFERS</li>
         <li>PREMIER LEAGUE</li>
         <li>LA LIGA</li>
-        <li>CULTURE</li>
         <li>BETTING</li>
       </ul>
       <div className="navbar-right">

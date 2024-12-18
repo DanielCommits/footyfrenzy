@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { collection, addDoc, deleteDoc, doc, onSnapshot } from "firebase/firestore";
+import { collection, addDoc, updateDoc, deleteDoc, doc, onSnapshot } from "firebase/firestore";
 import { db } from "../firebaseConfig"; // Import Firebase configuration
 
 const AdminDashboard = () => {
@@ -7,6 +7,7 @@ const AdminDashboard = () => {
   const [description, setDescription] = useState("");
   const [imageUrl, setImageUrl] = useState(""); // State for image URL
   const [news, setNews] = useState([]);
+  const [editId, setEditId] = useState(null); // State to hold the id of the article being edited
 
   // Fetch news with real-time updates
   useEffect(() => {
@@ -26,11 +27,11 @@ const AdminDashboard = () => {
     return () => unsubscribe(); // Cleanup the listener when component is unmounted
   }, []);
 
-  // Handle form submission to add a new article
+  // Handle form submission to add or edit an article
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const newArticle = {
+    const articleData = {
       title,
       description,
       imageUrl,
@@ -38,12 +39,21 @@ const AdminDashboard = () => {
     };
 
     try {
-      await addDoc(collection(db, "news"), newArticle); // Add the new article to Firestore
+      if (editId) {
+        // Update existing article
+        await updateDoc(doc(db, "news", editId), articleData);
+        setEditId(null); // Clear the edit mode
+      } else {
+        // Add a new article
+        await addDoc(collection(db, "news"), articleData);
+      }
+
+      // Reset form fields after submitting
       setTitle("");
       setDescription("");
-      setImageUrl(""); // Reset the form fields after submitting
+      setImageUrl("");
     } catch (error) {
-      console.error("Error adding article:", error);
+      console.error("Error saving article:", error);
     }
   };
 
@@ -54,6 +64,14 @@ const AdminDashboard = () => {
     } catch (error) {
       console.error("Error deleting article:", error);
     }
+  };
+
+  // Handle edit article
+  const handleEdit = (article) => {
+    setTitle(article.title);
+    setDescription(article.description);
+    setImageUrl(article.imageUrl);
+    setEditId(article.id); // Set editId to track the article being edited
   };
 
   return (
@@ -87,7 +105,7 @@ const AdminDashboard = () => {
             required
           />
         </div>
-        <button type="submit">Add Article</button>
+        <button type="submit">{editId ? "Update Article" : "Add Article"}</button>
       </form>
 
       <h3>Existing Articles</h3>
@@ -101,6 +119,7 @@ const AdminDashboard = () => {
               style={{ width: "100px" }}
             />
             <p>{article.description}</p>
+            <button onClick={() => handleEdit(article)}>Edit</button>
             <button onClick={() => handleDelete(article.id)}>Delete</button>
           </li>
         ))}
