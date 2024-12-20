@@ -1,60 +1,32 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 
-const LiveScores = () => {
-  const [iframeSrc, setIframeSrc] = useState(
-    "https://www.scorebat.com/embed/livescore/?token=MTY4ODgzXzE3MzQ2MzUzNzVfZmJiZjM1NTc5N2FiYWI0NTBjZTI2NTFmYzk4MmFmNmJlY2UxYjMyYQ=="
-  );
-
+const LiveScoresWidget = () => {
   useEffect(() => {
-    // Dynamically load the Scorebat script after the component mounts
+    // Create a script element to dynamically load the widget
     const script = document.createElement("script");
-    script.src = "https://www.scorebat.com/embed/embed.js?v=arrv";
+    script.src = "https://ls.soccersapi.com/widget/res/wo_w4224_65ce2998b0ad9/widget.js";
+    script.type = "text/javascript";
     script.async = true;
-    script.id = "scorebat-jssdk";
+
+    // Append script to the body
     document.body.appendChild(script);
 
-    // Cleanup the script when the component unmounts
+    // Clean up script on component unmount
     return () => {
       document.body.removeChild(script);
     };
   }, []);
 
-  // Function to handle clicking on a live score link
-  const handleClickScore = (scoreToken) => {
-    const newSrc = `https://www.scorebat.com/embed/livescore/?token=${scoreToken}`;
-    setIframeSrc(newSrc); // Update iframe source based on score clicked
-  };
-
   return (
-    <div className="live-scores-container">
-      <div style={{ width: "100%", height: "100vh" }}>
-        <iframe
-          src={iframeSrc}
-          frameBorder="0"
-          width="100%"
-          height="100%"
-          allowFullScreen
-          style={{ width: "100%", height: "100vh", border: "none" }}
-          title="Live Scores"
-        />
-      </div>
-      <div className="score-list">
-        <button
-          onClick={() =>
-            handleClickScore(
-              "MTY4ODgzXzE3MzQ2MzUzNzVfZmJiZjM1NTc5N2FiYWI0NTBjZTI2NTFmYzk4MmFmNmJlY2UxYjMyYQ=="
-            )
-          }
-        >
-          Score 1
-        </button>
-        <button onClick={() => handleClickScore("AnotherScoreTokenHere")}>
-          Score 2
-        </button>
-        {/* Add more buttons or score links dynamically */}
-      </div>
+    <div>
+      {/* Livescore widget container */}
+      <div
+        id="ls-widget"
+        data-w="wo_w4224_65ce2998b0ad9"
+        className="livescore-widget"
+      ></div>
     </div>
   );
 };
 
-export default LiveScores;
+export default LiveScoresWidget;
