@@ -25,14 +25,7 @@ function Footer() {
         <p className="footer-description">
           Experience the thrill of football like never before with live scores,
           real-time updates, and unparalleled coverage from every corner of the
-          globe. Whether you're a passionate fan or a casual follower, our
-          platform keeps you ahead of the game with lightning-fast updates,
-          expert insights, and in-depth analysisExperience the thrill of
-          football like never before with live scores, real-time updates, and
-          unparalleled coverage from every corner of the globe. Whether you're a
-          passionate fan or a casual follower, our platform keeps you ahead of
-          the game with lightning-fast updates, expert insights, and in-depth
-          analysis
+          globe.
         </p>
 
         {/* Social Links Section */}
