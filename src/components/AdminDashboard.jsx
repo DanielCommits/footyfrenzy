@@ -1,13 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { collection, addDoc, updateDoc, deleteDoc, doc, onSnapshot } from "firebase/firestore";
-import { db } from "../firebaseConfig"; 
-import './AdminDashboard.css'
+import {
+  collection,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+  doc,
+  onSnapshot,
+} from "firebase/firestore";
+import { db } from "../firebaseConfig";
+import "./AdminDashboard.css";
 
 const AdminDashboard = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [imageUrl, setImageUrl] = useState(""); 
-  const [content, setContent] = useState(""); 
+  const [imageUrl, setImageUrl] = useState("");
+  const [content, setContent] = useState("");
   const [source, setSource] = useState(""); // New state for article source
   const [date, setDate] = useState(""); // New state for publication date
   const [news, setNews] = useState([]);
@@ -37,7 +44,7 @@ const AdminDashboard = () => {
       imageUrl,
       content,
       source,
-      date, // Add the source and publication date here
+      date: date ? new Date(date).toISOString() : null, // Format for consistent storage
       createdAt: new Date(),
     };
 
@@ -62,7 +69,7 @@ const AdminDashboard = () => {
 
   const handleDelete = async (id) => {
     try {
-      await deleteDoc(doc(db, "news", id)); 
+      await deleteDoc(doc(db, "news", id));
     } catch (error) {
       console.error("Error deleting article:", error);
     }
@@ -75,7 +82,7 @@ const AdminDashboard = () => {
     setContent(article.content);
     setSource(article.source); // Pre-fill the source during edit
     setDate(article.date); // Pre-fill the date during edit
-    setEditId(article.id); 
+    setEditId(article.id);
   };
 
   return (
@@ -137,7 +144,10 @@ const AdminDashboard = () => {
             required
           />
         </div>
-        <button type="submit">{editId ? "Update Article" : "Add Article"}</button>
+
+        <button type="submit">
+          {editId ? "Update Article" : "Add Article"}
+        </button>
       </form>
 
       <h3>Existing Articles</h3>

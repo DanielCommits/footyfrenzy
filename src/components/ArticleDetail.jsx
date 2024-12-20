@@ -5,7 +5,7 @@ import { db } from "../firebaseConfig";
 import "./ArticleDetail.css";
 
 const ArticleDetail = () => {
-  const { id } = useParams(); 
+  const { id } = useParams();
   const [article, setArticle] = useState(null);
   const [error, setError] = useState(null);
 
@@ -22,8 +22,11 @@ const ArticleDetail = () => {
           const docSnap = await getDoc(articleRef);
           if (docSnap.exists()) {
             const articleData = docSnap.data();
+            articleData.date = articleData.date
+              ? new Date(articleData.date).toISOString()
+              : null;
             setArticle(articleData);
-            localStorage.setItem(`article_${id}`, JSON.stringify(articleData)); // Cache
+            localStorage.setItem(`article_${id}`, JSON.stringify(articleData));
           } else {
             setError("Article not found.");
           }
@@ -43,7 +46,8 @@ const ArticleDetail = () => {
       const link = document.createElement("link");
       link.rel = "stylesheet";
       link.type = "text/css";
-      link.href = "https://www.htmlcommentbox.com/static/skins/bootstrap/twitter-bootstrap.css?v=0";
+      link.href =
+        "https://www.htmlcommentbox.com/static/skins/bootstrap/twitter-bootstrap.css?v=0";
       document.head.appendChild(link);
 
       // Add script
@@ -75,7 +79,7 @@ const ArticleDetail = () => {
       <div className="article-header">
         <h2>{article.title}</h2>
         <img
-          src={article.imageUrl || "defaultImage.jpg"}  
+          src={article.imageUrl || "defaultImage.jpg"}
           alt={article.title || "Article"}
           className="article-image"
         />
@@ -83,8 +87,13 @@ const ArticleDetail = () => {
       </div>
 
       <div className="article-info">
-        <p><strong>Source:</strong> {article.source || "Unknown"}</p>
-        <p><strong>Published on:</strong> {new Date(article.date).toLocaleString() || "N/A"}</p>
+        <p>
+          <strong>Source:</strong> {article.source || "Unknown"}
+        </p>
+        <p>
+          <strong>Published on:</strong>
+          {article.date ? new Date(article.date).toLocaleString() : "N/A"}
+        </p>
       </div>
 
       <div className="article-content">
@@ -92,7 +101,8 @@ const ArticleDetail = () => {
       </div>
 
       <div id="HCB_comment_box">
-        <a href="http://www.htmlcommentbox.com">Widget</a> is loading comments...
+        <a href="http://www.htmlcommentbox.com">Widget</a> is loading
+        comments...
       </div>
     </div>
   );
