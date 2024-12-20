@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import './Livescores.css';
 
 const LiveScores = () => {
   const [iframeSrc, setIframeSrc] = useState(
@@ -40,7 +39,13 @@ const LiveScores = () => {
         />
       </div>
       <div className="score-list">
-        <button onClick={() => handleClickScore("MTY4ODgzXzE3MzQ2MzUzNzVfZmJiZjM1NTc5N2FiYWI0NTBjZTI2NTFmYzk4MmFmNmJlY2UxYjMyYQ==")}>
+        <button
+          onClick={() =>
+            handleClickScore(
+              "MTY4ODgzXzE3MzQ2MzUzNzVfZmJiZjM1NTc5N2FiYWI0NTBjZTI2NTFmYzk4MmFmNmJlY2UxYjMyYQ=="
+            )
+          }
+        >
           Score 1
         </button>
         <button onClick={() => handleClickScore("AnotherScoreTokenHere")}>
