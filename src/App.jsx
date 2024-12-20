@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
+import PremierLeague from "./components/PremierLeague";
 import AdminDashboard from "./components/AdminDashboard";
 import ArticleDetail from "./components/ArticleDetail";
 import Navbar from "./components/Navbar";
@@ -12,6 +13,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/premier-league" element={<PremierLeague />} />
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/article/:id" element={<ArticleDetail />} />
         <Route path="/livescores" element={<LiveScores />} />

@@ -76,7 +76,7 @@ const Navbar = () => {
           <Link to="/livescores">LIVESCORES</Link>
         </li>
         <li>TRANSFERS</li>
-        <li>PREMIER LEAGUE</li>
+        <Link to="/premier-league">PREMIER LEAGUE</Link>
         <li>LA LIGA</li>
         <li>BETTING</li>
       </ul>

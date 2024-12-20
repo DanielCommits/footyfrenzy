@@ -9,14 +9,19 @@
   border-radius: 8px;
   overflow: hidden;
   transition: transform 0.3s;
-  font-size: 1rem;
   min-height: 220px; /* Fixed minimum height for consistency */
   height: 320px; /* Fixed height to maintain card size */
   width: 100%; /* Let the card occupy 100% of its column width */
   display: flex;
   flex-direction: column;
 }
-
+.card-title {
+  font-size: 0.6rem;
+  color: rgb(198, 184, 184);
+}
+.card-text {
+  font-size: 1rem;
+}
 .btn {
   background-color: rgb(164, 190, 13);
 }
@@ -52,12 +57,12 @@
 
 /* Smaller title and description for horizontal layout */
 .card-horizontal .card-title {
-  font-size: 1rem;
+  font-size: 0.6rem;
   margin-bottom: 0.2rem;
 }
 
 .card-horizontal .card-text {
-  font-size: 0.8rem;
+  font-size: 1rem;
   margin-bottom: 0.4rem;
 }
 
@@ -102,7 +107,7 @@
   .card-horizontal .card-title {
     font-size: 0.6rem;
     margin-bottom: 10px;
-    font-style: oblique;
+    color: rgb(198, 184, 184);
   }
 
   .card-horizontal .card-text {
@@ -133,7 +138,7 @@ a {
   text-decoration: solid;
   font-family: Impact;
 }
-* Default Light Mode */
+
 .card {
   background-color: white;
   color: black;
@@ -145,4 +150,5 @@ body.dark-mode .card {
   background-color: #282222;;
   color: white;
 }
+
 

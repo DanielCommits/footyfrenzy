@@ -44,6 +44,7 @@ const AdminDashboard = () => {
       imageUrl,
       content,
       source,
+      tag: "Premier League", // Add this
       date: date ? new Date(date).toISOString() : null, // Format for consistent storage
       createdAt: new Date(),
     };
@@ -90,7 +91,7 @@ const AdminDashboard = () => {
       <h2>Admin Dashboard</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Title:</label>
+          <label>Tag:</label>
           <input
             type="text"
             value={title}
@@ -99,7 +100,7 @@ const AdminDashboard = () => {
           />
         </div>
         <div>
-          <label>Description:</label>
+          <label>Description/Title:</label>
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
