@@ -56,7 +56,6 @@ const ArticleDetail = () => {
       </div>
 
       <div className="article-content">
-        <h4>FULL STORY:</h4>
         <p>{article.content}</p>
       </div>
     </div>

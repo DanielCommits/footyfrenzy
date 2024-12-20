@@ -27,9 +27,11 @@
   }
   
   .article-info {
+    display: flex;
     font-size: 1rem;
     color: #666;
-    margin: 15px 0;
+    margin: 10px 0;
+    gap: 70px;
   }
   
   .article-info strong {
