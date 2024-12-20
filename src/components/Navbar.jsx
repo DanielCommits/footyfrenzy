@@ -53,7 +53,7 @@ const Navbar = () => {
         FootyFrenzy
       </Link>
       <ul className={`navbar-links ${isMenuOpen ? "open" : ""}`}>
-        <li>LIVE SCORES</li>
+      <li><Link to="/livescores">LIVESCORES</Link></li>
         <li>TRANSFERS</li>
         <li>PREMIER LEAGUE</li>
         <li>LA LIGA</li>

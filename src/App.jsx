@@ -3,6 +3,7 @@ import Home from "./components/Home";
 import AdminDashboard from "./components/AdminDashboard";
 import ArticleDetail from "./components/ArticleDetail";
 import Navbar from "./components/Navbar";
+import LiveScores from "./components/LiveScores";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/article/:id" element={<ArticleDetail />} />
+        <Route path="/livescores" element={<LiveScores />} />
       </Routes>
     </Router>
   );
