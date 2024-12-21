@@ -120,7 +120,7 @@ const PremierLeague = () => {
         <div>
           Table Component
           <div
-            id="scoreaxis-widget-d2931"
+            id="scoreaxis-widget-b7d04"
             style={{
               borderWidth: "1px",
               borderColor: "rgba(0, 0, 0, 0.15)",
@@ -134,14 +134,35 @@ const PremierLeague = () => {
           >
             <iframe
               id="Iframe"
-              src="https://www.scoreaxis.com/widget/standings-widget/8?autoHeight=1&amp;font=3&amp;fontSize=13&amp;bodyBackground=%23000000&amp;textColor=%23ffffff&amp;inst=d2931"
+              src="https://www.scoreaxis.com/widget/standings-widget/8?autoHeight=0&amp;font=3&amp;fontSize=13&amp;bodyBackground=%23000000&amp;textColor=%23ffffff&amp;inst=b7d04"
               style={{
                 width: "100%",
+                height: "580px",
                 border: "none",
                 transition: "all 300ms ease",
               }}
               title="ScoreAxis Widget"
             ></iframe>
+            <script>
+              {`
+              window.addEventListener("DOMContentLoaded", (event) => {
+                window.addEventListener("message", (event) => {
+                  if (
+                    event.data.appHeight &&
+                    "b7d04" === event.data.inst
+                  ) {
+                    const container = document.querySelector(
+                      "#scoreaxis-widget-b7d04 iframe"
+                    );
+                    if (container) {
+                      container.style.height =
+                        parseInt(event.data.appHeight) + "px";
+                    }
+                  }
+                });
+              });
+              `}
+            </script>
           </div>
           <div
             style={{
