@@ -126,6 +126,7 @@ const PremierLeague = () => {
               borderStyle: "solid",
               borderRadius: "8px",
               padding: "10px",
+              background: "rgb(255, 255, 255)",
               width: "100%",
               backgroundColor: "#000000",
             }}
@@ -143,22 +144,22 @@ const PremierLeague = () => {
             ></iframe>
             <script>
               {`
-              window.addEventListener("DOMContentLoaded", (event) => {
-                window.addEventListener("message", (event) => {
-                  if (
-                    event.data.appHeight &&
-                    "b7d04" === event.data.inst
-                  ) {
-                    const container = document.querySelector(
-                      "#scoreaxis-widget-b7d04 iframe"
-                    );
-                    if (container) {
-                      container.style.height =
-                        parseInt(event.data.appHeight) + "px";
+                window.addEventListener("DOMContentLoaded", (event) => {
+                  window.addEventListener("message", (event) => {
+                    if (
+                      event.data.appHeight &&
+                      "b7d04" === event.data.inst
+                    ) {
+                      const container = document.querySelector(
+                        "#scoreaxis-widget-b7d04 iframe"
+                      );
+                      if (container) {
+                        container.style.height =
+                          parseInt(event.data.appHeight) + "px";
+                      }
                     }
-                  }
+                  });
                 });
-              });
               `}
             </script>
           </div>
@@ -181,23 +182,7 @@ const PremierLeague = () => {
         </div>
       );
     } else if (activeTab === "matches") {
-      return (
-        <div
-          style={{
-            backgroundColor: "#000000",
-            color: "#ffffff",
-            padding: "10px",
-            borderRadius: "8px",
-          }}
-        >
-          <iframe
-            src="https://eplfixturestoday.com/widgets/matches/this-weekend?height=1000"
-            style={{ width: "100%", height: "100%", border: "none" }}
-            height="580px"
-            title="Matches Widget"
-          ></iframe>
-        </div>
-      );
+      return <div>Football Nation</div>;
     } else if (activeTab === "top-players") {
       return (
         <div
@@ -264,8 +249,8 @@ const PremierLeague = () => {
             {tab === "news"
               ? "Latest News"
               : tab === "top-players"
-              ? "Top Players"
-              : tab.charAt(0).toUpperCase() + tab.slice(1)}
+                ? "Top Players"
+                : tab.charAt(0).toUpperCase() + tab.slice(1)}
           </button>
         ))}
       </div>
