@@ -17,7 +17,7 @@
 }
 .card-title {
   font-size: 0.6rem;
-  color: rgb(198, 184, 184);
+  color: rgb(130, 124, 124);
 }
 .card-text {
   font-size: 1rem;
@@ -107,7 +107,7 @@
   .card-horizontal .card-title {
     font-size: 0.6rem;
     margin-bottom: 10px;
-    color: rgb(198, 184, 184);
+    color: rgb(130, 124, 124);
   }
 
   .card-horizontal .card-text {

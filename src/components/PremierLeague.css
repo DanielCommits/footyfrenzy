@@ -1,0 +1,30 @@
+.tabs {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .tab-button {
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    color: var(--text-color); /* Use a variable for text color */
+  }
+  
+  .tab-button.active {
+    font-size: 18px;
+    font-weight: bold;
+    color: rgb(164, 190, 13);
+  }
+  
+  /* Light Theme Variables */
+  body[data-theme="light"] {
+    --text-color: #000000;
+  }
+  
+  /* Dark Theme Variables */
+  body[data-theme="dark"] {
+    --text-color: #ffffff;
+  }
+  
