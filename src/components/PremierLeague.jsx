@@ -118,7 +118,6 @@ const PremierLeague = () => {
     } else if (activeTab === "table") {
       return (
         <div>
-          Table Component
           <div
             id="scoreaxis-widget-b7d04"
             style={{
@@ -127,7 +126,6 @@ const PremierLeague = () => {
               borderStyle: "solid",
               borderRadius: "8px",
               padding: "10px",
-              background: "rgb(255, 255, 255)",
               width: "100%",
               backgroundColor: "#000000",
             }}
@@ -183,7 +181,70 @@ const PremierLeague = () => {
         </div>
       );
     } else if (activeTab === "matches") {
-      return <div>Matches Component</div>; // Replace with the actual Matches component
+      return (
+        <div
+          style={{
+            backgroundColor: "#000000",
+            color: "#ffffff",
+            padding: "10px",
+            borderRadius: "8px",
+          }}
+        >
+          <iframe
+            src="https://eplfixturestoday.com/widgets/matches/this-weekend?height=1000"
+            style={{ width: "100%", height: "100%", border: "none" }}
+            height="580px"
+            title="Matches Widget"
+          ></iframe>
+        </div>
+      );
+    } else if (activeTab === "top-players") {
+      return (
+        <div
+          id="scoreaxis-widget-eb501"
+          style={{
+            borderWidth: "1px",
+            borderColor: "rgba(0, 0, 0, 0.15)",
+            borderStyle: "solid",
+            borderRadius: "8px",
+            padding: "10px",
+            width: "100%",
+            backgroundColor: "#000000",
+          }}
+        >
+          <iframe
+            id="Iframe"
+            src="https://www.scoreaxis.com/widget/league-top-players/8?autoHeight=0&font=3&playersNumber=10&bodyBackground=%23000000&textColor=%23ffffff&fontSize=12&inst=eb501"
+            style={{
+              width: "100%",
+              height: "640px",
+              border: "none",
+              transition: "all 300ms ease",
+            }}
+            title="Top Players Widget"
+          ></iframe>
+          <script>
+            {`
+              window.addEventListener("DOMContentLoaded", (event) => {
+                window.addEventListener("message", (event) => {
+                  if (
+                    event.data.appHeight &&
+                    "eb501" === event.data.inst
+                  ) {
+                    const container = document.querySelector(
+                      "#scoreaxis-widget-eb501 iframe"
+                    );
+                    if (container) {
+                      container.style.height =
+                        parseInt(event.data.appHeight) + "px";
+                    }
+                  }
+                });
+              });
+            `}
+          </script>
+        </div>
+      );
     }
   };
 
@@ -194,13 +255,17 @@ const PremierLeague = () => {
 
       {/* Navigation Tabs */}
       <div className="tabs">
-        {["news", "table", "matches"].map((tab) => (
+        {["news", "table", "matches", "top-players"].map((tab) => (
           <button
             key={tab}
             className={`tab-button ${activeTab === tab ? "active" : ""}`}
             onClick={() => setActiveTab(tab)}
           >
-            {tab === "news" ? "Latest News" : tab.charAt(0).toUpperCase() + tab.slice(1)}
+            {tab === "news"
+              ? "Latest News"
+              : tab === "top-players"
+              ? "Top Players"
+              : tab.charAt(0).toUpperCase() + tab.slice(1)}
           </button>
         ))}
       </div>
