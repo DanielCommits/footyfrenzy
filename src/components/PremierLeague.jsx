@@ -182,7 +182,7 @@ const PremierLeague = () => {
         </div>
       );
     } else if (activeTab === "matches") {
-      return <div>Football Nation</div>;
+      return <div>Fixtures Coming Soon, for now use LiveScore.</div>;
     } else if (activeTab === "top-players") {
       return (
         <div
