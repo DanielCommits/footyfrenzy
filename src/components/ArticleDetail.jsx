@@ -77,15 +77,15 @@ const ArticleDetail = () => {
   return (
     <div className="article-container">
       <div className="article-header">
-        <h2>{article.title}</h2>
+        <h2>{article.description}</h2>
         <img
           src={article.imageUrl || "defaultImage.jpg"}
           alt={article.title || "Article"}
           className="article-image"
         />
-        <p>{article.description}</p>
+      
       </div>
-
+      <p className="article-type">{article.title}</p>
       <div className="article-info">
         <p>
           <strong>Source:</strong> {article.source || "Unknown"}
