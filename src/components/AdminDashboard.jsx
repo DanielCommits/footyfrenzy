@@ -44,9 +44,7 @@ const AdminDashboard = () => {
       imageUrl,
       content,
       source,
-      tag: "Premier League", 
-      tag: "La Liga",
-      tag: "Transfers", // Add this
+      tags: ["Premier League", "La Liga", "Transfers"], // Corrected format
       date: date ? new Date(date).toISOString() : null, // Format for consistent storage
       createdAt: new Date(),
     };
