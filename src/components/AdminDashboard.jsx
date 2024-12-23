@@ -88,7 +88,7 @@ const AdminDashboard = () => {
 
   return (
     <div>
-      <h2>Admin Dashboard</h2>
+      <h2 className="adminhead">Admin Dashboard</h2>
       <form onSubmit={handleSubmit}>
         <div>
           <label>Tag:</label>
@@ -100,12 +100,12 @@ const AdminDashboard = () => {
           />
         </div>
         <div>
-          <label>Description:</label>
+          <label>Description/Title:</label>
           <input
             type="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            placeholder="Brief description of the article"
+            placeholder="Should be brief."
             required
           />
         </div>
@@ -170,9 +170,9 @@ const AdminDashboard = () => {
             <img
               src={article.imageUrl}
               alt={article.title}
-              style={{ width: "100px" }}
+              style={{ width: "100px"}}
             />
-            <div dangerouslySetInnerHTML={{ __html: article.content }} />
+            <p>{article.description}</p>
             <button onClick={() => handleEdit(article)}>Edit</button>
             <button onClick={() => handleDelete(article.id)}>Delete</button>
           </li>

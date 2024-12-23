@@ -15,6 +15,13 @@
   font-weight: bold;
   margin-bottom: 10px;
 }
+/* Apply styling to images inside the dynamically injected content */
+.article-content img {
+  max-width: 70%;
+  height: auto;
+  display: block;
+  margin: 10px 0;
+}
 
 .article-image {
   width: 75%;
@@ -81,4 +88,11 @@
   .article-image {
     width: 100%;
   }
+  .article-content img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 10px 0;
+  }
+  
 }
