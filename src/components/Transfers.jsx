@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import { Link } from "react-router-dom";
-import "./Home.css"; // Optionally use a separate CSS file
+import "./Home.css";
 
-const PremierLeague = () => {
+const Transfers = () => {
   const [news, setNews] = useState([]);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [searchTerm, setSearchTerm] = useState(""); // Added search term state
 
   // Handle window resizing
   const handleResize = () => {
@@ -20,6 +21,7 @@ const PremierLeague = () => {
     };
   }, []);
 
+  // Fetch and filter the news articles
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, "news"), (querySnapshot) => {
       const articles = querySnapshot.docs
@@ -27,7 +29,13 @@ const PremierLeague = () => {
           id: doc.id,
           ...doc.data(),
         }))
-        .filter((article) => article.tag === "Transfers"); // Filter by tag
+        .filter(
+          (article) =>
+            article.title.toLowerCase().includes("transfers") ||
+            article.description.toLowerCase().includes("transfers") ||
+            (article.content &&
+              article.content.toLowerCase().includes("transfers"))
+        );
 
       const sortedArticles = articles.sort((a, b) => b.createdAt - a.createdAt);
       setNews(sortedArticles);
@@ -36,25 +44,51 @@ const PremierLeague = () => {
     return () => unsubscribe();
   }, []);
 
+  // Handle search term change
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  // Filter news based on search term
+  const filteredNews = news.filter(
+    (article) =>
+      article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      article.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (article.content &&
+        article.content.toLowerCase().includes(searchTerm.toLowerCase()))
+  );
+
   return (
     <div className="container mt-5">
       <h1 className="toptext">TRANSFERS</h1>
       <br />
 
+      {/* Search Bar */}
+      <div className="row mb-3">
+        <input
+          type="text"
+          placeholder="Search by Players, Clubs, or Leagues"
+          value={searchTerm}
+          onChange={handleSearchChange}
+          className="form-control"
+          style={{ width: "100%" }} 
+        />
+      </div>
+
       {/* Featured Articles */}
       <div className="row mb-4">
-        {news[0] && (
+        {filteredNews[0] && (
           <div className="col-md-8 mb-3">
-            <Link to={`/article/${news[0].id}`} className="card-link">
+            <Link to={`/article/${filteredNews[0].id}`} className="card-link">
               <div className="card h-100">
                 <img
-                  src={news[0].imageUrl}
+                  src={filteredNews[0].imageUrl}
                   className="card-img-top"
-                  alt={news[0].title}
+                  alt={filteredNews[0].title}
                 />
                 <div className="card-body">
-                  <h5 className="card-title">{news[0].title}</h5>
-                  <p className="card-text">{news[0].description}</p>
+                  <h5 className="card-title">{filteredNews[0].title}</h5>
+                  <p className="card-text">{filteredNews[0].description}</p>
                   <button className="btn btn-primary">Read Full Story</button>
                 </div>
               </div>
@@ -64,7 +98,7 @@ const PremierLeague = () => {
 
         {/* Second and Third Articles */}
         <div className="col-md-4 d-flex flex-column gap-3">
-          {news.slice(1, 3).map((article) => (
+          {filteredNews.slice(1, 3).map((article) => (
             <Link
               to={`/article/${article.id}`}
               key={article.id}
@@ -94,7 +128,7 @@ const PremierLeague = () => {
 
       {/* Regular Articles */}
       <div className="row">
-        {news.slice(3).map((article) => (
+        {filteredNews.slice(3).map((article) => (
           <div key={article.id} className="col-md-4 col-12 mb-3">
             <Link to={`/article/${article.id}`} className="card-link">
               <div className="card h-100">
@@ -116,4 +150,4 @@ const PremierLeague = () => {
   );
 };
 
-export default PremierLeague;
+export default Transfers;

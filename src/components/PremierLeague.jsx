@@ -3,23 +3,19 @@ import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import { Link } from "react-router-dom";
 import "./PremierLeague.css";
-import "./Home.css"; // Optionally use a separate CSS file
 
 const PremierLeague = () => {
   const [news, setNews] = useState([]);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [activeTab, setActiveTab] = useState("news"); // Tracks the currently active tab
+  const [activeTab, setActiveTab] = useState("news");
 
-  // Handle window resizing
   const handleResize = () => {
     setWindowWidth(window.innerWidth);
   };
 
   useEffect(() => {
     window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   useEffect(() => {
@@ -29,7 +25,13 @@ const PremierLeague = () => {
           id: doc.id,
           ...doc.data(),
         }))
-        .filter((article) => article.tag === "Premier League"); // Filter by tag
+        .filter(
+          (article) =>
+            article.title.toLowerCase().includes("premier league") ||
+            article.description.toLowerCase().includes("premier league") ||
+            (article.content &&
+              article.content.toLowerCase().includes("premier league"))
+        );
 
       const sortedArticles = articles.sort((a, b) => b.createdAt - a.createdAt);
       setNews(sortedArticles);
@@ -38,7 +40,6 @@ const PremierLeague = () => {
     return () => unsubscribe();
   }, []);
 
-  // Content for different tabs
   const renderContent = () => {
     if (activeTab === "news") {
       return (
@@ -237,8 +238,6 @@ const PremierLeague = () => {
     <div className="container mt-5">
       <h1 className="toptext">PREMIER LEAGUE</h1>
       <br />
-
-      {/* Navigation Tabs */}
       <div className="tabs">
         {["news", "table", "matches", "top-players"].map((tab) => (
           <button
@@ -249,14 +248,12 @@ const PremierLeague = () => {
             {tab === "news"
               ? "Latest News"
               : tab === "top-players"
-                ? "Top Players"
-                : tab.charAt(0).toUpperCase() + tab.slice(1)}
+              ? "Top Players"
+              : tab.charAt(0).toUpperCase() + tab.slice(1)}
           </button>
         ))}
       </div>
       <hr />
-
-      {/* Render Content */}
       {renderContent()}
     </div>
   );

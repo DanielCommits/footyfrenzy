@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import { Link } from "react-router-dom";
-import "./PremierLeague.css";
 import "./Home.css"; // Optionally use a separate CSS file
 
 const Laliga = () => {
@@ -29,7 +28,13 @@ const Laliga = () => {
           id: doc.id,
           ...doc.data(),
         }))
-        .filter((article) => article.tag === "La Liga"); // Filter by tag
+        .filter(
+          (article) =>
+            article.title.toLowerCase().includes("la liga") ||
+            article.description.toLowerCase().includes("la liga") ||
+            (article.content &&
+              article.content.toLowerCase().includes("la liga"))
+        );
 
       const sortedArticles = articles.sort((a, b) => b.createdAt - a.createdAt);
       setNews(sortedArticles);
