@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import ReactQuill from "react-quill";
 import {
   collection,
   addDoc,
@@ -8,15 +9,16 @@ import {
   onSnapshot,
 } from "firebase/firestore";
 import { db } from "../firebaseConfig";
+import "react-quill/dist/quill.snow.css"; // Import Quill styles
 import "./AdminDashboard.css";
 
 const AdminDashboard = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [imageUrl, setImageUrl] = useState("");
-  const [content, setContent] = useState("");
-  const [source, setSource] = useState(""); // New state for article source
-  const [date, setDate] = useState(""); // New state for publication date
+  const [content, setContent] = useState(""); // Updated for React Quill
+  const [source, setSource] = useState("");
+  const [date, setDate] = useState("");
   const [news, setNews] = useState([]);
   const [editId, setEditId] = useState(null);
 
@@ -26,7 +28,6 @@ const AdminDashboard = () => {
         id: doc.id,
         ...doc.data(),
       }));
-
       const sortedArticles = articles.sort((a, b) => b.createdAt - a.createdAt);
       setNews(sortedArticles);
       localStorage.setItem("news", JSON.stringify(sortedArticles));
@@ -42,10 +43,9 @@ const AdminDashboard = () => {
       title,
       description,
       imageUrl,
-      content,
+      content, // Content is handled by React Quill
       source,
-      tags: ["Premier League", "La Liga", "Transfers"], // Corrected format
-      date: date ? new Date(date).toISOString() : null, // Format for consistent storage
+      date: date ? new Date(date).toISOString() : null,
       createdAt: new Date(),
     };
 
@@ -80,9 +80,9 @@ const AdminDashboard = () => {
     setTitle(article.title);
     setDescription(article.description);
     setImageUrl(article.imageUrl);
-    setContent(article.content);
-    setSource(article.source); // Pre-fill the source during edit
-    setDate(article.date); // Pre-fill the date during edit
+    setContent(article.content); // Pre-fill article content
+    setSource(article.source);
+    setDate(article.date);
     setEditId(article.id);
   };
 
@@ -100,10 +100,12 @@ const AdminDashboard = () => {
           />
         </div>
         <div>
-          <label>Description/Title:</label>
-          <textarea
+          <label>Description:</label>
+          <input
+            type="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
+            placeholder="Brief description of the article"
             required
           />
         </div>
@@ -119,11 +121,20 @@ const AdminDashboard = () => {
         </div>
         <div>
           <label>Article Content:</label>
-          <textarea
+          <ReactQuill
             value={content}
-            onChange={(e) => setContent(e.target.value)}
-            placeholder="Enter full article content"
-            required
+            onChange={setContent}
+            placeholder="Write your article content here..."
+            modules={{
+              toolbar: [
+                [{ header: [1, 2, false] }],
+                ["bold", "italic", "underline", "strike"],
+                ["blockquote", "code-block"],
+                [{ list: "ordered" }, { list: "bullet" }],
+                [{ indent: "-1" }, { indent: "+1" }],
+                ["link", "image", "video"],
+              ],
+            }}
           />
         </div>
         <div>
@@ -161,7 +172,7 @@ const AdminDashboard = () => {
               alt={article.title}
               style={{ width: "100px" }}
             />
-            <p>{article.description}</p>
+            <div dangerouslySetInnerHTML={{ __html: article.content }} />
             <button onClick={() => handleEdit(article)}>Edit</button>
             <button onClick={() => handleDelete(article.id)}>Delete</button>
           </li>

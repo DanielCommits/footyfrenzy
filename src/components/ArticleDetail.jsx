@@ -12,12 +12,10 @@ const ArticleDetail = () => {
   useEffect(() => {
     const fetchArticle = async () => {
       try {
-        // Check local storage for the article
         const storedArticle = localStorage.getItem(`article_${id}`);
         if (storedArticle) {
           setArticle(JSON.parse(storedArticle));
         } else {
-          // Fetch article from Firestore
           const articleRef = doc(db, "news", id);
           const docSnap = await getDoc(articleRef);
           if (docSnap.exists()) {
@@ -42,7 +40,6 @@ const ArticleDetail = () => {
 
   useEffect(() => {
     const loadCommentWidget = () => {
-      // Add stylesheet
       const link = document.createElement("link");
       link.rel = "stylesheet";
       link.type = "text/css";
@@ -50,7 +47,6 @@ const ArticleDetail = () => {
         "https://www.htmlcommentbox.com/static/skins/bootstrap/twitter-bootstrap.css?v=0";
       document.head.appendChild(link);
 
-      // Add script
       const script = document.createElement("script");
       script.id = "hcb";
       script.type = "text/javascript";
@@ -61,7 +57,6 @@ const ArticleDetail = () => {
       script.src = `https://www.htmlcommentbox.com/jread?page=${pageURL}&mod=%241%24wq1rdBcg%241gh94zbht3hy5YlOfec1W%2F&opts=16798&num=10&ts=${Date.now()}`;
       document.head.appendChild(script);
 
-      // Cleanup on unmount
       return () => {
         document.head.removeChild(link);
         document.head.removeChild(script);
@@ -83,7 +78,6 @@ const ArticleDetail = () => {
           alt={article.title || "Article"}
           className="article-image"
         />
-      
       </div>
       <p className="article-type">{article.title}</p>
       <div className="article-info">
@@ -97,12 +91,11 @@ const ArticleDetail = () => {
       </div>
 
       <div className="article-content">
-        <p>{article.content}</p>
+        <div dangerouslySetInnerHTML={{ __html: article.content }} />
       </div>
 
       <div id="HCB_comment_box">
-        <a href="http://www.htmlcommentbox.com">Widget</a> is loading
-        comments...
+        <a href="http://www.htmlcommentbox.com">Widget</a> is loading comments...
       </div>
     </div>
   );
