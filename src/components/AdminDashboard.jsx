@@ -86,12 +86,6 @@ const AdminDashboard = () => {
     setEditId(article.id);
   };
 
-  useEffect(() => {
-    if (window.twttr) {
-      window.twttr.widgets.load();
-    }
-  }, [content]); // Re-run whenever content changes
-  
   return (
     <div>
       <h2 className="adminhead">Admin Dashboard</h2>
@@ -128,46 +122,20 @@ const AdminDashboard = () => {
         <div>
           <label>Article Content:</label>
           <ReactQuill
-  value={content}
-  onChange={setContent}
-  placeholder="Write your article content here..."
-  modules={{
-    toolbar: {
-      container: [
-        [{ header: [1, 2, false] }],
-        ["bold", "italic", "underline", "strike"],
-        ["blockquote", "code-block"],
-        [{ list: "ordered" }, { list: "bullet" }],
-        [{ indent: "-1" }, { indent: "+1" }],
-        ["link", "image", "video"],
-        ["clean"],
-        [
-          {
-            insert: "twitter",
-          }, // Add a custom handler for embedding Twitter
-        ],
-      ],
-      handlers: {
-        twitter: () => {
-          const tweetUrl = prompt("Enter the Twitter post URL:");
-          if (tweetUrl) {
-            const tweetEmbedHtml = `
-              <blockquote class="twitter-tweet">
-                <a href="${tweetUrl}"></a>
-              </blockquote>
-              <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-            `;
-            const range = quillRef.current?.getEditor().getSelection();
-            quillRef.current
-              ?.getEditor()
-              .clipboard.dangerouslyPasteHTML(range.index, tweetEmbedHtml);
-          }
-        },
-      },
-    },
-  }}
-/>
-
+            value={content}
+            onChange={setContent}
+            placeholder="Write your article content here..."
+            modules={{
+              toolbar: [
+                [{ header: [1, 2, false] }],
+                ["bold", "italic", "underline", "strike"],
+                ["blockquote", "code-block"],
+                [{ list: "ordered" }, { list: "bullet" }],
+                [{ indent: "-1" }, { indent: "+1" }],
+                ["link", "image", "video"],
+              ],
+            }}
+          />
         </div>
         <div>
           <label>Source:</label>
@@ -202,7 +170,7 @@ const AdminDashboard = () => {
             <img
               src={article.imageUrl}
               alt={article.title}
-              style={{ width: "100px"}}
+              style={{ width: "100px" }}
             />
             <p>{article.description}</p>
             <button onClick={() => handleEdit(article)}>Edit</button>
