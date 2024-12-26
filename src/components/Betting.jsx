@@ -51,7 +51,7 @@ function Betting() {
 
   return (
     <div className="betting-container">
-      <div className="betting-header">Most Popular Codes</div>
+      <div className="betting-header">Most Popular Odds</div>
       <div className="date-header">{currentDate}</div>
       {odds.map((match) => {
         const outcomes = match.bookmakers[0]?.markets[0]?.outcomes || [];
@@ -65,7 +65,6 @@ function Betting() {
           <div key={match.id} className="match-card">
             <div className="match-details">
               <strong>{match.home_team} vs {match.away_team}</strong>
-              <p className="id-text">ID: {match.id}</p>
             </div>
             <div className="odds-row">
               <button className="odds-button">{homeOdd}</button>
