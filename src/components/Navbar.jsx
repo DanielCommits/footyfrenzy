@@ -78,7 +78,7 @@ const Navbar = () => {
         <Link to="/transfers">TRANSFERS</Link>
         <Link to="/premier-league">PREMIER LEAGUE</Link>
         <Link to="/la-liga">LA-LIGA</Link>
-        <li>BETTING</li>
+        <li><Link to="/betting">BETTING</Link></li>
       </ul>
       <div className="navbar-right">
         <div className="navbar-login">

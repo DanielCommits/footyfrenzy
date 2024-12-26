@@ -8,6 +8,7 @@ import ArticleDetail from "./components/ArticleDetail";
 import Navbar from "./components/Navbar";
 import LiveScores from "./components/LiveScores";
 import Footer from "./components/Footer"; // Import the Footer component
+import Betting from "./components/Betting";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/article/:id" element={<ArticleDetail />} />
         <Route path="/livescores" element={<LiveScores />} />
+        <Route path="/betting" element={<Betting />} /> 
       </Routes>
       <Footer /> 
     </Router>

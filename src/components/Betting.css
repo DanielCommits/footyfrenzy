@@ -1,0 +1,84 @@
+.betting-container {
+    padding: 20px;
+    font-family: "Arial", sans-serif;
+    max-width: 1024px;
+  }
+.betting-header {
+    font-size: 1.8rem;
+    margin-left: 50px;
+    margin-bottom: 20px;
+  }
+  .date-header {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .match-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #dddddd;
+    border-radius: 8px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .match-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .match-details {
+    font-size: 1rem;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .match-details strong {
+    font-size: 1.2rem;
+  }
+  
+  .odds-row {
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+    width: 100%;
+  }
+  
+  .odds-button {
+    padding: 10px 15px;
+    font-size: 1rem;
+    font-weight: bold;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    background: #e7e7e7;
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+  
+  .odds-button:hover {
+    background-color: #24a148;
+    color: #fff;
+    border-color: #1c8238;
+  }
+  
+  .more-options {
+    color: #007aff;
+    cursor: pointer;
+    font-size: 0.9rem;
+    align-self: flex-end;
+    font-weight: bold;
+  }
+  
+  .more-options:hover {
+    text-decoration: underline;
+  }
+  
+  .id-text {
+    font-size: 0.85rem;
+  }
+  
