@@ -35,7 +35,7 @@ function Betting() {
   useEffect(() => {
     const formatDate = () => {
       const today = new Date();
-      const options = { day: '2-digit', month: '2-digit', weekday: 'long' };
+      const options = { day: "2-digit", month: "2-digit", weekday: "long" };
       return today.toLocaleDateString(undefined, options); // e.g., "26/12 Thursday"
     };
     setCurrentDate(formatDate());
@@ -56,15 +56,22 @@ function Betting() {
       {odds.map((match) => {
         const outcomes = match.bookmakers[0]?.markets[0]?.outcomes || [];
 
-        // Ensure outcomes array has at least 3 elements (home, away, draw)
-        const homeOdd = outcomes.find(outcome => outcome.name === match.home_team)?.price || "--";
-        const awayOdd = outcomes.find(outcome => outcome.name === match.away_team)?.price || "--";
-        const drawOdd = outcomes.find(outcome => outcome.name === "Draw")?.price || "--";
+     
+        const homeOdd =
+          outcomes.find((outcome) => outcome.name === match.home_team)?.price ||
+          "--";
+        const drawOdd =
+          outcomes.find((outcome) => outcome.name === "Draw")?.price || "--";
+        const awayOdd =
+          outcomes.find((outcome) => outcome.name === match.away_team)?.price ||
+          "--";
 
         return (
           <div key={match.id} className="match-card">
             <div className="match-details">
-              <strong>{match.home_team} vs {match.away_team}</strong>
+              <strong>
+                {match.home_team} vs {match.away_team}
+              </strong>
             </div>
             <div className="odds-row">
               <button className="odds-button">{homeOdd}</button>
@@ -72,7 +79,6 @@ function Betting() {
                 <button className="odds-button">{drawOdd}</button>
               )}
               <button className="odds-button">{awayOdd}</button>
-             
             </div>
           </div>
         );
