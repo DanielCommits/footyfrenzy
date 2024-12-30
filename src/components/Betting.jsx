@@ -68,10 +68,11 @@ function Betting() {
             </div>
             <div className="odds-row">
               <button className="odds-button">{homeOdd}</button>
-              <button className="odds-button">{awayOdd}</button>
               {drawOdd !== "--" && (
                 <button className="odds-button">{drawOdd}</button>
               )}
+              <button className="odds-button">{awayOdd}</button>
+             
             </div>
           </div>
         );
