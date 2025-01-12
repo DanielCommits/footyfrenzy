@@ -69,16 +69,20 @@ const ArticleDetail = () => {
   }, [article]);
 
   useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://www.htmlcommentbox.com/javascripts/htmlcommentbox.js";
-    script.async = true;
-    document.body.appendChild(script);
-
+    const loadCommentBox = () => {
+      const script = document.createElement("script");
+      script.id = "hcb";
+      script.src = `https://www.htmlcommentbox.com/jread?page=${encodeURIComponent(window.location.href)}&mod=%241%24wq1rdBcg%241gh94zbht3hy5YlOfec1W%2F&opts=16798&num=10&ts=${Date.now()}`;
+      document.head.appendChild(script);
+    };
+  
+    loadCommentBox();
     return () => {
-      document.body.removeChild(script);
+      const existingScript = document.getElementById("hcb");
+      if (existingScript) document.head.removeChild(existingScript);
     };
   }, []);
-
+  
   if (error) return <p className="error-message">{error}</p>;
   if (!article) return <p className="loading-message">Loading...</p>;
 
