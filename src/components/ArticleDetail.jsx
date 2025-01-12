@@ -42,7 +42,7 @@ const ArticleDetail = () => {
   const getTweetId = (url) => {
     try {
       const parts = url.split("/");
-      return parts[parts.length - 1]; // The Tweet ID is usually the last part of the URL
+      return parts[parts.length - 1];
     } catch {
       return null;
     }
@@ -51,16 +51,19 @@ const ArticleDetail = () => {
   const isYouTubeEmbed = (url) =>
     url.includes("youtube.com") || url.includes("youtu.be");
 
-  const isInstagramEmbed = (url) => url.includes("instagram.com");
+  const isInstagramEmbed = (url) =>
+    typeof url === "string" && url.includes("instagram.com");
 
   useEffect(() => {
-    if (isInstagramEmbed(article?.embed)) {
+    if (article?.embed && isInstagramEmbed(article.embed)) {
       const script = document.createElement("script");
-      script.async = true;
       script.src = "//www.instagram.com/embed.js";
+      script.async = true;
       document.body.appendChild(script);
 
-      return () => document.body.removeChild(script);
+      return () => {
+        document.body.removeChild(script);
+      };
     }
   }, [article]);
 
@@ -72,7 +75,7 @@ const ArticleDetail = () => {
       <div className="article-header">
         <h2>{article.description}</h2>
         <img
-          src={article.imageUrl || "defaultImage.jpg"}
+          src={article.imageUrl || "/defaultImage.jpg"}
           alt={article.title || "Article"}
           className="article-image"
         />
@@ -83,7 +86,7 @@ const ArticleDetail = () => {
           <strong>Source:</strong> {article.source || "Unknown"}
         </p>
         <p>
-          <strong>Published on:</strong>
+          <strong>Published on:</strong>{" "}
           {article.date ? new Date(article.date).toLocaleString() : "N/A"}
         </p>
       </div>
@@ -95,41 +98,41 @@ const ArticleDetail = () => {
       {/* Embed Section */}
       {article.embed && (
         <div className="embedded-post">
-          {/* Render Twitter Embed */}
           {article.embed.includes("twitter.com") && (
             <TwitterTweetEmbed tweetId={getTweetId(article.embed)} />
           )}
-
-          {/* Render YouTube Embed */}
           {isYouTubeEmbed(article.embed) && (
             <iframe
               width="100%"
               height="315"
               src={article.embed
-                .replace("watch?v=", "embed/") // Convert YouTube link to embed
-                .replace(/https:\/\/youtu\.be\//, "https://www.youtube.com/embed/")}
+                .replace("watch?v=", "embed/")
+                .replace(
+                  /https:\/\/youtu\.be\//,
+                  "https://www.youtube.com/embed/"
+                )}
               title="YouTube video player"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
             ></iframe>
           )}
-
-          {/* Render Instagram Embed */}
           {isInstagramEmbed(article.embed) && (
             <blockquote
               className="instagram-media"
               data-instgrm-captioned
               style={{ maxWidth: "540px", margin: "1rem auto" }}
             >
-              <a href={article.embed}></a>
+              <a href={article.embed} target="_blank" rel="noopener noreferrer">
+                Instagram Post
+              </a>
             </blockquote>
           )}
         </div>
       )}
 
       <div id="HCB_comment_box">
-        <a href="http://www.htmlcommentbox.com">Widget</a> is loading comments...
+        <a href="http://www.htmlcommentbox.com">Comments</a> are loading...
       </div>
     </div>
   );
