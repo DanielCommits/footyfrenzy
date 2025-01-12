@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import "./ArticleDetail.css";
+import { TwitterTweetEmbed } from "react-twitter-embed";
 
 const ArticleDetail = () => {
   const { id } = useParams();
@@ -37,6 +38,15 @@ const ArticleDetail = () => {
 
     fetchArticle();
   }, [id]);
+
+  const getTweetId = (url) => {
+    try {
+      const parts = url.split("/");
+      return parts[parts.length - 1]; // The Tweet ID is usually the last part of the URL
+    } catch {
+      return null;
+    }
+  };
 
   useEffect(() => {
     const loadCommentWidget = () => {
@@ -94,8 +104,15 @@ const ArticleDetail = () => {
         <div dangerouslySetInnerHTML={{ __html: article.content }} />
       </div>
 
+      {/* Add a section for embedded Twitter post */}
+      {article.embed && (
+        <div className="embedded-post">
+          <TwitterTweetEmbed tweetId={getTweetId(article.embed)} />
+        </div>
+      )}
       <div id="HCB_comment_box">
-        <a href="http://www.htmlcommentbox.com">Widget</a> is loading comments...
+        <a href="http://www.htmlcommentbox.com">Widget</a> is loading
+        comments...
       </div>
     </div>
   );

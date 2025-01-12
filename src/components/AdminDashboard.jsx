@@ -22,6 +22,7 @@ const AdminDashboard = () => {
   const [date, setDate] = useState("");
   const [news, setNews] = useState([]);
   const [editId, setEditId] = useState(null);
+  const [embed, setEmbed] = useState("");
 
   // Fetch articles from Firestore and sort by date
   useEffect(() => {
@@ -29,7 +30,9 @@ const AdminDashboard = () => {
       const articles = querySnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
-        createdAt: doc.data().createdAt ? new Date(doc.data().createdAt.seconds * 1000) : null,
+        createdAt: doc.data().createdAt
+          ? new Date(doc.data().createdAt.seconds * 1000)
+          : null,
       }));
       const sortedArticles = articles.sort((a, b) => b.createdAt - a.createdAt);
       setNews(sortedArticles);
@@ -52,6 +55,7 @@ const AdminDashboard = () => {
       content: sanitizedContent,
       source,
       date: date ? new Date(date).toISOString() : null,
+      embed,
       createdAt: new Date(),
     };
 
@@ -70,6 +74,7 @@ const AdminDashboard = () => {
       setContent("");
       setSource("");
       setDate("");
+      setEmbed("");
     } catch (error) {
       console.error("Error saving article:", error.message);
     }
@@ -146,6 +151,15 @@ const AdminDashboard = () => {
                 ["link", "image", "video"],
               ],
             }}
+          />
+        </div>
+        <div>
+          <label>Embed Post (Twitter Link):</label>
+          <input
+            type="text"
+            placeholder="Enter Twitter embed link"
+            value={embed}
+            onChange={(e) => setEmbed(e.target.value)}
           />
         </div>
         <div>
