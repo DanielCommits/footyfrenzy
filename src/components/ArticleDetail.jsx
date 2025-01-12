@@ -48,33 +48,21 @@ const ArticleDetail = () => {
     }
   };
 
+  const isYouTubeEmbed = (url) =>
+    url.includes("youtube.com") || url.includes("youtu.be");
+
+  const isInstagramEmbed = (url) => url.includes("instagram.com");
+
   useEffect(() => {
-    const loadCommentWidget = () => {
-      const link = document.createElement("link");
-      link.rel = "stylesheet";
-      link.type = "text/css";
-      link.href =
-        "https://www.htmlcommentbox.com/static/skins/bootstrap/twitter-bootstrap.css?v=0";
-      document.head.appendChild(link);
-
+    if (isInstagramEmbed(article?.embed)) {
       const script = document.createElement("script");
-      script.id = "hcb";
-      script.type = "text/javascript";
       script.async = true;
-      const pageURL = encodeURIComponent(
-        (window.location + "").replace(/'/g, "%27").replace("+", "%2B")
-      );
-      script.src = `https://www.htmlcommentbox.com/jread?page=${pageURL}&mod=%241%24wq1rdBcg%241gh94zbht3hy5YlOfec1W%2F&opts=16798&num=10&ts=${Date.now()}`;
-      document.head.appendChild(script);
+      script.src = "//www.instagram.com/embed.js";
+      document.body.appendChild(script);
 
-      return () => {
-        document.head.removeChild(link);
-        document.head.removeChild(script);
-      };
-    };
-
-    loadCommentWidget();
-  }, []);
+      return () => document.body.removeChild(script);
+    }
+  }, [article]);
 
   if (error) return <p className="error-message">{error}</p>;
   if (!article) return <p className="loading-message">Loading...</p>;
@@ -104,15 +92,44 @@ const ArticleDetail = () => {
         <div dangerouslySetInnerHTML={{ __html: article.content }} />
       </div>
 
-      {/* Add a section for embedded Twitter post */}
+      {/* Embed Section */}
       {article.embed && (
         <div className="embedded-post">
-          <TwitterTweetEmbed tweetId={getTweetId(article.embed)} />
+          {/* Render Twitter Embed */}
+          {article.embed.includes("twitter.com") && (
+            <TwitterTweetEmbed tweetId={getTweetId(article.embed)} />
+          )}
+
+          {/* Render YouTube Embed */}
+          {isYouTubeEmbed(article.embed) && (
+            <iframe
+              width="100%"
+              height="315"
+              src={article.embed
+                .replace("watch?v=", "embed/") // Convert YouTube link to embed
+                .replace(/https:\/\/youtu\.be\//, "https://www.youtube.com/embed/")}
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          )}
+
+          {/* Render Instagram Embed */}
+          {isInstagramEmbed(article.embed) && (
+            <blockquote
+              className="instagram-media"
+              data-instgrm-captioned
+              style={{ maxWidth: "540px", margin: "1rem auto" }}
+            >
+              <a href={article.embed}></a>
+            </blockquote>
+          )}
         </div>
       )}
+
       <div id="HCB_comment_box">
-        <a href="http://www.htmlcommentbox.com">Widget</a> is loading
-        comments...
+        <a href="http://www.htmlcommentbox.com">Widget</a> is loading comments...
       </div>
     </div>
   );
