@@ -41,15 +41,16 @@ const ArticleDetail = () => {
 
   const getTweetId = (url) => {
     try {
-      const parts = url.split("/");
-      return parts[parts.length - 1];
+      const parts = url.split("/status/");
+      return parts[1]?.split("?")[0] || null;
     } catch {
       return null;
     }
   };
 
   const isYouTubeEmbed = (url) =>
-    url.includes("youtube.com") || url.includes("youtu.be");
+    typeof url === "string" &&
+    (url.includes("youtube.com") || url.includes("youtu.be"));
 
   const isInstagramEmbed = (url) =>
     typeof url === "string" && url.includes("instagram.com");
@@ -66,6 +67,17 @@ const ArticleDetail = () => {
       };
     }
   }, [article]);
+
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://www.htmlcommentbox.com/javascripts/htmlcommentbox.js";
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
 
   if (error) return <p className="error-message">{error}</p>;
   if (!article) return <p className="loading-message">Loading...</p>;
