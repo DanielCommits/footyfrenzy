@@ -154,10 +154,10 @@ const AdminDashboard = () => {
           />
         </div>
         <div>
-          <label>Embed Post (Twitter, YouTube, Instagram):</label>
+          <label>Embed Post (Twitter Link):</label>
           <input
             type="text"
-            placeholder="Enter a valid embed link (e.g., Twitter, YouTube, Instagram)"
+            placeholder="Enter Twitter embed link"
             value={embed}
             onChange={(e) => setEmbed(e.target.value)}
           />
