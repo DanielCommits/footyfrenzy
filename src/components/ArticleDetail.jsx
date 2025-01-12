@@ -41,48 +41,40 @@ const ArticleDetail = () => {
 
   const getTweetId = (url) => {
     try {
-      const parts = url.split("/status/");
-      return parts[1]?.split("?")[0] || null;
+      const parts = url.split("/");
+      return parts[parts.length - 1]; // The Tweet ID is usually the last part of the URL
     } catch {
       return null;
     }
   };
-
-  const isYouTubeEmbed = (url) =>
-    typeof url === "string" &&
-    (url.includes("youtube.com") || url.includes("youtu.be"));
-
-  const isInstagramEmbed = (url) =>
-    typeof url === "string" && url.includes("instagram.com");
-
   useEffect(() => {
-    if (article?.embed && isInstagramEmbed(article.embed)) {
-      const script = document.createElement("script");
-      script.src = "//www.instagram.com/embed.js";
-      script.async = true;
-      document.body.appendChild(script);
+    const loadCommentWidget = () => {
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.type = "text/css";
+      link.href =
+        "https://www.htmlcommentbox.com/static/skins/bootstrap/twitter-bootstrap.css?v=0";
+      document.head.appendChild(link);
 
-      return () => {
-        document.body.removeChild(script);
-      };
-    }
-  }, [article]);
-
-  useEffect(() => {
-    const loadCommentBox = () => {
       const script = document.createElement("script");
       script.id = "hcb";
-      script.src = `https://www.htmlcommentbox.com/jread?page=${encodeURIComponent(window.location.href)}&mod=%241%24wq1rdBcg%241gh94zbht3hy5YlOfec1W%2F&opts=16798&num=10&ts=${Date.now()}`;
+      script.type = "text/javascript";
+      script.async = true;
+      const pageURL = encodeURIComponent(
+        (window.location + "").replace(/'/g, "%27").replace("+", "%2B")
+      );
+      script.src = `https://www.htmlcommentbox.com/jread?page=${pageURL}&mod=%241%24wq1rdBcg%241gh94zbht3hy5YlOfec1W%2F&opts=16798&num=10&ts=${Date.now()}`;
       document.head.appendChild(script);
+
+      return () => {
+        document.head.removeChild(link);
+        document.head.removeChild(script);
+      };
     };
-  
-    loadCommentBox();
-    return () => {
-      const existingScript = document.getElementById("hcb");
-      if (existingScript) document.head.removeChild(existingScript);
-    };
+
+    loadCommentWidget();
   }, []);
-  
+
   if (error) return <p className="error-message">{error}</p>;
   if (!article) return <p className="loading-message">Loading...</p>;
 
@@ -91,7 +83,7 @@ const ArticleDetail = () => {
       <div className="article-header">
         <h2>{article.description}</h2>
         <img
-          src={article.imageUrl || "/defaultImage.jpg"}
+          src={article.imageUrl || "defaultImage.jpg"}
           alt={article.title || "Article"}
           className="article-image"
         />
@@ -102,7 +94,7 @@ const ArticleDetail = () => {
           <strong>Source:</strong> {article.source || "Unknown"}
         </p>
         <p>
-          <strong>Published on:</strong>{" "}
+          <strong>Published on:</strong>
           {article.date ? new Date(article.date).toLocaleString() : "N/A"}
         </p>
       </div>
@@ -111,44 +103,14 @@ const ArticleDetail = () => {
         <div dangerouslySetInnerHTML={{ __html: article.content }} />
       </div>
 
-      {/* Embed Section */}
+      {/* Add a section for embedded Twitter post */}
       {article.embed && (
         <div className="embedded-post">
-          {article.embed.includes("twitter.com") && (
-            <TwitterTweetEmbed tweetId={getTweetId(article.embed)} />
-          )}
-          {isYouTubeEmbed(article.embed) && (
-            <iframe
-              width="100%"
-              height="315"
-              src={article.embed
-                .replace("watch?v=", "embed/")
-                .replace(
-                  /https:\/\/youtu\.be\//,
-                  "https://www.youtube.com/embed/"
-                )}
-              title="YouTube video player"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
-          )}
-          {isInstagramEmbed(article.embed) && (
-            <blockquote
-              className="instagram-media"
-              data-instgrm-captioned
-              style={{ maxWidth: "540px", margin: "1rem auto" }}
-            >
-              <a href={article.embed} target="_blank" rel="noopener noreferrer">
-                Instagram Post
-              </a>
-            </blockquote>
-          )}
+          <TwitterTweetEmbed tweetId={getTweetId(article.embed)} />
         </div>
       )}
-
       <div id="HCB_comment_box">
-        <a href="http://www.htmlcommentbox.com">Comments</a> are loading...
+        <h4>Comments are loading...</h4>
       </div>
     </div>
   );
