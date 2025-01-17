@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
 import Home from "./components/Home";
 import PremierLeague from "./components/PremierLeague";
 import Laliga from "./components/Laliga"
@@ -12,6 +13,7 @@ import Betting from "./components/Betting";
 
 function App() {
   return (
+    <HelmetProvider>
     <Router>
       <Navbar />
       <Routes>
@@ -26,6 +28,7 @@ function App() {
       </Routes>
       <Footer /> 
     </Router>
+    </HelmetProvider>
   );
 }
 

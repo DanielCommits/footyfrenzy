@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 import { useParams } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebaseConfig";
@@ -47,6 +48,7 @@ const ArticleDetail = () => {
       return null;
     }
   };
+
   useEffect(() => {
     const loadCommentWidget = () => {
       const link = document.createElement("link");
@@ -80,6 +82,23 @@ const ArticleDetail = () => {
 
   return (
     <div className="article-container">
+      <Helmet>
+        <title>{article.title || "Article"} | FootyFrenzy</title>
+        <meta
+          name="description"
+          content={article.description || "Latest football article on FootyFrenzy."}
+        />
+        <meta
+          property="og:title"
+          content={article.title || "Article on FootyFrenzy"}
+        />
+        <meta
+          property="og:description"
+          content={article.description || "Stay updated with football news."}
+        />
+        <meta property="og:image" content={article.imageUrl || "defaultImage.jpg"} />
+      </Helmet>
+
       <div className="article-header">
         <h2>{article.description}</h2>
         <img
@@ -94,7 +113,7 @@ const ArticleDetail = () => {
           <strong>Source:</strong> {article.source || "Unknown"}
         </p>
         <p>
-          <strong>Published on:</strong>
+          <strong>Published on:</strong>{" "}
           {article.date ? new Date(article.date).toLocaleString() : "N/A"}
         </p>
       </div>
