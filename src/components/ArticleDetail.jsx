@@ -27,6 +27,7 @@ const ArticleDetail = () => {
               : null;
             setArticle(articleData);
             localStorage.setItem(`article_${id}`, JSON.stringify(articleData));
+            console.log("Fetched article from Firebase:", articleData); // Log here
           } else {
             setError("Article not found.");
           }
@@ -84,17 +85,10 @@ const ArticleDetail = () => {
     <div className="article-container">
       <Helmet>
         <title>
-          {article ? article.title : "FootyFrenzy | Football News and More"}
+          {article?.title || "FootyFrenzy | Football News and More"}
         </title>
         <meta
           name="description"
-          content={
-            article?.description ||
-            "Stay updated with the latest football news, scores, and transfers on FootyFrenzy."
-          }
-        />
-        <meta
-          property="og:description"
           content={
             article?.description ||
             "Stay updated with the latest football news, scores, and transfers on FootyFrenzy."
@@ -105,34 +99,14 @@ const ArticleDetail = () => {
           content={article?.title || "FootyFrenzy | Football News and More"}
         />
         <meta
+          property="og:description"
+          content={article?.description || "Default Description"}
+        />
+        <meta
           property="og:image"
           content={article?.imageUrl || "defaultImage.jpg"}
         />
       </Helmet>
-
-      <div className="article-header">
-        <h2>{article.description}</h2>
-        <img
-          src={article.imageUrl || "defaultImage.jpg"}
-          alt={article.title || "Article"}
-          className="article-image"
-        />
-      </div>
-      <p className="article-type">{article.title}</p>
-      <div className="article-info">
-        <p>
-          <strong>Source:</strong> {article.source || "Unknown"}
-        </p>
-        <p>
-          <strong>Published on:</strong>{" "}
-          {article.date ? new Date(article.date).toLocaleString() : "N/A"}
-        </p>
-      </div>
-
-      <div className="article-content">
-        <div dangerouslySetInnerHTML={{ __html: article.content }} />
-      </div>
-
       {/* Add a section for embedded Twitter post */}
       {article.embed && (
         <div className="embedded-post">
