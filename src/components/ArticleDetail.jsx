@@ -93,7 +93,7 @@ const ArticleDetail = () => {
           content={article.title || "Article on FootyFrenzy"}
         />
         <meta
-          property="og:description"
+          property="og:title"
           content={article.description || "Stay updated with football news."}
         />
         <meta property="og:image" content={article.imageUrl || "defaultImage.jpg"} />
