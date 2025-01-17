@@ -85,19 +85,22 @@ const ArticleDetail = () => {
       <Helmet>
         <title>{article?.title || "Default Title"} | FootyFrenzy</title>
         <meta
-          name="title"
+          name="description"
           content={
             article?.description ||
-            "dey mad ?"
+            "Stay updated with the latest football news, scores, and transfers on FootyFrenzy."
           }
         />
         <meta
           property="og:description"
-          content={article?.title || "Default OG Title"}
+          content={
+            article?.description ||
+            "Stay updated with the latest football news, scores, and transfers on FootyFrenzy."
+          }
         />
         <meta
           property="og:title"
-          content={article?.description || "Default OG Description"}
+          content={article?.title || "Default Title | FootyFrenzy"}
         />
         <meta
           property="og:image"
