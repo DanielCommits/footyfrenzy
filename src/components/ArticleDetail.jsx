@@ -83,7 +83,9 @@ const ArticleDetail = () => {
   return (
     <div className="article-container">
       <Helmet>
-        <title>{article?.title || "Default Title"} | FootyFrenzy</title>
+        <title>
+          {article ? article.title : "FootyFrenzy | Football News and More"}
+        </title>
         <meta
           name="description"
           content={
@@ -100,7 +102,7 @@ const ArticleDetail = () => {
         />
         <meta
           property="og:title"
-          content={article?.title || "Default Title | FootyFrenzy"}
+          content={article?.title || "FootyFrenzy | Football News and More"}
         />
         <meta
           property="og:image"
