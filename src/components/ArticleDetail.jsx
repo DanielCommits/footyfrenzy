@@ -83,20 +83,26 @@ const ArticleDetail = () => {
   return (
     <div className="article-container">
       <Helmet>
-        <title>{article.title || "Article"} | FootyFrenzy</title>
+        <title>{article?.title || "Default Title"} | FootyFrenzy</title>
         <meta
-          name="description"
-          content={article.description || "Latest football article on FootyFrenzy."}
+          name="title"
+          content={
+            article?.description ||
+            "dey mad ?"
+          }
+        />
+        <meta
+          property="og:description"
+          content={article?.title || "Default OG Title"}
         />
         <meta
           property="og:title"
-          content={article.title || "Article on FootyFrenzy"}
+          content={article?.description || "Default OG Description"}
         />
         <meta
-          property="og:title"
-          content={article.description || "Stay updated with football news."}
+          property="og:image"
+          content={article?.imageUrl || "defaultImage.jpg"}
         />
-        <meta property="og:image" content={article.imageUrl || "defaultImage.jpg"} />
       </Helmet>
 
       <div className="article-header">
