@@ -2,12 +2,11 @@ import React, { useState, useEffect } from "react";
 import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import { Link } from "react-router-dom"; // Import Link
-import { Helmet } from "react-helmet-async"; // Import Helmet
 import "./Home.css";
 
 const Home = () => {
   const [news, setNews] = useState([]);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth); // Track window size
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);  // Track window size
 
   // Function to handle window resize
   const handleResize = () => {
@@ -16,11 +15,11 @@ const Home = () => {
 
   useEffect(() => {
     // Set up resize listener
-    window.addEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
 
     // Cleanup the listener when the component is unmounted
     return () => {
-      window.removeEventListener("resize", handleResize);
+      window.removeEventListener('resize', handleResize);
     };
   }, []);
 
@@ -36,17 +35,11 @@ const Home = () => {
       localStorage.setItem("news", JSON.stringify(sortedArticles));
     });
 
-    return () => unsubscribe();
+    return () => unsubscribe(); 
   }, []);
 
   return (
     <div className="container mt-5">
-      <Helmet>
-        <title>Home - Latest News</title>
-        <meta name="description" content="Stay updated with the latest news." />
-        <meta name="keywords" content="news, latest news, top articles, trends" />
-        <link rel="canonical" href={window.location.href} />
-      </Helmet>
       <h1 className="toptext">LATEST NEWS</h1>
       <br />
 
@@ -77,17 +70,11 @@ const Home = () => {
               key={article.id}
               className="card-link"
             >
-              <div
-                className={`card h-100 ${
-                  windowWidth <= 768 ? "card-horizontal" : ""
-                }`}
-              >
+              <div className={`card h-100 ${windowWidth <= 768 ? "card-horizontal" : ""}`}>
                 <div className="card-img-container">
                   <img
                     src={article.imageUrl}
-                    className={`card-img ${
-                      windowWidth <= 768 ? "card-img-left" : "card-img-top"
-                    }`}
+                    className={`card-img ${windowWidth <= 768 ? "card-img-left" : "card-img-top"}`}
                     alt={article.title}
                   />
                 </div>
@@ -108,9 +95,7 @@ const Home = () => {
             <Link to={`/article/${article.id}`} className="card-link">
               <div className="card card-horizontal h-100">
                 <div
-                  className={`card-img-top ${
-                    window.innerWidth <= 768 ? "card-img-left" : ""
-                  }`}
+                  className={`card-img-top ${window.innerWidth <= 768 ? "card-img-left" : ""}`}
                 >
                   <img
                     src={article.imageUrl}

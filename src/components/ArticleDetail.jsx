@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Helmet } from "react-helmet-async";
 import { useParams } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebaseConfig";
@@ -27,7 +26,6 @@ const ArticleDetail = () => {
               : null;
             setArticle(articleData);
             localStorage.setItem(`article_${id}`, JSON.stringify(articleData));
-            console.log("Fetched article from Firebase:", articleData); // Log here
           } else {
             setError("Article not found.");
           }
@@ -49,7 +47,6 @@ const ArticleDetail = () => {
       return null;
     }
   };
-
   useEffect(() => {
     const loadCommentWidget = () => {
       const link = document.createElement("link");
@@ -83,30 +80,29 @@ const ArticleDetail = () => {
 
   return (
     <div className="article-container">
-      <Helmet>
-        <title>
-          {article?.title || "FootyFrenzy | Football News and More"}
-        </title>
-        <meta
-          name="description"
-          content={
-            article?.description ||
-            "Stay updated with the latest football news, scores, and transfers on FootyFrenzy."
-          }
+      <div className="article-header">
+        <h2>{article.description}</h2>
+        <img
+          src={article.imageUrl || "defaultImage.jpg"}
+          alt={article.title || "Article"}
+          className="article-image"
         />
-        <meta
-          property="og:title"
-          content={article?.title || "FootyFrenzy | Football News and More"}
-        />
-        <meta
-          property="og:description"
-          content={article?.description || "Default Description"}
-        />
-        <meta
-          property="og:image"
-          content={article?.imageUrl || "defaultImage.jpg"}
-        />
-      </Helmet>
+      </div>
+      <p className="article-type">{article.title}</p>
+      <div className="article-info">
+        <p>
+          <strong>Source:</strong> {article.source || "Unknown"}
+        </p>
+        <p>
+          <strong>Published on:</strong>
+          {article.date ? new Date(article.date).toLocaleString() : "N/A"}
+        </p>
+      </div>
+
+      <div className="article-content">
+        <div dangerouslySetInnerHTML={{ __html: article.content }} />
+      </div>
+
       {/* Add a section for embedded Twitter post */}
       {article.embed && (
         <div className="embedded-post">
