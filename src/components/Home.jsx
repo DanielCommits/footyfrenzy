@@ -40,7 +40,7 @@ const Home = () => {
 
   return (
     <div className="container mt-5">
-      <h1 className="toptext">LATEST NEWS</h1>
+      <h1 className="toptext">LATEST NEWS (ON HOLD)</h1>
       <br />
 
       {/* Featured Articles: One large article and two stacked */}
