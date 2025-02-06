@@ -41,7 +41,7 @@ const Home = () => {
 
   return (
     <>
-      <LiveMatch />
+     <LiveMatch />
       <div className="container mt-5">
         <h1 className="toptext">LATEST NEWS</h1>
         <br />
