@@ -44,21 +44,20 @@ const matches = [
       score: 2,
     },
   },
-  
 ];
 
 export default function MatchScoreboard() {
   return (
-    <div className="container py-4">
-      <div className="row gy-4">
+    <div className="container py-3">
+      <div className="row gy-3">
         {matches.map((match, index) => (
-          <div key={index} className="col-md-4">
-            <div className="card bg-secondary text-light p-3">
-              <div className="d-flex justify-content-between text-muted">
+          <div key={index} className="col-12 col-md-6 col-lg-4">
+            <div className="card bg-secondary text-light p-2">
+              <div className="d-flex justify-content-between text-muted small">
                 <span>{match.competition}</span>
                 <span>{match.status}</span>
               </div>
-              <div className="mt-3">
+              <div className="mt-2">
                 {/* Home Team */}
                 <div className="d-flex justify-content-between align-items-center">
                   <div className="d-flex align-items-center">
@@ -67,21 +66,21 @@ export default function MatchScoreboard() {
                       alt={match.homeTeam.abbreviation}
                       className="match-logo me-2"
                     />
-                    <span className="fw-bold">{match.homeTeam.abbreviation}</span>
+                    <span className="fw-semibold">{match.homeTeam.abbreviation}</span>
                   </div>
-                  <span className="fw-bold">{match.homeTeam.score}</span>
+                  <span className="fw-bold fs-5">{match.homeTeam.score}</span>
                 </div>
                 {/* Away Team */}
-                <div className="d-flex justify-content-between align-items-center mt-2">
+                <div className="d-flex justify-content-between align-items-center mt-1">
                   <div className="d-flex align-items-center">
                     <img
                       src={match.awayTeam.logo}
                       alt={match.awayTeam.abbreviation}
                       className="match-logo me-2"
                     />
-                    <span className="fw-bold">{match.awayTeam.abbreviation}</span>
+                    <span className="fw-semibold">{match.awayTeam.abbreviation}</span>
                   </div>
-                  <span className="fw-bold">{match.awayTeam.score}</span>
+                  <span className="fw-bold fs-5">{match.awayTeam.score}</span>
                 </div>
               </div>
             </div>

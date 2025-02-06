@@ -1,7 +1,6 @@
 .match-logo {
-    width: 30px; /* Adjust the width to make it smaller */
-    height: 30px; /* Adjust the height to match */
-    border-radius: 50%; /* Keep it rounded */
-    object-fit: cover; /* Ensure it maintains aspect ratio */
+    width: 25px; /* Smaller logos */
+    height: 25px;
+    border-radius: 50%;
+    object-fit: cover;
   }
-  
