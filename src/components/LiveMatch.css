@@ -6,7 +6,8 @@
 }
 
 .match-container {
-  width: 90%;
+  width: 80%;
+  height: 50%;
   max-width: 1200px;
   margin: 0 auto;
 }

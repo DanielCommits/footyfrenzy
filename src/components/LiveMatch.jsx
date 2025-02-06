@@ -27,7 +27,7 @@ const matches = [
     awayTeam: {
       abbreviation: "GIR",
       logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screen%20Shot%202025-01-22%20at%2023.37.20-lgquvYhCZfxKHptyE8rc5ULJ7krbO5.png",
-      score: 0,
+      score: 7,
     },
   },
   {
@@ -62,40 +62,44 @@ const matches = [
 
 export default function MatchScoreboard() {
   return (
-    
     <div className="match-container py-3">
       <div className="row gy-3">
         {matches.map((match, index) => (
           <div key={index} className="col-12 col-md-6 col-lg-3">
             <div className="match-card bg-secondary text-light p-2 d-flex flex-column">
-              <div className="d-flex justify-content-between text-muted small">
+              <div className="d-flex justify-content-between text-muted small w-100">
                 <span>{match.competition}</span>
                 <span>{match.status}</span>
               </div>
               <div className="mt-3">
                 {/* Home Team */}
-                <div className="d-flex justify-content-between align-items-center">
+                <div className="d-flex align-items-center w-100">
                   <div className="d-flex align-items-center">
                     <img
                       src={match.homeTeam.logo}
                       alt={match.homeTeam.abbreviation}
                       className="match-logo me-2"
                     />
-                    <span className="fw-semibold">{match.homeTeam.abbreviation}</span>
+                    <span className="fw-semibold">
+                      {match.homeTeam.abbreviation}
+                    </span>
                   </div>
-                  <span className="fw-bold fs-6">{match.homeTeam.score}</span>
+                  <div className="fw-bold">{match.homeTeam.score}</div>
                 </div>
+
                 {/* Away Team */}
-                <div className="d-flex justify-content-between align-items-center mt-1">
+                <div className="d-flex align-items-center w-100 mt-1">
                   <div className="d-flex align-items-center">
                     <img
                       src={match.awayTeam.logo}
                       alt={match.awayTeam.abbreviation}
                       className="match-logo me-2"
                     />
-                    <span className="fw-semibold">{match.awayTeam.abbreviation}</span>
+                    <span className="fw-semibold">
+                      {match.awayTeam.abbreviation}
+                    </span>
                   </div>
-                  <span className="fw-bold fs-6">{match.awayTeam.score}</span>
+                  <span className="fw-bold">{match.awayTeam.score}</span>
                 </div>
               </div>
             </div>
