@@ -82,7 +82,7 @@ export default function MatchScoreboard() {
                     />
                     <span className="fw-semibold">{match.homeTeam.abbreviation}</span>
                   </div>
-                  <span className="fw-bold fs-5">{match.homeTeam.score}</span>
+                  <span className="fw-bold fs-6">{match.homeTeam.score}</span>
                 </div>
                 {/* Away Team */}
                 <div className="d-flex justify-content-between align-items-center mt-1">
@@ -94,7 +94,7 @@ export default function MatchScoreboard() {
                     />
                     <span className="fw-semibold">{match.awayTeam.abbreviation}</span>
                   </div>
-                  <span className="fw-bold fs-5">{match.awayTeam.score}</span>
+                  <span className="fw-bold fs-6">{match.awayTeam.score}</span>
                 </div>
               </div>
             </div>
