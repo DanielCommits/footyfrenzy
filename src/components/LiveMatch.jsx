@@ -71,10 +71,10 @@ export default function MatchScoreboard() {
                 <span>{match.competition}</span>
                 <span>{match.status}</span>
               </div>
-              <div className="mt-3">
+              <div className="mt-3 w-100">
                 {/* Home Team */}
-                <div className="d-flex align-items-center w-100">
-                  <div className="d-flex align-items-center">
+                <div className="d-flex align-items-center justify-content-between w-100">
+                  <div className="d-flex align-items-center flex-grow-1">
                     <img
                       src={match.homeTeam.logo}
                       alt={match.homeTeam.abbreviation}
@@ -84,12 +84,12 @@ export default function MatchScoreboard() {
                       {match.homeTeam.abbreviation}
                     </span>
                   </div>
-                  <div className="fw-bold">{match.homeTeam.score}</div>
+                  <div className="fw-bold text-end">{match.homeTeam.score}</div>
                 </div>
 
                 {/* Away Team */}
-                <div className="d-flex align-items-center w-100 mt-1">
-                  <div className="d-flex align-items-center">
+                <div className="d-flex align-items-center justify-content-between w-100 mt-1">
+                  <div className="d-flex align-items-center flex-grow-1">
                     <img
                       src={match.awayTeam.logo}
                       alt={match.awayTeam.abbreviation}
@@ -99,7 +99,7 @@ export default function MatchScoreboard() {
                       {match.awayTeam.abbreviation}
                     </span>
                   </div>
-                  <span className="fw-bold">{match.awayTeam.score}</span>
+                  <div className="fw-bold text-end">{match.awayTeam.score}</div>
                 </div>
               </div>
             </div>
