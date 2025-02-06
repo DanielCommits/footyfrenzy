@@ -1,19 +1,19 @@
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import Image from "next/image";
+import React from "react";
+import "./LiveMatch.css";
 
 const matches = [
   {
     competition: "Champions League",
     status: "FT",
     homeTeam: {
-      abbreviation: "FEY",
-      logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screen%20Shot%202025-01-22%20at%2023.37.20-lgquvYhCZfxKHptyE8rc5ULJ7krbO5.png",
-      score: 3,
+      abbreviation: "LEG",
+      logo: "https://seeklogo.com/images/C/cd-leganes-logo-A1B5A5A72C-seeklogo.com.png",
+      score: 2,
     },
     awayTeam: {
-      abbreviation: "FCB",
-      logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screen%20Shot%202025-01-22%20at%2023.37.20-lgquvYhCZfxKHptyE8rc5ULJ7krbO5.png",
-      score: 0,
+      abbreviation: "RMA",
+      logo: "https://logos-world.net/wp-content/uploads/2020/06/Real-Madrid-Logo-700x394.png",
+      score: 3,
     },
   },
   {
@@ -48,40 +48,45 @@ const matches = [
 
 export default function MatchScoreboard() {
   return (
-    <div className="w-full bg-zinc-900 p-4">
-      <ScrollArea className="w-full whitespace-nowrap rounded-md">
-        <div className="flex w-full space-x-4 p-4">
-          {matches.map((match, index) => (
-            <div key={index} className="inline-flex min-w-[200px] flex-col space-y-3 rounded-lg bg-zinc-800/50 p-4">
-              <div className="flex items-center justify-between text-sm text-zinc-400">
+    <div className="container py-4">
+      <div className="row gy-4">
+        {matches.map((match, index) => (
+          <div key={index} className="col-md-4">
+            <div className="card bg-secondary text-light p-3">
+              <div className="d-flex justify-content-between text-muted">
                 <span>{match.competition}</span>
                 <span>{match.status}</span>
               </div>
-              <div className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-2">
-                    <div className="h-6 w-6 overflow-hidden rounded-full">
-                      <Image src={match.homeTeam.logo || "/placeholder.svg"} alt={match.homeTeam.abbreviation} width={24} height={24} className="h-full w-full object-cover" />
-                    </div>
-                    <span className="text-sm font-medium text-white">{match.homeTeam.abbreviation}</span>
+              <div className="mt-3">
+                {/* Home Team */}
+                <div className="d-flex justify-content-between align-items-center">
+                  <div className="d-flex align-items-center">
+                    <img
+                      src={match.homeTeam.logo}
+                      alt={match.homeTeam.abbreviation}
+                      className="match-logo me-2"
+                    />
+                    <span className="fw-bold">{match.homeTeam.abbreviation}</span>
                   </div>
-                  <span className="text-sm font-bold text-white">{match.homeTeam.score}</span>
+                  <span className="fw-bold">{match.homeTeam.score}</span>
                 </div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-2">
-                    <div className="h-6 w-6 overflow-hidden rounded-full">
-                      <Image src={match.awayTeam.logo || "/placeholder.svg"} alt={match.awayTeam.abbreviation} width={24} height={24} className="h-full w-full object-cover" />
-                    </div>
-                    <span className="text-sm font-medium text-white">{match.awayTeam.abbreviation}</span>
+                {/* Away Team */}
+                <div className="d-flex justify-content-between align-items-center mt-2">
+                  <div className="d-flex align-items-center">
+                    <img
+                      src={match.awayTeam.logo}
+                      alt={match.awayTeam.abbreviation}
+                      className="match-logo me-2"
+                    />
+                    <span className="fw-bold">{match.awayTeam.abbreviation}</span>
                   </div>
-                  <span className="text-sm font-bold text-white">{match.awayTeam.score}</span>
+                  <span className="fw-bold">{match.awayTeam.score}</span>
                 </div>
               </div>
             </div>
-          ))}
-        </div>
-        <ScrollBar orientation="horizontal" className="bg-zinc-700" />
-      </ScrollArea>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
