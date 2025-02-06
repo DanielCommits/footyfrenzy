@@ -38,7 +38,7 @@ export default function MatchScoreboard() {
       <div className="row">
         {matches.map((match, index) => (
           <div key={index} className="col-6 col-sm-6 col-md-6 col-lg-6">
-            <div className="match-card bg-secondary text-light p-2 d-flex flex-column">
+            <div className="match-card text-light p-2 d-flex flex-column">
               <div className="d-flex justify-content-between text-muted small w-100">
                 <span className="textshii">{match.competition}</span>
                 <span className="textshii">{match.status}</span>
@@ -52,11 +52,11 @@ export default function MatchScoreboard() {
                       alt={match.homeTeam.abbreviation}
                       className="match-logo me-2"
                     />
-                    <span className="fw-semibold">
+                    <span className="fw-semibold textcol">
                       {match.homeTeam.abbreviation}
                     </span>
                   </div>
-                  <div className="fw-bold text-end">{match.homeTeam.score}</div>
+                  <div className="fw-bold text-end textcol">{match.homeTeam.score}</div>
                 </div>
 
                 {/* Away Team */}
@@ -67,11 +67,11 @@ export default function MatchScoreboard() {
                       alt={match.awayTeam.abbreviation}
                       className="match-logo me-2"
                     />
-                    <span className="fw-semibold">
+                    <span className="fw-semibold textcol">
                       {match.awayTeam.abbreviation}
                     </span>
                   </div>
-                  <div className="fw-bold text-end">{match.awayTeam.score}</div>
+                  <div className="fw-bold text-end textcol">{match.awayTeam.score}</div>
                 </div>
               </div>
             </div>
