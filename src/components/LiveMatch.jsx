@@ -37,7 +37,7 @@ export default function MatchScoreboard() {
     <div className="match-container">
       <div className="row">
         {matches.map((match, index) => (
-          <div key={index} className="col-6 col-sm-6 col-md-6 col-lg-3">
+          <div key={index} className="col-6 col-sm-6 col-md-6 col-lg-6">
             <div className="match-card bg-secondary text-light p-2 d-flex flex-column">
               <div className="d-flex justify-content-between text-muted small w-100">
                 <span>{match.competition}</span>

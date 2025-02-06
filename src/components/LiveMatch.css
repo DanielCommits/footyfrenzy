@@ -6,11 +6,15 @@
 }
 
 .match-container {
-  width: 80%;
-  height: 40%;
-  margin-left: 40px;
-}
+    width: 80%;
+    height: 40%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
 
 .match-card {
   height: 150px;
+  margin-left: auto;
+  margin-right: auto;
 }
