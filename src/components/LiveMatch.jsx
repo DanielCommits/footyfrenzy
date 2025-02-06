@@ -41,7 +41,7 @@ export default function MatchScoreboard() {
             <div className="match-card bg-secondary text-light p-2 d-flex flex-column">
               <div className="d-flex justify-content-between text-muted small w-100">
                 <span className="textshii">{match.competition}</span>
-                <span>{match.status}</span>
+                <span className="textshii">{match.status}</span>
               </div>
               <div className="mt-3 w-100">
                 {/* Home Team */}
