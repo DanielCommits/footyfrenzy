@@ -44,20 +44,34 @@ const matches = [
       score: 2,
     },
   },
+  {
+    competition: "Champions League",
+    status: "FT",
+    homeTeam: {
+      abbreviation: "PSG",
+      logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screen%20Shot%202025-01-22%20at%2023.37.20-lgquvYhCZfxKHptyE8rc5ULJ7krbO5.png",
+      score: 4,
+    },
+    awayTeam: {
+      abbreviation: "MCI",
+      logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screen%20Shot%202025-01-22%20at%2023.37.20-lgquvYhCZfxKHptyE8rc5ULJ7krbO5.png",
+      score: 2,
+    },
+  },
 ];
 
 export default function MatchScoreboard() {
   return (
-    <div className="container py-3">
-      <div className="row gy-3">
+    <div className="container py-4">
+      <div className="row gy-4">
         {matches.map((match, index) => (
-          <div key={index} className="col-12 col-md-6 col-lg-4">
+          <div key={index} className="col-12 col-md-6 col-lg-3">
             <div className="card bg-secondary text-light p-2">
               <div className="d-flex justify-content-between text-muted small">
                 <span>{match.competition}</span>
                 <span>{match.status}</span>
               </div>
-              <div className="mt-2">
+              <div className="mt-3">
                 {/* Home Team */}
                 <div className="d-flex justify-content-between align-items-center">
                   <div className="d-flex align-items-center">
