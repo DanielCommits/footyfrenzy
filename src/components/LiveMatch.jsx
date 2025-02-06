@@ -40,7 +40,7 @@ export default function MatchScoreboard() {
           <div key={index} className="col-6 col-sm-6 col-md-6 col-lg-6">
             <div className="match-card bg-secondary text-light p-2 d-flex flex-column">
               <div className="d-flex justify-content-between text-muted small w-100">
-                <span>{match.competition}</span>
+                <span className="textshii">{match.competition}</span>
                 <span>{match.status}</span>
               </div>
               <div className="mt-3 w-100">
