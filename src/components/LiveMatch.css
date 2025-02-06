@@ -22,3 +22,9 @@
 .textshii {
     font-size: 0.7em;
 }
+
+@media (max-width: 568px) {
+    .match-container {
+      width: 100%;
+    }
+  }
