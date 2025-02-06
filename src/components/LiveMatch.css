@@ -8,7 +8,9 @@
 .match-container {
   width: 90%;
   max-width: 1200px;
-  margin: auto;
-  min-height: 100px;
   margin: 0 auto;
+}
+
+.match-card {
+    height: 150px;
 }
