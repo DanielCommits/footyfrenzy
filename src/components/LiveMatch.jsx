@@ -62,8 +62,8 @@ const matches = [
 
 export default function MatchScoreboard() {
   return (
-    <div className="container py-4">
-      <div className="row gy-4">
+    <div className="container py-3">
+      <div className="row gy-3">
         {matches.map((match, index) => (
           <div key={index} className="col-12 col-md-6 col-lg-3">
             <div className="card bg-secondary text-light p-2">
