@@ -10,11 +10,13 @@ import LiveScores from "./components/LiveScores";
 import Footer from "./components/Footer"; // Import the Footer component
 import Betting from "./components/Betting";
 
+
 function App() {
   return (
     <Router>
       <Navbar />
       <Routes>
+   
         <Route path="/" element={<Home />} />
         <Route path="/premier-league" element={<PremierLeague />} />
         <Route path="/la-liga" element={<Laliga />} />
