@@ -93,7 +93,7 @@ function Footer() {
           <p>
             copyright &copy;{" "}
             <a href="https://danielcommits.github.io/MyPortfolio/">
-              Daniel Develops, 2024.
+              Daniel Develops, 2025.
             </a>
           </p>
         </div>
