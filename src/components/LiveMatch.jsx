@@ -30,40 +30,12 @@ const matches = [
       score: 7,
     },
   },
-  {
-    competition: "Champions League",
-    status: "FT",
-    homeTeam: {
-      abbreviation: "PSG",
-      logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screen%20Shot%202025-01-22%20at%2023.37.20-lgquvYhCZfxKHptyE8rc5ULJ7krbO5.png",
-      score: 4,
-    },
-    awayTeam: {
-      abbreviation: "MCI",
-      logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screen%20Shot%202025-01-22%20at%2023.37.20-lgquvYhCZfxKHptyE8rc5ULJ7krbO5.png",
-      score: 2,
-    },
-  },
-  {
-    competition: "Champions League",
-    status: "FT",
-    homeTeam: {
-      abbreviation: "PSG",
-      logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screen%20Shot%202025-01-22%20at%2023.37.20-lgquvYhCZfxKHptyE8rc5ULJ7krbO5.png",
-      score: 4,
-    },
-    awayTeam: {
-      abbreviation: "MCI",
-      logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screen%20Shot%202025-01-22%20at%2023.37.20-lgquvYhCZfxKHptyE8rc5ULJ7krbO5.png",
-      score: 2,
-    },
-  },
 ];
 
 export default function MatchScoreboard() {
   return (
-    <div className="match-container py-3">
-      <div className="row gy-3">
+    <div className="match-container">
+      <div className="row">
         {matches.map((match, index) => (
           <div key={index} className="col-6 col-sm-6 col-md-6 col-lg-3">
             <div className="match-card bg-secondary text-light p-2 d-flex flex-column">
