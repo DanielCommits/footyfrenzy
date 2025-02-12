@@ -23,7 +23,7 @@ function Footer() {
 
         {/* Description Section */}
         <p className="footer-description">
-          Experience the thrill of football like never before with live scores,
+          Experience the thrill of football like never before with live-scores,
           real-time updates, and unparalleled coverage from every corner of the
           globe.
         </p>
