@@ -16,7 +16,6 @@ function App() {
     <Router>
       <Navbar />
       <Routes>
-   
         <Route path="/" element={<Home />} />
         <Route path="/premier-league" element={<PremierLeague />} />
         <Route path="/la-liga" element={<Laliga />} />
