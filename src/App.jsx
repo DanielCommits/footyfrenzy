@@ -7,7 +7,7 @@ import AdminDashboard from "./components/AdminDashboard";
 import ArticleDetail from "./components/ArticleDetail";
 import Navbar from "./components/Navbar";
 import LiveScores from "./components/LiveScores";
-import Footer from "./components/Footer"; // Import the Footer component
+import Footer from "./components/Footer";
 import Betting from "./components/Betting";
 
 
