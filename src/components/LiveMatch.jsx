@@ -6,7 +6,7 @@ const matches = [
     competition: "Champions League",
     status: "FT",
     homeTeam: {
-      abbreviation: "LEG",
+      abbreviation: "MUN",
       logo: "https://seeklogo.com/images/C/cd-leganes-logo-A1B5A5A72C-seeklogo.com.png",
       score: 2,
     },
