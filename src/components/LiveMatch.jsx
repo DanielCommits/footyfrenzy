@@ -25,7 +25,7 @@ const matches = [
       score: 1,
     },
     awayTeam: {
-      abbreviation: "ARS",
+      abbreviation: "PSG",
       logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screen%20Shot%202025-01-22%20at%2023.37.20-lgquvYhCZfxKHptyE8rc5ULJ7krbO5.png",
       score: 7,
     },
