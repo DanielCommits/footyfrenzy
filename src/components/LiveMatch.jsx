@@ -8,12 +8,12 @@ const matches = [
     homeTeam: {
       abbreviation: "MUN",
       logo: "https://seeklogo.com/images/C/cd-leganes-logo-A1B5A5A72C-seeklogo.com.png",
-      score: 2,
+      score: 5,
     },
     awayTeam: {
-      abbreviation: "RMA",
+      abbreviation: "LYO",
       logo: "https://logos-world.net/wp-content/uploads/2020/06/Real-Madrid-Logo-700x394.png",
-      score: 3,
+      score: 4,
     },
   },
   {
