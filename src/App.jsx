@@ -9,6 +9,7 @@ import Navbar from "./components/Navbar";
 import LiveScores from "./components/LiveScores";
 import Footer from "./components/Footer";
 import Betting from "./components/Betting";
+import { Analytics } from "@vercel/analytics/react"
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
         <Route path="/betting" element={<Betting />} /> 
       </Routes>
       <Footer /> 
+      <Analytics/>
     </Router>
   );
 }
