@@ -32,7 +32,7 @@ function Footer() {
         <ul className="socials">
           <li>
             <a
-              href="https://web.facebook.com/FootyFrenzynow"
+              href="https://web.facebook.com/footyfrenzyx/"
               target="_blank"
               rel="noopener noreferrer"
             >
