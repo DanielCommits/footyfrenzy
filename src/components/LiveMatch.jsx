@@ -6,14 +6,14 @@ const matches = [
     competition: "Champions League",
     status: "FT",
     homeTeam: {
-      abbreviation: "MUN",
-      logo: "https://seeklogo.com/images/C/cd-leganes-logo-A1B5A5A72C-seeklogo.com.png",
-      score: 5,
+      abbreviation: "ARS",
+      logo: "https://images.seeklogo.com/logo-png/32/1/arsenal-f-c-logo-png_seeklogo-325701.png",
+      score: 0,
     },
     awayTeam: {
-      abbreviation: "LYO",
-      logo: "https://logos-world.net/wp-content/uploads/2020/06/Real-Madrid-Logo-700x394.png",
-      score: 4,
+      abbreviation: "PSG",
+      logo: "https://images.seeklogo.com/logo-png/25/1/psg-logo-png_seeklogo-256583.png",
+      score: 1,
     },
   },
   {
