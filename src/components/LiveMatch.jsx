@@ -20,14 +20,14 @@ const matches = [
     competition: "Champions League",
     status: "FT",
     homeTeam: {
-      abbreviation: "MCI",
-      logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screen%20Shot%202025-01-22%20at%2023.37.20-lgquvYhCZfxKHptyE8rc5ULJ7krbO5.png",
+      abbreviation: "Al Hilal",
+      logo: "https://cdn.soccersapi.com/images/soccer/teams/18/3361.png",
       score: 1,
     },
     awayTeam: {
-      abbreviation: "PSG",
-      logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screen%20Shot%202025-01-22%20at%2023.37.20-lgquvYhCZfxKHptyE8rc5ULJ7krbO5.png",
-      score: 7,
+      abbreviation: "Al Ahli Saudi",
+      logo: "https://cdn.soccersapi.com/images/soccer/teams/18/5638.png",
+      score: 3,
     },
   },
 ];
