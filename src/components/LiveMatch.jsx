@@ -4,7 +4,7 @@ import "./LiveMatch.css";
 const matches = [
   {
     competition: "Champions League",
-    status: "90'",
+    status: "FT",
     homeTeam: {
       abbreviation: "BAR",
       logo: "https://ssl.gstatic.com/onebox/media/sports/logos/paYnEE8hcrP96neHRNofhQ_96x96.png",
