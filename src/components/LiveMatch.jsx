@@ -8,12 +8,12 @@ const matches = [
     homeTeam: {
       abbreviation: "BAR",
       logo: "https://ssl.gstatic.com/onebox/media/sports/logos/paYnEE8hcrP96neHRNofhQ_96x96.png",
-      score: 2,
+      score: 3,
     },
     awayTeam: {
       abbreviation: "INT",
       logo: "https://ssl.gstatic.com/onebox/media/sports/logos/l2-icwsMhIvsbRw8AwC1yg_96x96.png",
-      score: 2,
+      score: 3,
     },
   },
   {
