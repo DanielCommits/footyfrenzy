@@ -4,28 +4,28 @@ import "./LiveMatch.css";
 const matches = [
   {
     competition: "Champions League",
-    status: "FT",
+    status: "49'",
     homeTeam: {
-      abbreviation: "ARS",
-      logo: "https://images.seeklogo.com/logo-png/32/1/arsenal-f-c-logo-png_seeklogo-325701.png",
+      abbreviation: "BAR",
+      logo: "https://ssl.gstatic.com/onebox/media/sports/logos/paYnEE8hcrP96neHRNofhQ_96x96.png",
       score: 0,
     },
     awayTeam: {
-      abbreviation: "PSG",
-      logo: "https://images.seeklogo.com/logo-png/25/1/psg-logo-png_seeklogo-256583.png",
+      abbreviation: "INT",
+      logo: "https://ssl.gstatic.com/onebox/media/sports/logos/l2-icwsMhIvsbRw8AwC1yg_96x96.png",
       score: 1,
     },
   },
   {
-    competition: "Champions League",
+    competition: " AFC Champions League",
     status: "FT",
     homeTeam: {
-      abbreviation: "Al Hilal",
+      abbreviation: "Al Nassr",
       logo: "https://cdn.soccersapi.com/images/soccer/teams/18/3361.png",
-      score: 1,
+      score: 2,
     },
     awayTeam: {
-      abbreviation: "Al Ahli Saudi",
+      abbreviation: "Kawasaki Frontale",
       logo: "https://cdn.soccersapi.com/images/soccer/teams/18/5638.png",
       score: 3,
     },
