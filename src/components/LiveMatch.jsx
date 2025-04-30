@@ -21,12 +21,12 @@ const matches = [
     status: "FT",
     homeTeam: {
       abbreviation: "Al Nassr",
-      logo: "https://cdn.soccersapi.com/images/soccer/teams/18/3361.png",
+      logo: "https://ssl.gstatic.com/onebox/media/sports/logos/GWXetBOkODOWR3p2NIBqJg_96x96.png",
       score: 2,
     },
     awayTeam: {
       abbreviation: "Kawasaki Frontale",
-      logo: "https://cdn.soccersapi.com/images/soccer/teams/18/5638.png",
+      logo: "https://ssl.gstatic.com/onebox/media/sports/logos/JzqHyQjUTYRQf_9HHYqFBw_96x96.png",
       score: 3,
     },
   },
