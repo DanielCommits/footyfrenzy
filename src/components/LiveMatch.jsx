@@ -4,7 +4,7 @@ import "./LiveMatch.css";
 const matches = [
   {
     competition: "EUROPA LEAGUE",
-    status: "90",
+    status: "90'",
     homeTeam: {
       abbreviation: "MCI",
       logo: "https://cdn.sportfeeds.io/sdl/images/team/crest/large/xnuod9agz6j1RYdDVUCrn.png?quality=60&auto=webp&format=pjpg",
