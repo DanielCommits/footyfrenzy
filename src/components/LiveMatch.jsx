@@ -3,7 +3,7 @@ import "./LiveMatch.css";
 
 const matches = [
   {
-    competition: "EUROPA LEAGUE",
+    competition: "PREMIER LEAGUE",
     status: "90'",
     homeTeam: {
       abbreviation: "MCI",
