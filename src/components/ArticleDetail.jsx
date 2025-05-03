@@ -48,45 +48,7 @@ const ArticleDetail = () => {
     }
   };
 
-  const updateMetaTags = (article) => {
-    if (!article) return;
-
-    // Update the page title
-    document.title = article.title || "FootyFrenzy | Football News and More";
-
-    // Update description meta tag
-    let descriptionTag = document.querySelector("meta[name='description']");
-    if (!descriptionTag) {
-      descriptionTag = document.createElement("meta");
-      descriptionTag.name = "description";
-      document.head.appendChild(descriptionTag);
-    }
-    descriptionTag.content =
-      article.description ||
-      "Stay updated with the latest football news, scores, and transfers on FootyFrenzy.";
-
-    // Update Open Graph tags
-    const updateOrCreateMeta = (property, content) => {
-      let tag = document.querySelector(`meta[property='${property}']`);
-      if (!tag) {
-        tag = document.createElement("meta");
-        tag.setAttribute("property", property);
-        document.head.appendChild(tag);
-      }
-      tag.content = content;
-    };
-
-    updateOrCreateMeta("og:title", article.title);
-    updateOrCreateMeta("og:description", article.description);
-    updateOrCreateMeta("og:image", article.imageUrl || "defaultImage.jpg");
-  };
-
-  useEffect(() => {
-    if (article) {
-      updateMetaTags(article);
-    }
-  }, [article]);
-
+  
   useEffect(() => {
     const loadCommentWidget = () => {
       const link = document.createElement("link");
