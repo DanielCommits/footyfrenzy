@@ -76,10 +76,42 @@ const ArticleDetail = () => {
 
     loadCommentWidget();
   }, []);
+  useEffect(() => {
+    if (!article) return;
+  
+    // Set the document title
+    document.title = article.description || "FootyFrenzy | Football News and More";
+  
+    // Update meta description
+    let descriptionTag = document.querySelector("meta[name='description']");
+    if (!descriptionTag) {
+      descriptionTag = document.createElement("meta");
+      descriptionTag.name = "description";
+      document.head.appendChild(descriptionTag);
+    }
+    descriptionTag.content =
+      article.description || "Latest football news and updates from FootyFrenzy.";
+  
+    // Optionally update Open Graph tags for social previews
+    const updateOrCreateMeta = (property, content) => {
+      let tag = document.querySelector(`meta[property='${property}']`);
+      if (!tag) {
+        tag = document.createElement("meta");
+        tag.setAttribute("property", property);
+        document.head.appendChild(tag);
+      }
+      tag.setAttribute("content", content);
+    };
+  
+    updateOrCreateMeta("og:title", article.title || article.description);
+    updateOrCreateMeta("og:description", article.description);
+    updateOrCreateMeta("og:image", article.imageUrl || "defaultImage.jpg");
+  }, [article]);
 
   if (error) return <p className="error-message">{error}</p>;
   if (!article) return <p className="loading-message">Loading...</p>;
 
+ 
   return (
     <div className="article-container">
       <div className="article-header">
