@@ -13,7 +13,7 @@
   "dependencies": {
     "@firebasegen/default-connector": "file:dataconnect-generated/js/default-connector",
     "@vercel/analytics": "^1.5.0",
-    "axios": "^1.7.7",
+    "axios": "^1.9.0",
     "bootstrap": "^5.3.3",
     "cheerio": "^1.0.0",
     "classnames": "^2.5.1",
