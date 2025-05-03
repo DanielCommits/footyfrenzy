@@ -41,7 +41,7 @@ function Footer() {
           </li>
           <li>
             <a
-              href="https://x.com/Thatmaverickk"
+              href="https://x.com/thebigggdan"
               target="_blank"
               rel="noopener noreferrer"
             >
