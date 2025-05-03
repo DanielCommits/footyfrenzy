@@ -1,83 +1,141 @@
-import React from "react";
+import React, { useEffect, useState, useRef } from "react";
+import axios from "axios";
 import "./LiveMatch.css";
 
-const matches = [
-  {
-    competition: "PREMIER LEAGUE",
-    status: "FT",
-    homeTeam: {
-      abbreviation: "MCI",
-      logo: "https://cdn.sportfeeds.io/sdl/images/team/crest/large/xnuod9agz6j1RYdDVUCrn.png?quality=60&auto=webp&format=pjpg",
-      score: 1,
-    },
-    awayTeam: {
-      abbreviation: "WOL",
-      logo: "https://cdn.sportfeeds.io/sdl/images/team/crest/large/srO_TaMkRk5zT3FflsbRO.png?quality=60&auto=webp&format=pjpg",
-      score: 0,
-    },
-  },
-  {
-    competition: "PREMIER LEAGUE",
-    status: "FT",
-    homeTeam: {
-      abbreviation: "NFO",
-      logo: "https://ssl.gstatic.com/onebox/media/sports/logos/Zr6FbE-8pDH7UBpWCO8U9A_96x96.png",
-      score: 0,
-    },
-    awayTeam: {
-      abbreviation: "BRE",
-      logo: "https://ssl.gstatic.com/onebox/media/sports/logos/QOUce0WQBYqnkSmN6_TxGA_96x96.png",
-      score: 2,
-    },
-  },
-];
+const API_KEY = "f5be21065fa69f1c7b9c535ec9b564c0";
 
-export default function MatchScoreboard() {
+export default function LiveMatches() {
+  const [liveMatches, setLiveMatches] = useState([]);
+  const [selectedLeague, setSelectedLeague] = useState("All");
+  const [leagues, setLeagues] = useState([]);
+  const sliderRef = useRef(null);
+
+  useEffect(() => {
+    const fetchLive = async () => {
+      try {
+        const res = await axios.get("https://v3.football.api-sports.io/fixtures", {
+          headers: { "x-apisports-key": API_KEY },
+          params: { live: "all" },
+        });
+
+        const matches = res.data.response;
+        const leagueNames = ["All", ...new Set(matches.map((m) => m.league.name))];
+        setLeagues(leagueNames);
+        setSelectedLeague(leagueNames[0]);
+        setLiveMatches(matches);
+      } catch (err) {
+        console.error("Error fetching live matches", err);
+      }
+    };
+
+    fetchLive();
+    const interval = setInterval(fetchLive, 60000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const filtered =
+    selectedLeague === "All"
+      ? liveMatches
+      : liveMatches.filter((m) => m.league.name === selectedLeague);
+
+  const scrollPrev = () => {
+    sliderRef.current?.scrollBy({ left: -300, behavior: "smooth" });
+  };
+
+  const scrollNext = () => {
+    sliderRef.current?.scrollBy({ left: 300, behavior: "smooth" });
+  };
+
   return (
-    <div className="match-container">
-      <div className="row">
-        {matches.map((match, index) => (
-          <div key={index} className="col-6 col-sm-6 col-md-6 col-lg-6">
-            <div className="match-card text-light p-2 d-flex flex-column">
-              <div className="d-flex justify-content-between text-muted small w-100">
-                <span className="textshii">{match.competition}</span>
-                <span className="textshii">{match.status}</span>
-              </div>
-              <div className="mt-3 w-100">
-                {/* Home Team */}
-                <div className="d-flex align-items-center justify-content-between w-100">
-                  <div className="d-flex align-items-center flex-grow-1">
-                    <img
-                      src={match.homeTeam.logo}
-                      alt={match.homeTeam.abbreviation}
-                      className="match-logo me-2"
-                    />
-                    <span className="fw-semibold textcol">
-                      {match.homeTeam.abbreviation}
-                    </span>
-                  </div>
-                  <div className="fw-bold text-end textcol">{match.homeTeam.score}</div>
+    <div className="container py-4">
+      {/* League Dropdown */}
+      <div className="mb-4 d-flex flex-column">
+        <label className="form-label fw-bold">Live Matches</label>
+        <select
+          className="form-select w-100"
+          value={selectedLeague}
+          onChange={(e) => setSelectedLeague(e.target.value)}
+        >
+          {leagues.map((league, idx) => (
+            <option key={idx} value={league}>
+              {league}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {/* Match Cards Slider */}
+      {filtered.length > 0 ? (
+        <div className="position-relative">
+          {filtered.length > 1 && (
+            <>
+              <button className="slider-arrow prev" onClick={scrollPrev}>
+                ‹
+              </button>
+              <button className="slider-arrow next" onClick={scrollNext}>
+                ›
+              </button>
+            </>
+          )}
+
+          <div
+            className="d-flex overflow-auto slider-wrapper"
+            ref={sliderRef}
+            style={{ scrollBehavior: "smooth" }}
+          >
+            {filtered.map((match) => (
+              <div
+                key={match.fixture.id}
+                className="match-card text-light p-3 d-flex flex-column me-3"
+                style={{ minWidth: "300px", maxWidth: "300px" }}
+              >
+                <div className="d-flex justify-content-between text-muted small w-100">
+                  <span className="textshii">{match.league.name}</span>
+                  <span className="textshii">{match.fixture.status.short}</span>
                 </div>
 
-                {/* Away Team */}
-                <div className="d-flex align-items-center justify-content-between w-100 mt-1">
-                  <div className="d-flex align-items-center flex-grow-1">
-                    <img
-                      src={match.awayTeam.logo}
-                      alt={match.awayTeam.abbreviation}
-                      className="match-logo me-2"
-                    />
-                    <span className="fw-semibold textcol">
-                      {match.awayTeam.abbreviation}
-                    </span>
+                <div className="mt-3 w-100">
+                  {/* Home */}
+                  <div className="d-flex align-items-center justify-content-between w-100">
+                    <div className="d-flex align-items-center flex-grow-1">
+                      <img
+                        src={match.teams.home.logo}
+                        alt={match.teams.home.name}
+                        className="match-logo me-2"
+                      />
+                      <span className="fw-semibold textcol">
+                        {match.teams.home.name}
+                      </span>
+                    </div>
+                    <div className="fw-bold text-end textcol">
+                      {match.goals.home}
+                    </div>
                   </div>
-                  <div className="fw-bold text-end textcol">{match.awayTeam.score}</div>
+
+                  {/* Away */}
+                  <div className="d-flex align-items-center justify-content-between w-100 mt-2">
+                    <div className="d-flex align-items-center flex-grow-1">
+                      <img
+                        src={match.teams.away.logo}
+                        alt={match.teams.away.name}
+                        className="match-logo me-2"
+                      />
+                      <span className="fw-semibold textcol">
+                        {match.teams.away.name}
+                      </span>
+                    </div>
+                    <div className="fw-bold text-end textcol">
+                      {match.goals.away}
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </div>
+      ) : (
+        <p className="text-muted">No live matches for this competition.</p>
+      )}
     </div>
   );
 }

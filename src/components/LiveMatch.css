@@ -10,17 +10,27 @@
     height: 40%;
     margin-left: auto;
     margin-right: auto;
-  }
   
+  }
+ 
 
-.match-card {
-  height: 130px;
-  margin-left: auto;
-  margin-right: auto;
-  background-color: white;
-  color: black;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
+
+
+  .match-card {
+    height: 130px;
+    background-color: white;
+    color: black;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    flex: 0 0 auto; /* Ensure cards don't shrink */
+    margin-right: 1rem; /* consistent spacing */
+  }
+
+  .slider-wrapper {
+    scroll-behavior: smooth;
+    overflow-x: auto;
+    display: flex;
+    padding-left: 0.5rem; /* optional: creates breathing room from the left edge */
+  }
 
 .textshii {
     font-size: 0.7em;
@@ -42,3 +52,38 @@ body.dark-mode .match-card {
   body.dark-mode .textcol {
     color: white;
   }
+
+
+  /* LiveMatch.css */
+
+
+/* The horizontal scrolling container */
+.matches-slider {
+  scroll-behavior: smooth;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+
+/* Arrow buttons */
+.slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.6);
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  line-height: 1;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10;
+}
+.slider-arrow.prev {
+  left: -1rem;
+}
+.slider-arrow.next {
+  right: -1rem;
+}
+
