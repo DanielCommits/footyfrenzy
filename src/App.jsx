@@ -9,6 +9,7 @@ import Navbar from "./components/Navbar";
 import LiveScores from "./components/LiveScores";
 import Footer from "./components/Footer";
 import Betting from "./components/Betting";
+import Ucl from "./components/ucl";
 import { Analytics } from "@vercel/analytics/react"
 
 
@@ -20,6 +21,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/premier-league" element={<PremierLeague />} />
         <Route path="/la-liga" element={<Laliga />} />
+        <Route path="/ucl" element={<Ucl />} />
         <Route path="/transfers" element={<Transfers />} />
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/article/:id" element={<ArticleDetail />} />

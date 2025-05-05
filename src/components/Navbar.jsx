@@ -111,6 +111,7 @@ const Navbar = () => {
         <li><Link to="/transfers">TRANSFERS</Link></li>
         <li><Link to="/premier-league">PREMIER LEAGUE</Link></li>
         <li><Link to="/la-liga">LA-LIGA</Link></li>
+        <li><Link to="/ucl">UCL</Link></li>
         <li><Link to="/betting">BETTING</Link></li>
       </ul>
 
