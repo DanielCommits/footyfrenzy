@@ -28,11 +28,11 @@ body:not(.dark-mode) {
   color: white;
   padding: 0.5rem 1rem;
   margin: 0;
-  position: fixed; /* Make the navbar fixed */
+  position: relative; /* Changed from fixed to relative */
   top: 0;
   left: 0;
   width: 100%; /* Ensure it spans the full width */
-  z-index: 1000; /* Ensure it stays above other elements */
+  z-index: 10; /* Adjusted z-index */
 }
 
 .navbar-logo {
@@ -168,7 +168,7 @@ body:not(.dark-mode) {
 /* Responsive Design for screens <= 1024px */
 @media (max-width: 1024px) {
   .navbar {
-    position: relative; /* Default position */
+    position: relative; /* Default position for larger screens */
   }
 
   .navbar-links {
