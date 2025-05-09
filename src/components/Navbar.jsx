@@ -105,6 +105,14 @@ const Navbar = () => {
     };
   }, [isMenuOpen]);
 
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.classList.add("menu-open");
+    } else {
+      document.body.classList.remove("menu-open");
+    }
+  }, [isMenuOpen]);
+
   return (
     <nav className="navbar" ref={menuRef}>
       <Link to="/" className="navbar-logo">

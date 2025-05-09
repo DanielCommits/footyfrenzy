@@ -28,8 +28,11 @@ body:not(.dark-mode) {
   color: white;
   padding: 0.5rem 1rem;
   margin: 0;
-  position: relative;
-  z-index: 10;
+  position: fixed; /* Make the navbar fixed */
+  top: 0;
+  left: 0;
+  width: 100%; /* Ensure it spans the full width */
+  z-index: 1000; /* Ensure it stays above other elements */
 }
 
 .navbar-logo {
@@ -164,6 +167,10 @@ body:not(.dark-mode) {
 
 /* Responsive Design for screens <= 1024px */
 @media (max-width: 1024px) {
+  .navbar {
+    position: relative; /* Default position */
+  }
+
   .navbar-links {
     display: none;
     flex-direction: column;
@@ -181,18 +188,23 @@ body:not(.dark-mode) {
     display: flex;
     flex-direction: column;
     gap: 1.5rem; /* Increased gap for better spacing */
-    position: fixed;
+    position: fixed; /* Fix the navbar when the menu is open */
     top: 0;
     left: 0;
     width: 100%;
     height: calc(100% - 60px); /* Exclude navbar height */
-    background-color: #282222;
+    background-color: #181717;
     z-index: 999;
     padding: 2rem;
     box-sizing: border-box;
     justify-content: flex-start; /* Align links to the top */
     align-items: flex-start; /* Align links to the left */
     margin-top: 60px; /* Push content below the navbar */
+    overflow-y: auto; /* Allow scrolling within the open menu */
+  }
+
+  body.menu-open {
+    overflow: hidden; /* Prevent body scrolling when the menu is open */
   }
 
   .navbar-links li {

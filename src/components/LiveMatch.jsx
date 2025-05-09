@@ -134,7 +134,7 @@ export default function LiveMatches() {
           </div>
         </div>
       ) : (
-        <p className="text-muted">No live matches for this competition.</p>
+        <p className="text-muted">No live matches for now.</p>
       )}
     </div>
   );
