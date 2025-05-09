@@ -2,7 +2,9 @@
 body {
   background-color: black; /* Default background is dark */
   color: white; /* Default text color is white */
-  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for theme change */
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease; /* Smooth transition for theme change */
 }
 
 /* Dark Mode Styles */
@@ -54,7 +56,6 @@ body:not(.dark-mode) {
   align-items: center;
   gap: 0.5rem;
 }
-
 
 .navbar-menu-icon {
   display: none; /* Hide the menu icon by default (for larger screens) */
@@ -161,7 +162,6 @@ body:not(.dark-mode) {
   }
 }
 
-
 /* Responsive Design for screens <= 1024px */
 @media (max-width: 1024px) {
   .navbar-links {
@@ -179,11 +179,73 @@ body:not(.dark-mode) {
 
   .navbar-links.open {
     display: flex;
+    flex-direction: column;
+    gap: 1.5rem; /* Increased gap for better spacing */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 60px); /* Exclude navbar height */
+    background-color: #282222;
+    z-index: 999;
+    padding: 2rem;
+    box-sizing: border-box;
+    justify-content: flex-start; /* Align links to the top */
+    align-items: flex-start; /* Align links to the left */
+    margin-top: 60px; /* Push content below the navbar */
+  }
+
+  .navbar-links li {
+    font-size: 1.2rem; /* Increased font size for better readability */
+    font-weight: bold; /* Make the font strong and bold */
+    width: 100%; /* Ensure links span the full width */
+  }
+
+  .navbar-links li a {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem;
+    display: block;
+    width: 100%;
+    font-weight: bold; /* Ensure links are bold */
+  }
+
+  .navbar-links li a:hover {
+    background-color: #333; /* Add hover effect for better UX */
   }
 
   .navbar-menu-icon {
     display: flex; /* Show the menu icon on smaller screens */
+    justify-content: center;
+    align-items: center;
+    width: 2rem;
+    height: 2rem;
   }
+
+  .notif-modal {
+    top: 50px;
+    right: 10px;
+    width: 90%;
+  }
+
+  .menu-close-icon {
+    font-size: 2rem; /* Larger font size for the "X" */
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+  }
+
+  .navbar-links.open ~ .live-match-buttons {
+    display: none; /* Hide the < and > buttons when the navbar is open */
+  }
+}
+
+/* Menu close icon (X) */
+.menu-close-icon {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
 }
 
 /* Theme toggle button */

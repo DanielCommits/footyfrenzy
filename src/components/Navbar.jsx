@@ -11,7 +11,11 @@ const Navbar = () => {
 
   const defaultNotifications = [
     { id: 3, message: "Back from a 4-month Hiatus!", read: false },
-    { id: 2, message: "Join our socials, just scroll to the footer", read: false },
+    {
+      id: 2,
+      message: "Join our socials, just scroll to the footer",
+      read: false,
+    },
     { id: 1, message: "Help in sharing the site please.", read: false },
     // You can keep adding new messages here with unique IDs
   ];
@@ -107,12 +111,18 @@ const Navbar = () => {
         FootyFrenzy
       </Link>
       <ul className={`navbar-links ${isMenuOpen ? "open" : ""}`}>
-        <li><Link to="/livescores">LIVESCORES</Link></li>
-        <li><Link to="/transfers">TRANSFERS</Link></li>
-        <li><Link to="/premier-league">PREMIER LEAGUE</Link></li>
-        <li><Link to="/la-liga">LA-LIGA</Link></li>
-        <li><Link to="/ucl">UCL</Link></li>
-        <li><Link to="/betting">BETTING</Link></li>
+        {[
+          "LIVESCORES",
+          "TRANSFERS",
+          "PREMIER LEAGUE",
+          "LA-LIGA",
+          "UCL",
+          "BETTING",
+        ].map((link, index) => (
+          <li key={index} onClick={() => setIsMenuOpen(false)}>
+            <Link to={`/${link.toLowerCase().replace(" ", "-")}`}>{link}</Link>
+          </li>
+        ))}
       </ul>
 
       <div className="navbar-right">
@@ -153,9 +163,15 @@ const Navbar = () => {
           className="navbar-menu-icon"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
-          <div></div>
-          <div></div>
-          <div></div>
+          {isMenuOpen ? (
+            <div className="menu-close-icon"></div>
+          ) : (
+            <>
+              <div></div>
+              <div></div>
+              <div></div>
+            </>
+          )}
         </div>
       </div>
     </nav>
