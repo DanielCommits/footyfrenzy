@@ -9,7 +9,7 @@ import Navbar from "./components/Navbar";
 import LiveScores from "./components/LiveScores";
 import Footer from "./components/Footer";
 import Betting from "./components/Betting";
-import Ucl from "./components/ucl";
+import Ucl from "./components/Ucl";
 import { Analytics } from "@vercel/analytics/react"
 
 
