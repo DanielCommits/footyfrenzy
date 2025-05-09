@@ -181,7 +181,7 @@ const Ucl = () => {
         </div>
       );
     } else if (activeTab === "matches") {
-      return <div>Fixtures Coming Soon, for now use LiveScore.</div>;
+      return <div>Fixtures Coming Soon, for now use LiveScore</div>;
     } 
   };
 
