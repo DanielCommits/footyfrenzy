@@ -14,6 +14,7 @@ const IMPORTANT_LEAGUES = [
   101, // Club World Cup
   307, // Saudi Pro League
   253, // MLS
+  135, // Serie A
 ];
 
 export default function LiveMatches() {
