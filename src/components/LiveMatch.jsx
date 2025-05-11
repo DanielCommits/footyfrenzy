@@ -4,6 +4,18 @@ import "./LiveMatch.css";
 
 const API_KEY = "f5be21065fa69f1c7b9c535ec9b564c0";
 
+const IMPORTANT_LEAGUES = [
+  39, // Premier League
+  140, // La Liga
+  2, // UEFA Champions League
+  3, // UEFA Europa League
+  78, // Bundesliga
+  61, // Ligue 1
+  101, // Club World Cup
+  307, // Saudi Pro League
+  253, // MLS
+];
+
 export default function LiveMatches() {
   const [liveMatches, setLiveMatches] = useState([]);
   const [selectedLeague, setSelectedLeague] = useState("All");
@@ -13,13 +25,21 @@ export default function LiveMatches() {
   useEffect(() => {
     const fetchLive = async () => {
       try {
-        const res = await axios.get("https://v3.football.api-sports.io/fixtures", {
-          headers: { "x-apisports-key": API_KEY },
-          params: { live: "all" },
-        });
+        const res = await axios.get(
+          "https://v3.football.api-sports.io/fixtures",
+          {
+            headers: { "x-apisports-key": API_KEY },
+            params: { live: "all" },
+          }
+        );
 
-        const matches = res.data.response;
-        const leagueNames = ["All", ...new Set(matches.map((m) => m.league.name))];
+        const matches = res.data.response.filter((m) =>
+          IMPORTANT_LEAGUES.includes(m.league.id)
+        );
+        const leagueNames = [
+          "All",
+          ...new Set(matches.map((m) => m.league.name)),
+        ];
         setLeagues(leagueNames);
         setSelectedLeague(leagueNames[0]);
         setLiveMatches(matches);
