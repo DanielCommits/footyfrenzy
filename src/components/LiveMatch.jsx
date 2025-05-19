@@ -19,7 +19,7 @@ const IMPORTANT_LEAGUES = [
   45, // FA Cup
   1, // FIFA World Cup
   7, // Africa Cup of Nations (AFCON)
-  143, /// Copa del Rey
+  143, // Copa del Rey
 ];
 
 export default function LiveMatches() {
