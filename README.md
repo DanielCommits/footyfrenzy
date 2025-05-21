@@ -25,14 +25,6 @@ FootyFrenzy is your all-in-one football companion — delivering live scores, re
 
 ---
 
-## 📦 Installation
-
-```bash
-git clone https://github.com/DanielCommits/footyfrenzy.git
-cd footyfrenzy
-npm install
-npm run dev
-
 
 # React + Vite
 
@@ -42,3 +34,12 @@ Currently, two official plugins are available:
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+
+## 📦 Installation
+
+```bash
+git clone https://github.com/DanielCommits/footyfrenzy.git
+cd footyfrenzy
+npm install
+npm run dev
