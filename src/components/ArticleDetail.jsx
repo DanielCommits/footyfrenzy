@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import "./ArticleDetail.css";
-import { TwitterTweetEmbed } from "react-twitter-embed";
 
 const ArticleDetail = () => {
   const { id } = useParams();
@@ -108,6 +107,19 @@ const ArticleDetail = () => {
     updateOrCreateMeta("og:image", article.imageUrl || "defaultImage.jpg");
   }, [article]);
 
+  useEffect(() => {
+    if (article && article.embed && article.embed.includes("twitter.com")) {
+      if (!window.twttr) {
+        const script = document.createElement("script");
+        script.src = "https://platform.twitter.com/widgets.js";
+        script.async = true;
+        document.body.appendChild(script);
+      } else {
+        window.twttr.widgets.load();
+      }
+    }
+  }, [article]);
+
   if (error) return <p className="error-message">{error}</p>;
   if (!article) return <p className="loading-message">Loading...</p>;
 
@@ -138,9 +150,11 @@ const ArticleDetail = () => {
       </div>
 
       {/* Add a section for embedded Twitter post */}
-      {article.embed && (
+      {article.embed && article.embed.includes("twitter.com") && (
         <div className="embedded-post">
-          <TwitterTweetEmbed tweetId={getTweetId(article.embed)} />
+          <blockquote className="twitter-tweet">
+            <a href={article.embed}></a>
+          </blockquote>
         </div>
       )}
       <div id="HCB_comment_box">
