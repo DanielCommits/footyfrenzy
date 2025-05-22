@@ -47,7 +47,6 @@ const ArticleDetail = () => {
     }
   };
 
-  
   useEffect(() => {
     const loadCommentWidget = () => {
       const link = document.createElement("link");
@@ -77,10 +76,11 @@ const ArticleDetail = () => {
   }, []);
   useEffect(() => {
     if (!article) return;
-  
+
     // Set the document title
-    document.title = article.description || "FootyFrenzy | Football News and More";
-  
+    document.title =
+      article.description || "FootyFrenzy | Football News and More";
+
     // Update meta description
     let descriptionTag = document.querySelector("meta[name='description']");
     if (!descriptionTag) {
@@ -89,8 +89,9 @@ const ArticleDetail = () => {
       document.head.appendChild(descriptionTag);
     }
     descriptionTag.content =
-      article.description || "Latest football news and updates from FootyFrenzy.";
-  
+      article.description ||
+      "Latest football news and updates from FootyFrenzy.";
+
     // Optionally update Open Graph tags for social previews
     const updateOrCreateMeta = (property, content) => {
       let tag = document.querySelector(`meta[property='${property}']`);
@@ -101,7 +102,7 @@ const ArticleDetail = () => {
       }
       tag.setAttribute("content", content);
     };
-  
+
     updateOrCreateMeta("og:title", article.title || article.description);
     updateOrCreateMeta("og:description", article.description);
     updateOrCreateMeta("og:image", article.imageUrl || "defaultImage.jpg");
@@ -123,7 +124,6 @@ const ArticleDetail = () => {
   if (error) return <p className="error-message">{error}</p>;
   if (!article) return <p className="loading-message">Loading...</p>;
 
- 
   return (
     <div className="article-container">
       <div className="article-header">
