@@ -109,13 +109,23 @@ const ArticleDetail = () => {
   }, [article]);
 
   useEffect(() => {
-    if (article && article.embed && article.embed.includes("twitter.com")) {
+    if (
+      article &&
+      article.embed &&
+      (article.embed.includes("twitter.com") || article.embed.includes("x.com"))
+    ) {
+      // Ensure the Twitter widgets script is loaded
       if (!window.twttr) {
         const script = document.createElement("script");
         script.src = "https://platform.twitter.com/widgets.js";
         script.async = true;
+        script.onload = () => {
+          if (window.twttr && window.twttr.widgets) {
+            window.twttr.widgets.load();
+          }
+        };
         document.body.appendChild(script);
-      } else {
+      } else if (window.twttr && window.twttr.widgets) {
         window.twttr.widgets.load();
       }
     }
@@ -150,13 +160,15 @@ const ArticleDetail = () => {
       </div>
 
       {/* Add a section for embedded Twitter post */}
-      {article.embed && article.embed.includes("twitter.com") && (
-        <div className="embedded-post">
-          <blockquote className="twitter-tweet">
-            <a href={article.embed}></a>
-          </blockquote>
-        </div>
-      )}
+      {article.embed &&
+        (article.embed.includes("twitter.com") ||
+          article.embed.includes("x.com")) && (
+          <div className="embedded-post">
+            <blockquote className="twitter-tweet">
+              <a href={article.embed}></a>
+            </blockquote>
+          </div>
+        )}
       <div id="HCB_comment_box">
         <h4>Comments are loading...</h4>
       </div>

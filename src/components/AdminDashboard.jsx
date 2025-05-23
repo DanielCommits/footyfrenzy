@@ -97,6 +97,7 @@ const AdminDashboard = () => {
     setContent(article.content);
     setSource(article.source);
     setDate(article.date ? article.date.split(".")[0] : ""); // Convert ISO to datetime-local
+    setEmbed(article.embed || ""); // <-- Add this line to restore embed field
     setEditId(article.id);
   };
 
