@@ -47,6 +47,10 @@ const ArticleDetail = () => {
     }
   };
 
+  // Strictly validate tweet URLs
+  const isValidTweetUrl = (url) =>
+    /^https:\/\/(twitter\.com|x\.com)\/[A-Za-z0-9_]{1,15}\/status\/\d+$/.test(url);
+
   useEffect(() => {
     const loadCommentWidget = () => {
       const link = document.createElement("link");
@@ -112,9 +116,9 @@ const ArticleDetail = () => {
     if (
       article &&
       article.embed &&
-      (article.embed.includes("twitter.com") || article.embed.includes("x.com"))
+      isValidTweetUrl(article.embed)
     ) {
-      // Remove any previous Twitter widgets script to avoid duplicates
+      // Remove any previous widgets.js script to avoid duplicates
       const existingScript = document.querySelector("script[src='https://platform.twitter.com/widgets.js']");
       if (!window.twttr && !existingScript) {
         const script = document.createElement("script");
@@ -160,10 +164,9 @@ const ArticleDetail = () => {
         <div dangerouslySetInnerHTML={{ __html: article.content }} />
       </div>
 
-      {/* Add a section for embedded Twitter post */}
+      {/* Strict Twitter/X embed using blockquote */}
       {article.embed &&
-        (article.embed.includes("twitter.com") ||
-          article.embed.includes("x.com")) && (
+        isValidTweetUrl(article.embed) && (
           <div className="embedded-post">
             <blockquote className="twitter-tweet">
               <a href={article.embed}></a>
