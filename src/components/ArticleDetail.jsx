@@ -114,8 +114,9 @@ const ArticleDetail = () => {
       article.embed &&
       (article.embed.includes("twitter.com") || article.embed.includes("x.com"))
     ) {
-      // Ensure the Twitter widgets script is loaded
-      if (!window.twttr) {
+      // Remove any previous Twitter widgets script to avoid duplicates
+      const existingScript = document.querySelector("script[src='https://platform.twitter.com/widgets.js']");
+      if (!window.twttr && !existingScript) {
         const script = document.createElement("script");
         script.src = "https://platform.twitter.com/widgets.js";
         script.async = true;
@@ -129,7 +130,7 @@ const ArticleDetail = () => {
         window.twttr.widgets.load();
       }
     }
-  }, [article]);
+  }, [article?.embed]);
 
   if (error) return <p className="error-message">{error}</p>;
   if (!article) return <p className="loading-message">Loading...</p>;
