@@ -44,17 +44,6 @@ const PremierLeague = () => {
     if (activeTab === "news") {
       return (
         <>
-          {/* Ad container above the news */}
-          <div
-            style={{
-              width: 320,
-              height: 50,
-              margin: "0 auto 24px auto",
-              textAlign: "center",
-            }}
-          >
-            <div id="container-3a9cfe4e5c7829b05fa6c39f45408eed"></div>
-          </div>
           <div className="row mb-4">
             {news[0] && (
               <div className="col-md-8 mb-3">

@@ -148,7 +148,6 @@ const ArticleDetail = () => {
 
   return (
     <div className="article-container">
-      {/* Removed ad container before the article */}
       <div className="article-header">
         <h2>{article.description}</h2>
         <img
