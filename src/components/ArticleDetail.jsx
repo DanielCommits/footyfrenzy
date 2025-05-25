@@ -143,11 +143,41 @@ const ArticleDetail = () => {
     }
   }, [article?.embed]);
 
+  useEffect(() => {
+    // Inject the ad config and script for rightyclasp.com
+    const scriptConfig = document.createElement("script");
+    scriptConfig.type = "text/javascript";
+    scriptConfig.innerHTML = `
+      atOptions = {
+        'key' : '8c15f02e69d0b5b4a2d9a21e4683d099',
+        'format' : 'iframe',
+        'height' : 50,
+        'width' : 320,
+        'params' : {}
+      };
+    `;
+    document.body.appendChild(scriptConfig);
+
+    const script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "//rightyclasp.com/8c15f02e69d0b5b4a2d9a21e4683d099/invoke.js";
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(scriptConfig);
+      document.body.removeChild(script);
+    };
+  }, []);
+
   if (error) return <p className="error-message">{error}</p>;
   if (!article) return <p className="loading-message">Loading...</p>;
 
   return (
     <div className="article-container">
+      {/* Ad container before the article */}
+      <div style={{ width: 320, height: 50, margin: "24px auto", textAlign: "center" }}>
+        <div id="container-8c15f02e69d0b5b4a2d9a21e4683d099"></div>
+      </div>
       <div className="article-header">
         <h2>{article.description}</h2>
         <img
