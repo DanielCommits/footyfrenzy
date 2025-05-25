@@ -40,10 +40,33 @@ const PremierLeague = () => {
     return () => unsubscribe();
   }, []);
 
+  // Inject the ad script for rightyclasp.com
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.async = true;
+    script.setAttribute("data-cfasync", "false");
+    script.src = "//rightyclasp.com/3a9cfe4e5c7829b05fa6c39f45408eed/invoke.js";
+    document.body.appendChild(script);
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
   const renderContent = () => {
     if (activeTab === "news") {
       return (
         <>
+          {/* Ad container above the news */}
+          <div
+            style={{
+              width: 320,
+              height: 50,
+              margin: "0 auto 24px auto",
+              textAlign: "center",
+            }}
+          >
+            <div id="container-3a9cfe4e5c7829b05fa6c39f45408eed"></div>
+          </div>
           <div className="row mb-4">
             {news[0] && (
               <div className="col-md-8 mb-3">
@@ -248,8 +271,8 @@ const PremierLeague = () => {
             {tab === "news"
               ? "Latest News"
               : tab === "top-players"
-              ? "Top Players"
-              : tab.charAt(0).toUpperCase() + tab.slice(1)}
+                ? "Top Players"
+                : tab.charAt(0).toUpperCase() + tab.slice(1)}
           </button>
         ))}
       </div>
