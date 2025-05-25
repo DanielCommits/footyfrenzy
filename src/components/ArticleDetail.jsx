@@ -171,6 +171,24 @@ const ArticleDetail = () => {
         <div dangerouslySetInnerHTML={{ __html: article.content }} />
       </div>
 
+      {/* Ad hyperlink inserted between article content and embed */}
+      <div style={{ margin: "24px 0", textAlign: "center" }}>
+        <a
+          href="https://www.profitableratecpm.com/mmzdeybc?key=b1055a8d32d8c1f749678fbb014bcbe1"
+          target="_blank"
+          rel="noopener sponsored"
+          style={{
+            display: "inline-block",
+            color: "#007bff",
+            textDecoration: "underline",
+            fontWeight: "bold",
+            fontSize: "1.1em",
+          }}
+        >
+          Sponsored: Check this offer!
+        </a>
+      </div>
+
       {/* Embed X post: blockquote or link */}
       {article.embed &&
         (isBlockquote(article.embed) ? (
