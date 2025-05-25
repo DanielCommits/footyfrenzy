@@ -44,18 +44,6 @@ const Transfers = () => {
     return () => unsubscribe();
   }, []);
 
-  // Inject the ad script for rightyclasp.com
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.async = true;
-    script.setAttribute("data-cfasync", "false");
-    script.src = "//rightyclasp.com/3a9cfe4e5c7829b05fa6c39f45408eed/invoke.js";
-    document.body.appendChild(script);
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
-
   // Handle search term change
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
@@ -158,16 +146,6 @@ const Transfers = () => {
             </Link>
           </div>
         ))}
-      </div>
-      <div
-        style={{
-          width: 320,
-          height: 50,
-          margin: "24px auto 0 auto",
-          textAlign: "center",
-        }}
-      >
-        <div id="container-3a9cfe4e5c7829b05fa6c39f45408eed"></div>
       </div>
     </div>
   );

@@ -41,18 +41,6 @@ const Ucl = () => {
     return () => unsubscribe();
   }, []);
 
-  // Inject the ad script for rightyclasp.com
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.async = true;
-    script.setAttribute("data-cfasync", "false");
-    script.src = "//rightyclasp.com/3a9cfe4e5c7829b05fa6c39f45408eed/invoke.js";
-    document.body.appendChild(script);
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
-
   const renderContent = () => {
     if (activeTab === "news") {
       return (
@@ -227,17 +215,6 @@ const Ucl = () => {
       </div>
       <hr />
       {renderContent()}
-      {/* Ad container at the bottom, before the end of the main container */}
-      <div
-        style={{
-          width: 320,
-          height: 50,
-          margin: "24px auto 0 auto",
-          textAlign: "center",
-        }}
-      >
-        <div id="container-3a9cfe4e5c7829b05fa6c39f45408eed"></div>
-      </div>
     </div>
   );
 };
