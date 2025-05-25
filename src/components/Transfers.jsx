@@ -73,16 +73,6 @@ const Transfers = () => {
   return (
     <div className="container mt-5">
       {/* Ad container above the news */}
-      <div
-        style={{
-          width: 320,
-          height: 50,
-          margin: "0 auto 24px auto",
-          textAlign: "center",
-        }}
-      >
-        <div id="container-3a9cfe4e5c7829b05fa6c39f45408eed"></div>
-      </div>
       <h1 className="toptext">TRANSFERS</h1>
       <br />
 
@@ -168,6 +158,16 @@ const Transfers = () => {
             </Link>
           </div>
         ))}
+      </div>
+      <div
+        style={{
+          width: 320,
+          height: 50,
+          margin: "24px auto 0 auto",
+          textAlign: "center",
+        }}
+      >
+        <div id="container-3a9cfe4e5c7829b05fa6c39f45408eed"></div>
       </div>
     </div>
   );
