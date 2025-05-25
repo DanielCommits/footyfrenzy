@@ -47,9 +47,11 @@ const ArticleDetail = () => {
     }
   };
 
-  // Strictly validate tweet URLs
+  // Helper to check if the embed is a blockquote or a link (support both x-tweet and twitter-tweet)
+  const isBlockquote = (str) =>
+    /<blockquote[\s\S]*class=["'][^"']*(twitter-tweet|x-tweet)[^"']*["'][\s\S]*<\/blockquote>/.test(str);
   const isValidTweetUrl = (url) =>
-    /^https:\/\/(twitter\.com|x\.com)\/[A-Za-z0-9_]{1,15}\/status\/\d+$/.test(url);
+    /^https:\/\/(x\.com|twitter\.com)\/[A-Za-z0-9_]{1,15}\/status\/\d+$/.test(url);
 
   useEffect(() => {
     const loadCommentWidget = () => {
@@ -116,22 +118,27 @@ const ArticleDetail = () => {
     if (
       article &&
       article.embed &&
-      isValidTweetUrl(article.embed)
+      (isValidTweetUrl(article.embed) || isBlockquote(article.embed))
     ) {
-      // Remove any previous widgets.js script to avoid duplicates
-      const existingScript = document.querySelector("script[src='https://platform.twitter.com/widgets.js']");
-      if (!window.twttr && !existingScript) {
-        const script = document.createElement("script");
-        script.src = "https://platform.twitter.com/widgets.js";
-        script.async = true;
-        script.onload = () => {
-          if (window.twttr && window.twttr.widgets) {
-            window.twttr.widgets.load();
-          }
-        };
-        document.body.appendChild(script);
-      } else if (window.twttr && window.twttr.widgets) {
-        window.twttr.widgets.load();
+      // Always reload the widgets script after rendering the blockquote
+      const runWidget = () => {
+        if (window.twttr && window.twttr.widgets) {
+          window.twttr.widgets.load();
+        }
+      };
+      // If the script is already present, just run the widget loader
+      if (window.twttr && window.twttr.widgets) {
+        runWidget();
+      } else {
+        // Otherwise, inject the script
+        const existingScript = document.querySelector("script[src='https://platform.twitter.com/widgets.js']");
+        if (!existingScript) {
+          const script = document.createElement("script");
+          script.src = "https://platform.twitter.com/widgets.js";
+          script.async = true;
+          script.onload = runWidget;
+          document.body.appendChild(script);
+        }
       }
     }
   }, [article?.embed]);
@@ -164,20 +171,33 @@ const ArticleDetail = () => {
         <div dangerouslySetInnerHTML={{ __html: article.content }} />
       </div>
 
-      {/* Strict Twitter/X embed using blockquote */}
+      {/* Embed X post: blockquote or link */}
       {article.embed &&
-        isValidTweetUrl(article.embed) && (
+        (isBlockquote(article.embed) ? (
+          <div
+            className="embedded-post"
+            dangerouslySetInnerHTML={{ __html: article.embed }}
+          />
+        ) : isValidTweetUrl(article.embed) ? (
           <div className="embedded-post">
             <blockquote className="twitter-tweet">
               <a href={article.embed}></a>
             </blockquote>
           </div>
-        )}
+        ) : null)}
       <div id="HCB_comment_box">
         <h4>Comments are loading...</h4>
       </div>
     </div>
   );
 };
+
+// When adding a blockquote in AdminDashboard, only paste the <blockquote ...>...</blockquote> part.
+// Do NOT include the <script ...>...</script> tag from Twitter's embed code.
+
+// Example to paste in the embed field:
+{/* 
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">🚨 BREAKING: Barcelona are interested in Julian Alvarez in the medium term to replace Lewandowski.<br><br>— <a href="https://twitter.com/sport?ref_src=twsrc%5Etfw">@sport</a> <a href="https://t.co/P3VaDUPHkV">pic.twitter.com/P3VaDUPHkV</a></p>&mdash; Barça Universal (@BarcaUniversal) <a href="https://twitter.com/BarcaUniversal/status/1926624302570332262?ref_src=twsrc%5Etfw">May 25, 2025</a></blockquote>
+*/}
 
 export default ArticleDetail;
