@@ -174,7 +174,7 @@ const ArticleDetail = () => {
       {/* Ad hyperlink inserted between article content and embed */}
       <div style={{ margin: "24px 0", textAlign: "center" }}>
         <a
-          href="https://www.profitableratecpm.com/mmzdeybc?key=b1055a8d32d8c1f749678fbb014bcbe1"
+          href="https://rightyclasp.com/mmzdeybc?key=b1055a8d32d8c1f749678fbb014bcbe1"
           target="_blank"
           rel="noopener sponsored"
           style={{
