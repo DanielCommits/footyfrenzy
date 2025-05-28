@@ -22,6 +22,13 @@ const IMPORTANT_LEAGUES = [
   7, // Africa Cup of Nations (AFCON)
   143, // Copa del Rey
   48, // Carabao Cup (EFL Cup)
+  13, // Copa Libertadores
+  71, // Brasileirão Serie A (Brazil)
+  128, // Argentine Primera División
+  94, // Portuguese Primeira Liga
+  203, // CAF Champions League
+  4, // UEFA European Championship (EURO)
+  9, // Copa América
 ];
 
 export default function LiveMatches() {
