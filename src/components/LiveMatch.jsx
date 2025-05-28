@@ -9,6 +9,7 @@ const IMPORTANT_LEAGUES = [
   140, // La Liga
   2, // UEFA Champions League
   3, // UEFA Europa League
+  848, // UEFA Conference League
   78, // Bundesliga
   61, // Ligue 1
   101, // Club World Cup
@@ -20,6 +21,7 @@ const IMPORTANT_LEAGUES = [
   1, // FIFA World Cup
   7, // Africa Cup of Nations (AFCON)
   143, // Copa del Rey
+  48, // Carabao Cup (EFL Cup)
 ];
 
 export default function LiveMatches() {
