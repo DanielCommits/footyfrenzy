@@ -109,7 +109,6 @@ const ArticleDetail = () => {
       tag.setAttribute("content", content);
     };
 
-    
     updateOrCreateMeta("og:title", article.title || article.description);
     updateOrCreateMeta("og:description", article.description);
     updateOrCreateMeta("og:image", article.imageUrl || "defaultImage.jpg");
