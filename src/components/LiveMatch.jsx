@@ -29,6 +29,7 @@ const IMPORTANT_LEAGUES = [
   203, // CAF Champions League
   4, // UEFA European Championship (EURO)
   9, // Copa América
+  5, // UEFA Nations League
 ];
 
 export default function LiveMatches() {
@@ -53,10 +54,12 @@ export default function LiveMatches() {
         );
         const leagueNames = [
           "All",
-          ...new Set(matches.map((m) => m.league.name)),
+          ...Array.from(new Set(matches.map((m) => m.league.name))),
         ];
         setLeagues(leagueNames);
-        setSelectedLeague(leagueNames[0]);
+        setSelectedLeague((prev) =>
+          leagueNames.includes(prev) ? prev : leagueNames[0]
+        );
         setLiveMatches(matches);
       } catch (err) {
         console.error("Error fetching live matches", err);
