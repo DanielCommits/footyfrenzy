@@ -19,12 +19,12 @@ export default defineConfig({
         start_url: '/',
         icons: [
           {
-            src: 'public/WhatsApp Image 2025-06-04 at 18.45.01.jpeg.192x192.png',
+            src: '/WhatsApp Image 2025-06-04 at 18.45.01.jpeg.192x192.png',
             sizes: '192x192',
             type: 'image/png'
           },
           {
-            src: 'public/CompressJPEG.Online_img(512x512).jpg',
+            src: '/CompressJPEG.Online_img(512x512).jpg',
             sizes: '512x512',
             type: 'image/png'
           }
