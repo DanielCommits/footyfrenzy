@@ -7,7 +7,8 @@ import "./Home.css";
 
 const Home = () => {
   const [news, setNews] = useState([]);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth); // Track window size
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [loading, setLoading] = useState(true); // Add loading state
 
   // Function to handle window resize
   const handleResize = () => {
@@ -34,6 +35,7 @@ const Home = () => {
       const sortedArticles = articles.sort((a, b) => b.createdAt - a.createdAt);
       setNews(sortedArticles);
       localStorage.setItem("news", JSON.stringify(sortedArticles));
+      setLoading(false); // Hide overlay when data is loaded
     });
 
     return () => unsubscribe();
@@ -41,6 +43,40 @@ const Home = () => {
 
   return (
     <>
+      {/* Overlay while loading Firestore content */}
+      {loading && (
+        <div style={{
+          position: "fixed",
+          top: 0, left: 0, right: 0, bottom: 0,
+          background: "rgba(35,39,47,0.95)",
+          zIndex: 99999,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center"
+        }}>
+          <div
+            className="spinner-border text-light"
+            role="status"
+            style={{
+              width: "2.2rem",
+              height: "2.2rem",
+              borderWidth: "0.3em"
+            }}
+          >
+            <span className="visually-hidden">Loading...</span>
+          </div>
+          <span style={{
+            color: "#fff",
+            fontWeight: 600,
+            fontSize: "1.2rem",
+            marginTop: "18px",
+            letterSpacing: "0.03em"
+          }}>
+            Loading latest news...
+          </span>
+        </div>
+      )}
 
      <LiveMatch />
       <div className="container mt-1">
