@@ -30,6 +30,8 @@ const IMPORTANT_LEAGUES = [
   4, // UEFA European Championship (EURO)
   9, // Copa América
   5, // UEFA Nations League
+  6, // UEFA Nations League Finals
+  266, // WK League Women (Republic of Korea)
 ];
 
 export default function LiveMatches() {
@@ -48,6 +50,9 @@ export default function LiveMatches() {
             params: { live: "all" },
           }
         );
+
+        // Defensive: log all league IDs for debugging
+        // console.log(res.data.response.map(m => m.league.id + " " + m.league.name));
 
         const matches = res.data.response.filter((m) =>
           IMPORTANT_LEAGUES.includes(m.league.id)
