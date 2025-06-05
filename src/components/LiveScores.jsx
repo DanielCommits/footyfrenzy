@@ -13,13 +13,13 @@ const LiveScoresWidget = () => {
     // When the widget script loads, wait for the widget to render, then hide loader
     script.onload = () => {
       // Wait for widget to render (may need a short delay)
-      setTimeout(() => setLoading(false), 10000);
+      setTimeout(() => setLoading(false), 8000);
     };
 
     document.body.appendChild(script);
 
     // Fallback: hide loader after 3s if widget doesn't fire
-    const fallback = setTimeout(() => setLoading(false), 10000);
+    const fallback = setTimeout(() => setLoading(false), 8000);
 
     return () => {
       document.body.removeChild(script);
