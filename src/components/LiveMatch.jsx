@@ -31,7 +31,6 @@ const IMPORTANT_LEAGUES = [
   9, // Copa América
   5, // UEFA Nations League
   6, // UEFA Nations League Finals
-  266, // WK League Women (Republic of Korea)
 ];
 
 export default function LiveMatches() {
@@ -51,20 +50,15 @@ export default function LiveMatches() {
           }
         );
 
-        // Defensive: log all league IDs for debugging
-        // console.log(res.data.response.map(m => m.league.id + " " + m.league.name));
-
         const matches = res.data.response.filter((m) =>
           IMPORTANT_LEAGUES.includes(m.league.id)
         );
         const leagueNames = [
           "All",
-          ...Array.from(new Set(matches.map((m) => m.league.name))),
+          ...new Set(matches.map((m) => m.league.name)),
         ];
         setLeagues(leagueNames);
-        setSelectedLeague((prev) =>
-          leagueNames.includes(prev) ? prev : leagueNames[0]
-        );
+        setSelectedLeague(leagueNames[0]);
         setLiveMatches(matches);
       } catch (err) {
         console.error("Error fetching live matches", err);
