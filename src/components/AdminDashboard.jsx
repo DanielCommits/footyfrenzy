@@ -158,7 +158,7 @@ const AdminDashboard = () => {
           <label>Embed Post (Twitter Link):</label>
           <input
             type="text"
-            placeholder="Enter Twitter embed link"
+            placeholder="Enter Twitter embed link, remove script and add just the blockquote"
             value={embed}
             onChange={(e) => setEmbed(e.target.value)}
           />
