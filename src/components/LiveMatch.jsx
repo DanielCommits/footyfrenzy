@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import "./LiveMatch.css";
 
-const API_KEY = "f5be21065fa69f1c7b9c535ec9b564c0";
+const API_KEY = "dd0d2f5eed7cd7b9b192a6cf7d717977";
 
 const IMPORTANT_LEAGUES = [
   39, // Premier League
@@ -31,6 +31,13 @@ const IMPORTANT_LEAGUES = [
   9, // Copa América
   5, // UEFA Nations League
   6, // UEFA Nations League Finals
+  16, // World Cup Qualification, Europe
+  17, // World Cup Qualification, South America
+  18, // World Cup Qualification, Asia
+  19, // World Cup Qualification, Africa
+  20, // World Cup Qualification, North & Central America
+  21, // World Cup Qualification, Oceania
+  10, // International Friendlies
 ];
 
 export default function LiveMatches() {
