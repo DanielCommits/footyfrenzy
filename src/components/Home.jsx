@@ -16,7 +16,7 @@ const Home = () => {
   };
 
   useEffect(() => {
-    // Set up resize listener
+    
     window.addEventListener("resize", handleResize);
 
     // Cleanup the listener when the component is unmounted
