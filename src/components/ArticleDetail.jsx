@@ -156,6 +156,8 @@ const ArticleDetail = () => {
           className="article-image"
         />
       </div>
+      
+    
       <p className="article-type">{article.title}</p>
       <div className="article-info">
         <p>
@@ -210,12 +212,5 @@ const ArticleDetail = () => {
   );
 };
 
-// When adding a blockquote in AdminDashboard, only paste the <blockquote ...>...</blockquote> part.
-// Do NOT include the <script ...>...</script> tag from Twitter's embed code.
-
-// Example to paste in the embed field:
-{/* 
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">🚨 BREAKING: Barcelona are interested in Julian Alvarez in the medium term to replace Lewandowski.<br><br>— <a href="https://twitter.com/sport?ref_src=twsrc%5Etfw">@sport</a> <a href="https://t.co/P3VaDUPHkV">pic.twitter.com/P3VaDUPHkV</a></p>&mdash; Barça Universal (@BarcaUniversal) <a href="https://twitter.com/BarcaUniversal/status/1926624302570332262?ref_src=twsrc%5Etfw">May 25, 2025</a></blockquote>
-*/}
 
 export default ArticleDetail;
