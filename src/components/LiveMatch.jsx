@@ -12,7 +12,6 @@ const IMPORTANT_LEAGUES = [
   848, // UEFA Conference League
   78, // Bundesliga
   61, // Ligue 1
-  101, // Club World Cup
   307, // Saudi Pro League
   253, // MLS
   135, // Serie A
@@ -38,6 +37,7 @@ const IMPORTANT_LEAGUES = [
   20, // World Cup Qualification, North & Central America
   21, // World Cup Qualification, Oceania
   10, // International Friendlies
+  15, // FIFA Club World Cup (API-Football's usual ID for Club World Cup)
 ];
 
 export default function LiveMatches() {
