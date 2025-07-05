@@ -31,10 +31,10 @@ const Transfers = () => {
         }))
         .filter(
           (article) =>
-            article.title.toLowerCase().includes("transfers") ||
-            article.description.toLowerCase().includes("transfers") ||
+            article.title.toLowerCase().includes("transfer") ||
+            article.description.toLowerCase().includes("transfer") ||
             (article.content &&
-              article.content.toLowerCase().includes("transfers"))
+              article.content.toLowerCase().includes("transfer"))
         );
 
       const sortedArticles = articles.sort((a, b) => b.createdAt - a.createdAt);
