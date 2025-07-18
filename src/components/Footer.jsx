@@ -87,7 +87,7 @@ function Footer() {
         </ul>
       </div>
 
-      {/* Footer Bottom Section */}
+      {/*  Footer Bottom Section  */}
       <div className="footer-bottom">
         <div className="footer-menu">
           <p>
