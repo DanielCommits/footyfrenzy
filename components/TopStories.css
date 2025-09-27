@@ -1,0 +1,114 @@
+/* Style for description text */
+.description {
+  font-size: 0.8rem;
+}
+
+/* Style for metadata (previously small) */
+.meta-text {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+span.source {
+  font-size: 12px;
+}
+/* Float the Read More button to the right */
+.float-right {
+  float: right;
+}
+
+/* Dark mode styles */
+body.dark-mode .card {
+  background-color: #202020; /* Dark gray for cards in dark mode */
+  color: #fff;
+}
+
+body.dark-mode .meta-text {
+  color: #bbb; /* Lighter text color */
+}
+
+/* Light mode styles */
+.card {
+  background-color: #f9f9f9;
+  color: #000;
+}
+
+.description {
+  font-size: 1.1rem;
+}
+
+.meta-text {
+  font-size: 1rem;
+}
+
+/* Force image to maintain aspect ratio and fill height */
+.story-image {
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Ensure the row items are vertically aligned */
+.row.g-0.align-items-center {
+  display: flex;
+  align-items: center;
+  min-height: 100px; /* Set a minimum height for uniformity */
+}
+
+/* Adjust text and container for smaller screens */
+.card-body {
+  padding: 10px;
+}
+
+/* Responsive image size fix */
+@media (max-width: 576px) {
+  .story-image {
+    height: auto;
+    width: 100%;
+  }
+}
+
+/* Default card title styling */
+.card-title {
+  font-size: 1.5rem; /* Default size for larger screens */
+}
+
+/* Responsive font size for smaller screens */
+@media (max-width: 576px) {
+  .card-title {
+    font-size: 0.8rem; /* Smaller font size for screens less than 576px wide */
+  }
+  .description {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 400px) {
+  .card-title {
+    font-size: 0.8rem; /* Even smaller font size for very small screens */
+  }
+  .meta-text {
+    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 10px;
+  }
+  .big-card-title {
+    font-size: 1rem;
+  }
+  .card-text {
+  font-size: 10px;
+  }
+}
+
+.btn-custom {
+  background-color: rgb(164, 190, 13);
+  border-color: rgb(164, 190, 13); /* Ensure the border matches */
+  color: #fff; /* Optional: Set the text color to white for better contrast */
+}
+
+.btn-custom:hover {
+  background-color: rgb(144, 170, 10); /* Darken on hover */
+}

@@ -1,0 +1,33 @@
+.side-top-stories-text {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+.container {
+    margin: auto;
+    display: block;
+}
+.random-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr); /* Default to 1 column */
+  gap: 20px;
+}
+
+.random-stat-card {
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  padding: 10px;
+  background: #999999;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .random-stats-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns on medium screens */
+  }
+}
+
+@media (max-width: 1024px) {
+  .container {
+    margin-left: 1px;
+  }
+}

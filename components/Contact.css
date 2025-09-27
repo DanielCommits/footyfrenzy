@@ -1,0 +1,65 @@
+.contact-form {
+  max-width: 600px;
+  margin: 0 auto;
+  margin-top: 50px;
+  padding: 30px;
+  border-radius: 15px;
+}
+
+.contact-form form div {
+  margin-bottom: 20px;
+}
+
+.contact-form label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: var(--text-color); /* Adapts to dark mode */
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: var(--input-bg); /* Dynamic input background */
+  color: var(--text-color); /* Dynamic text color */
+  transition: background-color 0.3s ease;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: rgb(164, 190, 13);
+  box-shadow: 0 0 5px rgba(164, 190, 13, 0.5);
+}
+
+.contact-form button {
+  padding: 12px 25px;
+  background-color: rgb(164, 190, 13);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.contact-form button:hover {
+  background-color: #a4be0d;
+}
+
+/* Dark mode variables */
+body.dark-mode {
+  --form-bg: #333;
+  --text-color: #fff;
+  --input-bg: #444;
+}
+
+/* Light mode variables */
+body.light-mode {
+  --form-bg: #f9f9f9;
+  --text-color: #000;
+  --input-bg: #fff;
+}

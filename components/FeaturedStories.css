@@ -1,0 +1,76 @@
+/* src/components/FeaturedStories.css */
+.featured-stories-container {
+  display: flex;
+  flex-wrap: wrap; /* Allows wrapping to the next line if necessary */
+  gap: 15px; /* Space between cards */
+  justify-content: space-between; /* Adjusts spacing between cards */
+  margin: 20px auto; /* Center container */
+  max-width: 1200px; /* Limit maximum width */
+}
+
+.featured-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  width: calc(50% - 15px); /* Adjust width for two cards per row */
+}
+
+.featured-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.featured-card-image img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.featured-card-content {
+  padding: 10px;
+  flex: 1;
+}
+
+.featured-card-title {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.featured-card-description {
+  font-size: 0.9rem;
+  margin: 5px 0;
+}
+
+
+.featured-card-footer {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 10px;
+  color: #999;
+}
+
+.featured-card-date {
+  margin-left: 10px;
+}
+
+.featured-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+body.dark-mode .featured-card {
+  background-color: #202020;
+  color: #fff;
+}
+
+@media (max-width: 767px) {
+  .featured-card {
+    width: 100%; /* Full width on small screens */
+  }
+}
