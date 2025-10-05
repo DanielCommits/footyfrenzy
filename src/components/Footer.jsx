@@ -92,8 +92,8 @@ function Footer() {
         <div className="footer-menu">
           <p>
             copyright &copy;{" "}
-            <a href="https://danielcommits.github.io/MyPortfolio/">
-              Daniel Develops, 2025.
+            <a href="https://d4knrick.vercel.app/">
+              Omoare Daniel, 2025.
             </a>
           </p>
         </div>
